@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--spinner view-->
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/category"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="20sp"
+    android:fontFamily="@font/medium">
+
+</TextView>

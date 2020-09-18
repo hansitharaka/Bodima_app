@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".place_details">
+
+    <RelativeLayout
+        android:id="@+id/RelativeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--    Floating Phone Button   -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPink"
+            android:clickable="true"
+            android:contentDescription="@string/phone_label"
+            android:focusable="true"
+            android:rotationY="180"
+            android:tint="@color/colorPrimaryDark"
+            app:elevation="6dp"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/comment" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:background="@color/bgdarkPurple">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--   Image Slider   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/imgslider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPagerPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="350dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/dimgray"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <!--    Add following attributes of ImageView to fit image to screen
+                                    adjustViewBounds="true"
+                                    scaleType="centerCrop"-->
+
+                        <!--connected with custom_layout_imgs lider-->
+
+
+                    </androidx.viewpager.widget.ViewPager>
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:alpha="0.4"
+                        android:background="@color/black"
+                        android:paddingStart="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/imgCount"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:autoSizeTextType="uniform"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewPagerPlace"
+                        app:layout_constraintEnd_toEndOf="@+id/viewPagerPlace"
+                        app:layout_constraintTop_toTopOf="@+id/viewPagerPlace"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--****************************************************************************************************************************************************************-->
+
+                <!--   Title   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_section_layout"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txtDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/postDate"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"
+                            android:textStyle="italic"
+                            app:autoSizeTextType="uniform"
+                            tools:layout_conversion_absoluteHeight="16dp"
+                            tools:layout_conversion_absoluteWidth="391dp"
+                            tools:layout_editor_absoluteX="10dp"
+                            tools:layout_editor_absoluteY="346dp" />
+
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:text="@string/title_display"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="25sp"
+                            app:autoSizeTextType="uniform"
+                            tools:layout_conversion_absoluteHeight="27dp"
+                            tools:layout_conversion_absoluteWidth="391dp"
+                            tools:layout_editor_absoluteX="10dp"
+                            tools:layout_editor_absoluteY="367dp" />
+
+                        <TextView
+                            android:id="@+id/txtCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/city_name"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="13sp"
+                            app:autoSizeTextType="uniform"
+                            tools:layout_conversion_absoluteHeight="18dp"
+                            tools:layout_conversion_absoluteWidth="391dp"
+                            tools:layout_editor_absoluteX="10dp"
+                            tools:layout_editor_absoluteY="399dp" />
+
+                        <TextView
+                            android:id="@+id/txtUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/postUser"
+                            android:textColor="@color/colorPink"
+                            android:textSize="12sp"
+                            android:textStyle="italic"
+                            app:autoSizeTextType="uniform"
+                            tools:layout_conversion_absoluteHeight="16dp"
+                            tools:layout_conversion_absoluteWidth="391dp"
+                            tools:layout_editor_absoluteX="10dp"
+                            tools:layout_editor_absoluteY="422dp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--   Amount   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_section_layout"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/labelAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/amounlabel"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bold"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/price"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="25sp"
+                            app:autoSizeTextType="uniform" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--   Facilities   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutFacility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_section_layout"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearFacilities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/verticalLinear1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/Beds"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtBedsNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/bold"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="@string/beds_no"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="25sp"
+                                    app:autoSizeTextType="uniform" />
+
+                                <TextView
+                                    android:id="@+id/txtBeds"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/medium"
+                                    android:text="@string/beds_label"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="15sp"
+                                    app:autoSizeTextType="uniform" />
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/verticalLine"
+                                android:layout_width="3dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/divider" />
+
+                            <LinearLayout
+                                android:id="@+id/Baths"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtBathsNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/bold"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="@string/baths_no"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="25sp"
+                                    app:autoSizeTextType="uniform" />
+
+                                <TextView
+                                    android:id="@+id/txtBaths"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/medium"
+                                    android:text="@string/baths_label"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="15sp"
+                                    app:autoSizeTextType="uniform" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--   Description   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_section_layout"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txtDescLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/description_label"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/details"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="13sp"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--   Address   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_section_layout"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/LabelAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/address_label"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/addressFull"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="13sp"
+                            app:autoSizeTextType="uniform" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/mapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+                </LinearLayout-->
+
+                <!--   Phone number   -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layouPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bgdarkPurple"
+                    android:padding="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/LabelPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/medium"
+                            android:text="@string/phone_label"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/phone"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

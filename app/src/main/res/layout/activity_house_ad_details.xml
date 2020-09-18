@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HouseAdDetails"
+    android:background="@drawable/bgdark">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:background="@color/bgdarkPurple">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--   Image Slider   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/imgslider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPagerHouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="350dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/dimgray"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <!--    Add following attributes of ImageView to fit image to screen
+                                adjustViewBounds="true"
+                                scaleType="centerCrop"-->
+
+                    <!--connected with custom_layout_imgs lider-->
+
+
+                </androidx.viewpager.widget.ViewPager>
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:alpha="0.4"
+                    android:background="@color/black"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/imgCount"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewPagerHouse"
+                    app:layout_constraintEnd_toEndOf="@+id/viewPagerHouse"
+                    app:layout_constraintTop_toTopOf="@+id/viewPagerHouse"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--****************************************************************************************************************************************************************-->
+
+            <!--   Title   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_section_layout"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:text="@string/ad_title_display"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp"
+                        app:autoSizeTextType="uniform"
+                        tools:layout_conversion_absoluteHeight="27dp"
+                        tools:layout_conversion_absoluteWidth="391dp"
+                        tools:layout_editor_absoluteX="10dp"
+                        tools:layout_editor_absoluteY="367dp" />
+
+                    <TextView
+                        android:id="@+id/txtCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:text="@string/city_name"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:layout_marginTop="5dp"
+                        app:autoSizeTextType="uniform"
+                        tools:layout_conversion_absoluteHeight="18dp"
+                        tools:layout_conversion_absoluteWidth="391dp"
+                        tools:layout_editor_absoluteX="10dp"
+                        tools:layout_editor_absoluteY="399dp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--   Amount   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_section_layout"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/labelAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/medium"
+                        android:text="@string/amounlabel"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/txtAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/land_price"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--   Size   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutLand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_section_layout"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/labelLand"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/medium"
+                        android:text="@string/land_s_label"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/txtLandSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/ad_land_size"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--   Description   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_section_layout"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtDescLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/medium"
+                        android:text="@string/description_label"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/txtDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/details"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="13sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--   Contact Details   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layouPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bgdarkPurple"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/LabelPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/medium"
+                        android:text="@string/contact"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/Name"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:text="@string/name"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/username"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/phone"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:text="@string/phone_ad"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/txtPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/phone"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

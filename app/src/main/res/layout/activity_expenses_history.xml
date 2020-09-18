@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgdarkPurple"
+    tools:context=".ExpensesHistory">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:backgroundTint="@color/ashyPurple"
+                app:cardCornerRadius="20dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constrain_expense1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnDel">
+
+
+                    <LinearLayout
+                        android:id="@+id/date_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/amount_layout" >
+
+                        <TextView
+                            android:id="@+id/date_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ex_date_label"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:fontFamily="@font/medium"
+                            android:padding="10dp"
+                            android:autoSizeTextType="uniform"/>
+
+                        <View
+                            android:id="@+id/verticalLine"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/divider" />
+
+                        <TextView
+                            android:id="@+id/date_expense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ex_date"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:fontFamily="@font/medium"
+                            android:padding="10dp"
+                            android:autoSizeTextType="uniform"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/amount_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/date_layout"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <TextView
+                            android:id="@+id/amount_ex_label"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ex_amount_label"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:fontFamily="@font/medium"
+                            android:padding="10dp"
+                            android:autoSizeTextType="uniform"/>
+
+                        <View
+                            android:id="@+id/verticalLine2"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/divider" />
+
+                        <TextView
+                            android:id="@+id/amount_ex_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ex_amount"
+                            android:textSize="25sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:fontFamily="@font/bold"
+                            android:padding="10dp"
+                            android:autoSizeTextType="uniform"/>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageButton
+                    android:id="@+id/btnDel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="@color/colorPink"
+                    android:fontFamily="@font/bold"
+                    android:padding="20dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/delete"
+                    android:contentDescription="@string/deletebtn" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

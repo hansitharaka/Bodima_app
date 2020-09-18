@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Bodima</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_prof">My Profile</string>
+    <string name="nav_place">Places</string>
+    <string name="nav_addplaces">Add a place</string>
+    <string name="nav_ads">Advertisements</string>
+    <string name="myadds">My Advertisements</string>
+    <string name="myplaces">My Places</string>
+    <string name="nav_addAds">Post an Ad</string>
+    <string name="nav_logout">Logout</string>
+    <string name="username">John Doe</string>
+    <string name="buyer">Buyer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeimg">placesimage</string>
+    <string name="city_name">Colombo</string>
+    <string name="title_display">Room for Rent</string>
+    <string name="baths_no">2</string>
+    <string name="beds_no">5</string>
+    <string name="price">Rs. 0,000 / month</string>
+    <string name="postDate">posted on 20th August 2020</string>
+    <string name="currentdate">20 Aug 2020</string>
+    <string name="description_label">Description</string>
+    <string name="desc_txt">Write a description..... (max 200 characters)</string>
+    <string name="title_label">Title</string>
+    <string name="title">max 20 characters</string>
+    <string name="amount_rs">Rs.</string>
+    <string name="amount_txt">0,000</string>
+    <string name="amount_month">/ month</string>
+    <string name="amnt">Amount</string>
+    <string name="beds_label">No. of Beds</string>
+    <string name="beds_num">2</string>
+    <string name="baths_label">No. of Baths</string>
+    <string name="baths_num">1</string>
+    <string name="phone_label">Phone number</string>
+    <string name="phone">0777 123 123</string>
+    <string name="city">Colombo</string>
+    <string name="city_label">City</string>
+    <string name="address">Enter address here...</string>
+    <string name="address_label">Address</string>
+    <string name="btnImg">Add Images</string>
+    <string name="btnSave">Save</string>
+    <string name="sub_title">View all posts</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="nav_chat">Chatbox</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="imgCount">3/3</string>
+    <string name="details">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna et pharetra pharetra massa massa ultricies mi quis. In nibh mauris cursus mattis molestie a. Nec feugiat in fermentum posuere. Arcu non odio euismod lacinia at. Sed id semper risus in. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl. "</string>
+    <string name="postUser">for rent by John Doe</string>
+    <string name="addressFull">No. 000, Lorem Ipsum, dolor sit amet.</string>
+    <string name="btn_reviews">Ratings and Reviews</string>
+    <string name="amounlabel">Amount</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="input_amount">Enter Amount</string>
+    <string name="salary">Salary</string>
+    <string name="interst">Bank Interest</string>
+    <string name="Loan">Loan</string>
+    <string name="lending">Lending</string>
+    <string name="other">Other</string>
+    <string name="food">Food</string>
+    <string name="transport">Transport</string>
+    <string name="clothes">Clothes</string>
+    <string name="rent">Rent</string>
+    <string name="bill">Bill</string>
+    <string name="ex_date_label">Date</string>
+    <string name="ex_date">20/20/2020</string>
+    <string name="ex_amount_label">Amount</string>
+    <string name="ex_amount">Rs. 2000</string>
+    <string name="deletebtn">DeleteBtn</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcomemsg">All your needs at one place</string>
+    <string name="signup">SIGN UP</string>
+    <string name="signin">SIGN IN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="password_confirm">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="update">Update</string>
+    <string name="placename">Place name</string>
+    <string name="review">Enter yout review here...</string>
+    <string name="review_warning">*Please note that your reviews are visible for all users</string>
+    <string name="post">Post</string>
+    <string name="myreview">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="birthday">Birthday</string>
+    <string name="nametxt">Enter name</string>
+    <string name="seller">Seller</string>
+    <string name="category">Category</string>
+    <string name="remind_desc_txt">Write a description here... (max 20 characters)</string>
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="payment">Payment</string>
+    <string name="reminder_desc">Boarding Payment</string>
+    <string name="date">February  |  12</string>
+    <string name="add_reminder">Add Reminder</string>
+    <string name="ad_title_display">House for Rent Nugegoda</string>
+    <string name="contact">Contact Details</string>
+    <string name="phone_ad">Phone</string>
+    <string name="ad_vehicle_display">Toyota Land Cruiser</string>
+    <string name="price_vehicle">Rs. 28, 500, 000</string>
+    <string name="type">Vehicle Type</string>
+    <string name="v_type">Car</string>
+    <string name="condition_label">Condition</string>
+    <string name="condition">New</string>
+    <string name="fuel_label">Fuel</string>
+    <string name="fuel">Petrol</string>
+    <string name="brandlabel">Brand</string>
+    <string name="brand_name">Toyota</string>
+    <string name="modellabel">Model</string>
+    <string name="model_name">Land Cruiser</string>
+    <string name="house_s_label">House Size</string>
+    <string name="house_size">2, 200.0 sqft</string>
+    <string name="land_size">10.0 ph</string>
+    <string name="land_s_label">Land Size</string>
+    <string name="ad_title_land">Land for Sale</string>
+    <string name="land_price">Rs. 2, 000, 000</string>
+    <string name="ad_land_size">15.0 Perches</string>
+    <string name="house">Houses</string>
+    <string name="vehicle">Vehicles</string>
+    <string name="lands">Lands</string>
+    <string name="house_beds_no">2</string>
+    <string name="house_baths_no">2</string>
+    <string name="add_advertisement">Add advertisement</string>
+    <string name="add_place">Add place</string>
+    <string name="name_here">Enter your name</string>
+    <string-array name="category_array">
+        <item>Payment</item>
+        <item>Birthday</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="month_array">
+        <item>Every month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="day_array">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string-array name="type_id">
+        <item>Car</item>
+        <item>Van</item>
+        <item>Bike</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="condition_id">
+        <item>New</item>
+        <item>Old</item>
+        <item>Used</item>
+    </string-array>
+    <string-array name="fuel_id">
+        <item>Petrol</item>
+        <item>Diesel</item>
+    </string-array>
+</resources>

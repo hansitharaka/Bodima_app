@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPlaceForm"
+    android:background="@drawable/bgdark">
+
+    <ScrollView
+        android:id="@+id/scrollHouseForm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--username and date-->
+                <LinearLayout
+                    android:id="@+id/usernameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="170dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="5dp"
+                        android:drawableStart="@drawable/person"
+                        android:drawablePadding="5dp"
+                        android:drawableTint="@color/dimgray"
+                        android:fontFamily="@font/medium"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/username"
+                        android:textAlignment="center"
+                        android:textColor="@color/dimgray"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:drawableStart="@drawable/calendar"
+                        android:drawablePadding="5dp"
+                        android:drawableTint="@color/dimgray"
+                        android:fontFamily="@font/medium"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/currentdate"
+                        android:textAlignment="center"
+                        android:textColor="@color/dimgray"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform"
+                        tools:ignore="RtlCompat" />
+
+                </LinearLayout>
+
+                <!--                title-->
+                <LinearLayout
+                    android:id="@+id/titlelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/title_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/title_label"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <EditText
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
+                        android:ems="10"
+                        android:fontFamily="@font/light"
+                        android:gravity="center_vertical"
+                        android:hint="@string/title"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+                <!--                description-->
+                <LinearLayout
+                    android:id="@+id/descLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/desc_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/description_label"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <EditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/gray"
+                        android:ems="10"
+                        android:fontFamily="@font/light"
+                        android:gravity="top"
+                        android:hint="@string/desc_txt"
+                        android:inputType="textMultiLine"
+                        android:lines="5"
+                        android:maxLength="200"
+                        android:maxLines="10"
+                        android:minLines="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <!--                amount-->
+                <LinearLayout
+                    android:id="@+id/amountLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/amnt_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/amnt"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <LinearLayout
+                        android:id="@+id/amountLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/RS_label"
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/bold"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:text="@string/amount_rs"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <EditText
+                            android:id="@+id/amount"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/dimgray"
+                            android:ems="10"
+                            android:fontFamily="@font/light"
+                            android:hint="@string/amount_txt"
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/month_label"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|center_horizontal|center_vertical|end"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/bold"
+                            android:padding="10dp"
+                            android:text="@string/amount_month"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:autoSizeTextType="uniform" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--                facility-->
+                <LinearLayout
+                    android:id="@+id/facilityLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <LinearLayout
+                        android:id="@+id/facilityLayoutLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/bedlabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/bold"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/beds_label"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <TextView
+                            android:id="@+id/bathlabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/bold"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="@string/baths_label"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/facilityLayoutedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/beds_num"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/dimgray"
+                            android:ems="10"
+                            android:fontFamily="@font/light"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:hint="@string/beds_num"
+                            android:inputType="number"
+                            android:paddingStart="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+
+                        <EditText
+                            android:id="@+id/baths_num"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/dimgray"
+                            android:drawableTint="@color/dimgray"
+                            android:ems="10"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:hint="@string/baths_num"
+                            android:inputType="number"
+                            android:paddingStart="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp"
+                            app:autoSizeTextType="uniform" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--                phone number-->
+                <LinearLayout
+                    android:id="@+id/phonelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/phone_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/phone_label"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
+                        android:ems="10"
+                        android:fontFamily="@font/light"
+                        android:gravity="center_vertical"
+                        android:hint="@string/phone"
+                        android:inputType="phone"
+                        android:maxLength="20"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <!--                city-->
+                <LinearLayout
+                    android:id="@+id/citylayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/city_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/city_label"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gray"
+                        android:ems="10"
+                        android:fontFamily="@font/light"
+                        android:gravity="center_vertical"
+                        android:hint="@string/city"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <!--                address-->
+                <LinearLayout
+                    android:id="@+id/addressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <TextView
+                        android:id="@+id/address_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/address_label"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <EditText
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/gray"
+                        android:ems="10"
+                        android:fontFamily="@font/light"
+                        android:gravity="top"
+                        android:hint="@string/address"
+                        android:inputType="textMultiLine"
+                        android:lines="5"
+                        android:maxLength="200"
+                        android:maxLines="10"
+                        android:minLines="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <!--                buttons-->
+                <LinearLayout
+                    android:id="@+id/buttonLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="16dp">
+
+                    <Button
+                        android:id="@+id/addImg"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button"
+                        android:fontFamily="@font/medium"
+                        android:padding="15dp"
+                        android:text="@string/btnImg"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:autoSizeTextType="uniform"
+                        android:textSize="15sp"/>
+
+                    <Button
+                        android:id="@+id/btnSave"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@color/colorPink"
+                        android:fontFamily="@font/medium"
+                        android:padding="15dp"
+                        android:text="@string/btnSave"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:autoSizeTextType="uniform"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
