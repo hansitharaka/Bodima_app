@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "316072682170",
+    "firebase_url": "https://bodima-dd880.firebaseio.com",
+    "project_id": "bodima-dd880",
+    "storage_bucket": "bodima-dd880.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316072682170:android:f0e153332bd53ed5af1883",
+        "android_client_info": {
+          "package_name": "com.example.bodima"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316072682170-ouug0mmfi78v0o31odgmdl9sp3pcgqsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bodima",
+            "certificate_hash": "541abac097094120f620f276fcf1ef56eecdb084"
+          }
+        },
+        {
+          "client_id": "316072682170-jrr5k417hunr5s5de4k1aj2t5p2sirqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEPXsHKkhc4cFyuRk3K2JnEtOxNmjNYeQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316072682170-jrr5k417hunr5s5de4k1aj2t5p2sirqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
