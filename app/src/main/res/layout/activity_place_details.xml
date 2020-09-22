@@ -28,7 +28,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/colorPink"
             android:clickable="true"
-            android:contentDescription="@string/phone_label"
+            android:contentDescription="ratings"
             android:focusable="true"
             android:rotationY="180"
             android:tint="@color/colorPrimaryDark"
@@ -142,12 +142,8 @@
                             android:fontFamily="@font/bold"
                             android:text="@string/title_display"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="25sp"
-                            app:autoSizeTextType="uniform"
-                            tools:layout_conversion_absoluteHeight="27dp"
-                            tools:layout_conversion_absoluteWidth="391dp"
-                            tools:layout_editor_absoluteX="10dp"
-                            tools:layout_editor_absoluteY="367dp" />
+                            android:textSize="30sp"
+                            app:autoSizeTextType="uniform" />
 
                         <TextView
                             android:id="@+id/txtCity"
@@ -372,7 +368,7 @@
                             android:paddingBottom="10dp"
                             android:text="@string/details"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             app:autoSizeTextType="uniform" />
                     </LinearLayout>
 
@@ -418,7 +414,7 @@
                             android:paddingBottom="10dp"
                             android:text="@string/addressFull"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             app:autoSizeTextType="uniform" />
 
                     </LinearLayout>
