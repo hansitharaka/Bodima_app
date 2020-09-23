@@ -19,12 +19,12 @@
     <string name="baths_no">2</string>
     <string name="beds_no">5</string>
     <string name="price">Rs. %1$s / month</string>
-    <string name="postDate">posted on 20th August 2020</string>
+    <string name="postDate">posted on %1$s</string>
     <string name="currentdate">20 Aug 2020</string>
     <string name="description_label">Description</string>
-    <string name="desc_txt">Write a description..... (max 200 characters)</string>
+    <string name="desc_txt">Write a description..... (max 500 characters)</string>
     <string name="title_label">Title</string>
-    <string name="title">max 20 characters</string>
+    <string name="title">max 100 characters</string>
     <string name="amount_rs">Rs.</string>
     <string name="amount_txt">0,000</string>
     <string name="amount_month">/ month</string>

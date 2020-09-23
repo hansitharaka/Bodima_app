@@ -8,8 +8,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,8 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.util.Date;
 
 public class place_details extends AppCompatActivity {
 
@@ -33,8 +29,8 @@ public class place_details extends AppCompatActivity {
 
     private String pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
 
-    DatabaseReference mreff;
-    FirebaseUser currentUser;
+    private DatabaseReference mreff;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +57,10 @@ public class place_details extends AppCompatActivity {
         viewRating = (FloatingActionButton) findViewById(R.id.floatCall);
 
         //for now
-        final String user = "John Doe";
+        final String pid = "-MHqplawpHoqebZWkRPu";
 
         //Database
-        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(user); //TODO:child must be user uid
+        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(pid);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
             //retrieve data from the database
@@ -72,7 +68,8 @@ public class place_details extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    pUsername = getString( R.string.postUser, user);
+                    pUsername = getString( R.string.postUser, (snapshot.child("username").getValue().toString()) );
+                    pDate = getString( R.string.postDate, (snapshot.child("date").getValue().toString()) );
                     pTitle = snapshot.child("title").getValue().toString();
                     pDesc = getString( R.string.details, (snapshot.child("desc").getValue().toString()) );
                     pAmount = getString( R.string.price, (snapshot.child("amount").getValue().toString()) );
@@ -81,12 +78,6 @@ public class place_details extends AppCompatActivity {
                     pPhone = snapshot.child("phone").getValue().toString();
                     pCity = snapshot.child("city").getValue().toString();
                     pAddress = snapshot.child("address").getValue().toString();
-
-                    //convert date into a format
-//                    Date strDate = (Date) snapshot.child("date").getValue();
-//                    DateFormat DFormat = DateFormat.getDateInstance();
-                    pDate = snapshot.child("date").getValue().toString();
-                    //TODO: date is not displaying in the right format
 
                     //set data to the view
                     username.setText(pUsername);

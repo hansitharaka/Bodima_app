@@ -1,5 +1,6 @@
 package com.example.bodima;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -27,9 +30,7 @@ public class AddPlaceForm extends AppCompatActivity {
     private EditText title, desc, amount, nBeds, nBaths, phone, city,address;
     private Button addImg, btnSave;
 
-    private String pUsername;
-    private Date pDate;
-    private String pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
+    private String pUid, pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
 
     DatabaseReference mReff;
     FirebaseUser currentUser;
@@ -57,13 +58,11 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
         //Loading current user username and current date to the form
-        pUsername = "John Doe";
+        pUsername = "Robert Downey";
         username.setText(pUsername);
         //TODO: change the dummy pUsername; it should be received by the user profile
 
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        date.setText( dateFormat.format(new Date()) );
-        //TODO: check how expense root track date
+        date.setText( DateFormat.getDateInstance().format(new Date()) );
 
 
 
@@ -88,7 +87,8 @@ public class AddPlaceForm extends AppCompatActivity {
     }
 
     public boolean isValid() {
-        pDate = new Date();
+        pUid = "Ghgsc52s1f1S";
+        pDate = DateFormat.getDateInstance().format(new Date());
         pTitle = title.getText().toString().trim();
         pDesc = desc.getText().toString().trim();
         pAmount = amount.getText().toString().trim();
@@ -175,13 +175,20 @@ public class AddPlaceForm extends AppCompatActivity {
             int baths = Integer.parseInt(pBaths);
             double amount = Double.parseDouble(pAmount);
 
-            Place myPlace= new Place(pTitle, pDesc, pCity, pAddress, pDate, beds, baths, pPhone, amount);
+            Place myPlace= new Place(pUid, pUsername, pTitle, pDesc, pCity, pAddress, pDate, beds, baths, pPhone, amount);
 
             //TODO: user uid or phone number must be used instead of username as child(pUsername)
-            mReff.child(pUsername).setValue(myPlace);
-            //mReff.child(pUsername).child(currentUser).setValue(myPlace);
-
-            Toast.makeText(AddPlaceForm.this, "Successfull",Toast.LENGTH_SHORT).show();
+            mReff.push().setValue(myPlace).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(AddPlaceForm.this, "Data inserted successfully",Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AddPlaceForm.this, "Error Occured",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }

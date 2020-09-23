@@ -5,16 +5,17 @@ import java.util.Date;
 
 public class Place {
 
-    private String title, desc, city, address, phone;
-    private Date date;
+    private String uid, username, title, desc, city, address, phone, date;
     private int beds,baths;
     private double amount;
 
     public Place() {
     }
 
-    public Place(String title, String desc, String city, String address, Date date,
+    public Place(String uid, String username, String title, String desc, String city, String address, String date,
                  int beds, int baths, String phone, double amount) {
+        this.uid = uid;
+        this.username = username;
         this.title = title;
         this.desc = desc;
         this.city = city;
@@ -24,6 +25,22 @@ public class Place {
         this.baths = baths;
         this.phone = phone;
         this.amount = amount;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTitle() {
@@ -58,11 +75,11 @@ public class Place {
         this.address = address;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
