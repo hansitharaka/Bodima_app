@@ -15,7 +15,8 @@
         <activity android:name=".AddPlaceForm" />
         <activity android:name=".AllAdvertisements" />
         <activity android:name=".LandAdDetails" />
-        <activity android:name=".Register">
+        <activity android:name=".Register" />
+        <activity android:name=".Expenses_Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,12 +28,12 @@
         <activity android:name=".AddReminder" />
         <activity android:name=".RatingsAndReviews" />
         <activity android:name=".UserProfile" />
-        <activity android:name=".ExpensesHistory" />
         <activity android:name=".MyPlaces" />
         <activity android:name=".Vehicle_Ad_Details" />
         <activity android:name=".WelcomPage" />
         <activity android:name=".MyReminders" />
-        <activity android:name=".Expenses_Dashboard" />
+        <activity android:name=".ExpensesHistory" />
+
         <activity android:name=".Login" >
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
