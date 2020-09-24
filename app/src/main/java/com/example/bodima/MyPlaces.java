@@ -71,12 +71,6 @@ public class MyPlaces extends AppCompatActivity {
                     placeArrayList.add(place);
                     recyclerAdapter = new myplaceRecyclerViewAdapter(placeArrayList);
                     recyclerView.setAdapter(recyclerAdapter);
-
-//                    place.setTitle(dataSnapshot.child("title").getValue().toString());
-//                    place.setCity(dataSnapshot.child("city").getValue().toString());
-//                    place.setBaths(Integer.parseInt(dataSnapshot.child("baths").getValue().toString()));
-//                    place.setBeds(Integer.parseInt(dataSnapshot.child("beds").getValue().toString()));
-//                    place.setDate(dataSnapshot.child("date").getValue().toString());
                     //TODO: image should be there
 
 

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Place {
 
-    private String uid, username, title, desc, city, address, phone, date;
+    private String uid, username, title, desc, city, address, phone, date, imgUrl1;
     private int beds,baths;
     private double amount;
 
@@ -13,7 +13,7 @@ public class Place {
     }
 
     public Place(String uid, String username, String title, String desc, String city, String address, String date,
-                 int beds, int baths, String phone, double amount) {
+                 int beds, int baths, String phone, double amount, String imgUrl1) {
         this.uid = uid;
         this.username = username;
         this.title = title;
@@ -25,6 +25,7 @@ public class Place {
         this.baths = baths;
         this.phone = phone;
         this.amount = amount;
+        this.imgUrl1 = imgUrl1;
     }
 
     public String getUid() {
@@ -114,4 +115,13 @@ public class Place {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public String getImgUrl1() {
+        return imgUrl1;
+    }
+
+    public void setImgUrl1(String imgUrl1) {
+        this.imgUrl1 = imgUrl1;
+    }
+
 }

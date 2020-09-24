@@ -471,6 +471,55 @@
                         app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
+                <!--                img display-->
+                <LinearLayout
+                    android:id="@+id/imagesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgV1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/bgdarkPurple"
+                        android:scaleType="centerCrop" />
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imgV2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:background="@color/bgdarkPurple"-->
+<!--                        android:scaleType="centerCrop" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imgV3"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:background="@color/bgdarkPurple"-->
+<!--                        android:scaleType="centerCrop" />-->
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+
+
                 <!--                buttons-->
                 <LinearLayout
                     android:id="@+id/buttonLayout"
