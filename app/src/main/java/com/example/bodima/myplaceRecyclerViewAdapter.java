@@ -1,5 +1,7 @@
 package com.example.bodima;
 
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.bumptech.glide.Glide;
 import com.example.bodima.Model.Place;
 
 import java.util.List;
 
 public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecyclerViewAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<Place> placeArrayList;
 
-    public myplaceRecyclerViewAdapter(List<Place> placeArrayList) {
+    public myplaceRecyclerViewAdapter(Context context, List<Place> placeArrayList) {
+        this.mContext = context;
         this.placeArrayList = placeArrayList;
     }
 
@@ -41,13 +47,16 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
 
         viewHolder.title.setText( fecthPlacesData.getTitle() );
         viewHolder.city.setText( fecthPlacesData.getCity() );
-        viewHolder.nBeds.setText( String.valueOf(fecthPlacesData.getBeds()) );
-        viewHolder.nBaths.setText( String.valueOf(fecthPlacesData.getBaths()) );
-        viewHolder.price.setText( String.format("Rs. %s /month", (int)fecthPlacesData.getAmount()) );   //price is formatted
-        viewHolder.date.setText( String.format("posted on %s ", fecthPlacesData.getDate()) );           //date is formatted
-
+        viewHolder.nBeds.setText( fecthPlacesData.getBeds() );
+        viewHolder.nBaths.setText( fecthPlacesData.getBaths() );
+        viewHolder.price.setText( String.format("Rs. %s /month", fecthPlacesData.getAmount()) );   //price is formatted
+        viewHolder.date.setText( String.format("posted on %s ", fecthPlacesData.getDate()) );      //date is formatted
 
         //load image
+        Glide.with(mContext)
+                .load(fecthPlacesData.getImgUrl())
+                .into(viewHolder.imageView);
+
     }
 
     @Override
@@ -64,7 +73,7 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
                 super(itemView);
 
                 //initialize
-//                imageView = itemView.findViewById(R.id.imgPlace);
+                imageView = itemView.findViewById(R.id.imgPlace);
                 title = (TextView) itemView.findViewById(R.id.title);
                 city = (TextView) itemView.findViewById(R.id.city);
                 nBeds =(TextView)  itemView.findViewById(R.id.cBeds);

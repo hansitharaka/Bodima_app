@@ -242,15 +242,7 @@ public class AddPlaceForm extends AppCompatActivity {
     private void AddPlace() {
 
         if (isValid()) {
-
             //TODO: add images should be validate too
-            //if validation is success, insert data
-
-            int beds = Integer.parseInt(pBeds);
-            int baths = Integer.parseInt(pBaths);
-            double amount = Double.parseDouble(pAmount);
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //calling images upload
             if (uploadTask != null && uploadTask.isInProgress()) {
@@ -274,7 +266,7 @@ public class AddPlaceForm extends AppCompatActivity {
                                     }
 
                                     //Sending all data to firebase
-                                    HashMap<String, String> myPlaces = new HashMap<String, String>();
+                                    HashMap<String, Object> myPlaces = new HashMap<String, Object>();
                                     myPlaces.put("uid", pUid);
                                     myPlaces.put("username", pUsername);
                                     myPlaces.put("title", pTitle);
@@ -305,6 +297,9 @@ public class AddPlaceForm extends AppCompatActivity {
                             });
 
                             Toast.makeText(AddPlaceForm.this, "Data inserted successfully", Toast.LENGTH_SHORT).show();
+
+                            //go to home page
+                            startActivity(new Intent(AddPlaceForm.this, MyPlaces.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -325,9 +320,6 @@ public class AddPlaceForm extends AppCompatActivity {
                 }
 
             }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //TODO: user uid or phone number must be used instead of username as child(pUsername)
 
 

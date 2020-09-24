@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class Place {
 
-    private String uid, username, title, desc, city, address, phone, date, imgUrl1;
-    private int beds,baths;
-    private double amount;
+    private String uid, username, title, desc, city, address, phone, date, imgUrl;
+    private String beds,baths;
+    private String amount;
 
     public Place() {
     }
 
     public Place(String uid, String username, String title, String desc, String city, String address, String date,
-                 int beds, int baths, String phone, double amount, String imgUrl1) {
+                 String beds, String baths, String phone, String amount, String imgUrl) {
         this.uid = uid;
         this.username = username;
         this.title = title;
@@ -25,7 +25,7 @@ public class Place {
         this.baths = baths;
         this.phone = phone;
         this.amount = amount;
-        this.imgUrl1 = imgUrl1;
+        this.imgUrl = imgUrl;
     }
 
     public String getUid() {
@@ -84,19 +84,19 @@ public class Place {
         this.date = date;
     }
 
-    public int getBeds() {
+    public String getBeds() {
         return beds;
     }
 
-    public void setBeds(int beds) {
+    public void setBeds(String beds) {
         this.beds = beds;
     }
 
-    public int getBaths() {
+    public String getBaths() {
         return baths;
     }
 
-    public void setBaths(int baths) {
+    public void setBaths(String baths) {
         this.baths = baths;
     }
 
@@ -108,20 +108,20 @@ public class Place {
         this.phone = phone;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public String getImgUrl1() {
-        return imgUrl1;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgUrl1(String imgUrl1) {
-        this.imgUrl1 = imgUrl1;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
 }

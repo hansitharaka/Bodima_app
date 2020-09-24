@@ -69,7 +69,7 @@ public class MyPlaces extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Place place = dataSnapshot.getValue(Place.class);
                     placeArrayList.add(place);
-                    recyclerAdapter = new myplaceRecyclerViewAdapter(placeArrayList);
+                    recyclerAdapter = new myplaceRecyclerViewAdapter(getApplicationContext(), placeArrayList);
                     recyclerView.setAdapter(recyclerAdapter);
                     //TODO: image should be there
 
