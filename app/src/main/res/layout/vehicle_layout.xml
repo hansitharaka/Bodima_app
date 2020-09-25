@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <!--Vehicle Ad-->
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/ashyPurple"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardCornerRadius="20dp"
+
+    android:layout_marginBottom="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrain_vehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgVehicleAd"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@color/colorPrimaryDark"
+                android:contentDescription="@string/placeimg"
+                android:elevation="10dp"
+                android:scaleType="centerCrop"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/img1"/>
+
+            <LinearLayout
+                android:id="@+id/vehicle_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgVehicleAd"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/vehicleTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/bold"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/ad_vehicle_display"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+                <!-- City -->
+                <TextView
+                    android:id="@+id/vehicleCity"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/medium"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/city_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <!-- Vehicle Type -->
+                <TextView
+                    android:id="@+id/vehcileType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/medium"
+                    android:padding="10dp"
+                    android:text="@string/v_type"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
+
+                <!-- Price -->
+                <TextView
+                    android:id="@+id/VehiclePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/bold"
+                    android:padding="10dp"
+                    android:text="@string/price_vehicle"
+                    android:textColor="@color/colorPink"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+

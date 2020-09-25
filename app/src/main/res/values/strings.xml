@@ -199,17 +199,20 @@
         <item>31</item>
     </string-array>
     <string-array name="type_id">
+        <item>Select the type</item>
         <item>Car</item>
         <item>Van</item>
         <item>Bike</item>
         <item>Other</item>
     </string-array>
     <string-array name="condition_id">
+        <item>Select the Condition</item>
         <item>New</item>
         <item>Old</item>
         <item>Used</item>
     </string-array>
     <string-array name="fuel_id">
+        <item>Select Fuel Type</item>
         <item>Petrol</item>
         <item>Diesel</item>
     </string-array>

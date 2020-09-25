@@ -27,7 +27,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPagerLand"
+                    android:id="@+id/viewPagerHouse"
                     android:layout_width="wrap_content"
                     android:layout_height="350dp"
                     android:adjustViewBounds="true"
@@ -62,9 +62,9 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="@+id/viewPagerLand"
-                    app:layout_constraintEnd_toEndOf="@+id/viewPagerLand"
-                    app:layout_constraintTop_toTopOf="@+id/viewPagerLand"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewPagerHouse"
+                    app:layout_constraintEnd_toEndOf="@+id/viewPagerHouse"
+                    app:layout_constraintTop_toTopOf="@+id/viewPagerHouse"
                     app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bold"
-                        android:text="@string/ad_title_land"
+                        android:text="@string/ad_title_display"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25sp"
                         app:autoSizeTextType="uniform"
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/medium"
-                        android:text="@string/amounlabel"
+                        android:text="Amount"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp"
                         app:autoSizeTextType="uniform" />
@@ -169,211 +169,47 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--   Facilities   -->
+            <!--   Size   -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutFacility"
+                android:id="@+id/layoutLand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_section_layout"
                 android:padding="24dp">
 
                 <LinearLayout
-                    android:id="@+id/linearFacilities"
+                    android:id="@+id/linearLand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/verticalLinear1"
+                    <TextView
+                        android:id="@+id/labelLand"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/medium"
+                        android:text="Land Size (Perches)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:autoSizeTextType="uniform" />
 
-                        <LinearLayout
-                            android:id="@+id/Beds"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtBedsNo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/bold"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/beds_no"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="25sp"
-                                app:autoSizeTextType="uniform" />
-
-                            <TextView
-                                android:id="@+id/txtBeds"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/medium"
-                                android:text="@string/beds_label"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
-                                app:autoSizeTextType="uniform" />
-                        </LinearLayout>
-
-                        <View
-                            android:id="@+id/verticalLine"
-                            android:layout_width="3dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/divider" />
-
-                        <LinearLayout
-                            android:id="@+id/Baths"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtBathsNo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/bold"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/baths_no"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="25sp"
-                                app:autoSizeTextType="uniform" />
-
-                            <TextView
-                                android:id="@+id/txtBaths"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/medium"
-                                android:text="@string/baths_label"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
-                                app:autoSizeTextType="uniform" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--   Sizes   -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutSizes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_section_layout"
-                android:padding="24dp">
-
-                <LinearLayout
-                    android:id="@+id/linearSizes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:id="@+id/verticaS1"
+                    <TextView
+                        android:id="@+id/txtLandSize"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/HouseSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtHouseSize"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/bold"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/house_size"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="25sp"
-                                app:autoSizeTextType="uniform" />
-
-                            <TextView
-                                android:id="@+id/txtSizeHouse"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/medium"
-                                android:text="@string/house_s_label"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
-                                app:autoSizeTextType="uniform" />
-                        </LinearLayout>
-
-                        <View
-                            android:id="@+id/verticalS2"
-                            android:layout_width="3dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/divider" />
-
-                        <LinearLayout
-                            android:id="@+id/LandSIze"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtLandSize"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/bold"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/land_size"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="25sp"
-                                app:autoSizeTextType="uniform" />
-
-                            <TextView
-                                android:id="@+id/txtSizeLand"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/medium"
-                                android:text="@string/land_s_label"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
-                                app:autoSizeTextType="uniform" />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/ad_land_size"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp"
+                        app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
 

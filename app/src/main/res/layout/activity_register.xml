@@ -8,7 +8,7 @@
     android:background="@color/bgdarkPurple"
     android:layout_gravity="center_vertical">
 
-    <com.google.android.material.tabs.TabLayout
+    <LinearLayout
         android:id="@+id/modes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,23 +17,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicator="@drawable/button"
-        app:tabIndicatorColor="@color/colorPink"
-        app:tabIndicatorGravity="stretch"
-        app:tabSelectedTextColor="@color/colorPrimaryDark"
-        app:tabTextColor="@color/gray">
+        android:orientation="horizontal">
 
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:backgroundTint="@color/colorPink"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_weight="1"
             android:text="@string/signup" />
         
-        <com.google.android.material.tabs.TabItem
+        <Button
+            android:id="@+id/signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPink"
+            android:textColor="@color/colorPrimaryDark"
             android:text="@string/signin" />
 
-    </com.google.android.material.tabs.TabLayout>
+    </LinearLayout>
 
 <!--    Form-->
     <LinearLayout
@@ -47,133 +53,62 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/modes">
 
-        <RadioGroup
-            android:id="@+id/usertype"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:id="@+id/loginform"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="200dp">
 
-            <RadioButton
-                android:id="@+id/seller"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/usermail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/dimgray"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/medium"
-                android:paddingStart="10dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/dimgray"
+                android:backgroundTint="@color/dimgray"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
                 android:paddingEnd="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/seller"
-                android:textSize="16sp"
-                android:textColor="@color/dimgray" />
+                android:paddingStart="10dp"
+                android:layout_marginBottom="20dp"/>
 
-            <RadioButton
-                android:id="@+id/buyer"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/userpsw"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/dimgray"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/medium"
-                android:paddingStart="10dp"
+                android:hint="@string/password"
+                android:textColorHint="@color/dimgray"
+                android:backgroundTint="@color/dimgray"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
                 android:paddingEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:text="@string/buyer"
-                android:textSize="16sp"
-                android:textColor="@color/dimgray" />
+                android:paddingStart="10dp"
+                android:inputType="textPassword"
+                android:layout_marginBottom="50dp"/>
 
-        </RadioGroup>
+            <Button
+                android:id="@+id/btnReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:text="@string/register"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/name"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/userphone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/phone_label"
-            android:inputType="phone"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/useremail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/userpsw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/userpswconfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/password_confirm"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:inputType="textPassword"
-            android:layout_marginBottom="50dp"/>
-
-        <Button
-            android:id="@+id/btnContinue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:backgroundTint="@color/colorPink"
-            android:text="@string/register"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginBottom="20dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
