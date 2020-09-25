@@ -65,16 +65,21 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
         setContentView(R.layout.activity_expenses__dashboard);
 
+        //get id's from resources
         Minus = findViewById(R.id.btnMinus);
         Add = findViewById(R.id.btnPlus);
 
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // start coding to minus button
         Add.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -89,7 +94,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 100);
                 toast.show();
 
-                Intent intent = new Intent(Expenses_Dashboard.this, ExpensesHistory.class);
+                Intent intent = new Intent(Expenses_Dashboard.this, TypeSelector.class);
 
 
                 amountInput = findViewById(R.id.in_amount);
@@ -150,8 +155,6 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
         // start coding to minus button
-
-
         Minus.setOnClickListener(new View.OnClickListener() {
 
 
@@ -165,7 +168,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 100);
                 toast.show();
 
-                Intent intent = new Intent(Expenses_Dashboard.this, ExpensesHistory.class);
+                Intent intent = new Intent(Expenses_Dashboard.this, TypeSelector.class);
                 amountInput = findViewById(R.id.in_amount);
                 Salary = findViewById(R.id.Salary);
                 Bank_Intrest = findViewById(R.id.intrest);
@@ -249,7 +252,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
         expenseData.setAmount(ValueA);
         expenseData.setDate(datetime);
         expenseData.setType(Type);
-        expenseData.setUid(CurrentUser);
+//        expenseData.setUid("123");
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -260,7 +263,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 // use to upadte with addlistnerfor
 //                        databaseReference.child("Expenses").setValue(expenseData);
 
-                databaseReference.child("Expenses").setValue(expenseData);
+                databaseReference.child("Expenses").push().setValue(expenseData);
                 Toast.makeText(Expenses_Dashboard.this, "data Inserted", Toast.LENGTH_SHORT).show();
 
             }
@@ -282,18 +285,21 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
+//        UserID=firebaseAuth
+
         CurrentUser = user.getUid();
         expenseData.setAmount(ValueA);
         expenseData.setDate(datetime);
         expenseData.setType(Type);
-        expenseData.setUid(CurrentUser);
+//        expenseData.setUid("123");
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                        databaseReference.child("Revanue").setValue(expenseData);use for update
-                databaseReference.child("Revanue").setValue(expenseData);
+                databaseReference.child("Revanue").push().setValue(expenseData);
 
 
                 Toast.makeText(Expenses_Dashboard.this, "data Inserted", Toast.LENGTH_SHORT).show();

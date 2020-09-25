@@ -87,7 +87,7 @@ public class Register extends AppCompatActivity {
 
                                     } else {
 
-                                        startActivity(new Intent(Register.this, Expenses_Dashboard.class));
+                                        startActivity(new Intent(Register.this, UserProfile.class));
                                         finish();
 
                                     }
