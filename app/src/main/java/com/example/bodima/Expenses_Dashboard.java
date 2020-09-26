@@ -170,6 +170,8 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
                 Intent intent = new Intent(Expenses_Dashboard.this, TypeSelector.class);
                 amountInput = findViewById(R.id.in_amount);
+
+
                 Salary = findViewById(R.id.Salary);
                 Bank_Intrest = findViewById(R.id.intrest);
                 Loan = findViewById(R.id.Loan);
@@ -242,7 +244,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            CurrentUser = user.getUid();
+//            CurrentUser = user.getUid();
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
 
@@ -288,7 +290,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 //        UserID=firebaseAuth
 
-        CurrentUser = user.getUid();
+//        CurrentUser = user.getUid();
         expenseData.setAmount(ValueA);
         expenseData.setDate(datetime);
         expenseData.setType(Type);

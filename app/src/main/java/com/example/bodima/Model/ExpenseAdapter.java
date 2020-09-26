@@ -1,23 +1,20 @@
 package com.example.bodima.Model;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.view.Gravity;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bodima.ExpensesHistory;
 import com.example.bodima.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -32,6 +29,7 @@ public class ExpenseAdapter<databaseReference> extends RecyclerView.Adapter<Expe
         this.listdata = listdata;
     }
 
+
     @NonNull
     @Override
     public ViewHolderClass onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,10 +38,9 @@ public class ExpenseAdapter<databaseReference> extends RecyclerView.Adapter<Expe
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ex_data_card, parent, false);
         ViewHolderClass viewHolderClass = new ViewHolderClass(view);
 
-        ///////////////////
-
         return viewHolderClass;
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderClass holder, int position) {
@@ -64,10 +61,10 @@ public class ExpenseAdapter<databaseReference> extends RecyclerView.Adapter<Expe
         return listdata.size();
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //1
 
-    public static class ViewHolderClass extends RecyclerView.ViewHolder {
+    public static class ViewHolderClass extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
 
         TextView amount_ex_text1, Type123, date_expense1;
@@ -79,58 +76,26 @@ public class ExpenseAdapter<databaseReference> extends RecyclerView.Adapter<Expe
             amount_ex_text1 = (TextView) itemView.findViewById(R.id.amount_ex_text);
             Type123 = (TextView) itemView.findViewById(R.id.Type1);
             date_expense1 = (TextView) itemView.findViewById(R.id.date_expense);
-
-
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    mclicklistner.OnItemLongClick(view,getAdapterPosition());
-                    return false;
-                }
-            });
-
-
-
+            CardView cardV = (CardView) itemView.findViewById(R.id.card);
+            cardV.setOnCreateContextMenuListener(this);
 
 
         }
-        private ViewHolderClass.clickListener mclicklistner;
-        ///1
-        public interface  clickListener{
-            void OnItemLongClick(View view,int position);
+
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(this.getAdapterPosition(), 121, 0, "Delete");
+//            contextMenu.add(this.getAdapterPosition(), 122, 1, "Edit");
         }
-        //2
-        public void setOnclickListner(ViewHolderClass.clickListener clickListener){
-            mclicklistner = clickListener;
-        }
-
-
-
 
 
     }
 
-//    public void showDeletedetails(String id) {
-//        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                switch (which) {
-//                    case DialogInterface.BUTTON_POSITIVE:
-//
-//                        //Do your Yes progress
-//                        break;
-//
-//                    case DialogInterface.BUTTON_NEGATIVE:
-//                        //Do your No progress
-//                        break;
-//                }
-//            }
-//        };
-//
-//
-//    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    void getAdapterPosition() {
 
-    ////////////////////////////////////////////////////////////////////
+    }
 
 
 }

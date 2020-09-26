@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,17 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bodima.Model.ExpenseAdapter;
 import com.example.bodima.Model.ExpenseData;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +47,7 @@ public class ExpensesHistory extends AppCompatActivity {
     TextView DateView;
     //
     ImageButton deleteBtn;
-
+    String clubkey;
     String Amount;
     String Type_;
     String id;
@@ -75,7 +69,6 @@ public class ExpensesHistory extends AppCompatActivity {
 //        deleteBtn =findViewById(R.id.btnDel);
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //        AmountView = findViewById(R.id.amount_ex_text);
 //        TypeView = findViewById(R.id.Type1);
@@ -87,12 +80,67 @@ public class ExpensesHistory extends AppCompatActivity {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
     }
 
 
+
+// Running Code
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 121:
+                expenseData = new ArrayList<>();
+
+                if (Type_.equalsIgnoreCase("Revanue")){
+                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
+                }
+                else {
+                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
+                }
+
+
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            ExpenseData data = ds.getValue(ExpenseData.class);
+
+                            clubkey = ds.getKey();
+                            data.setUid(clubkey);
+//                            databaseReference.child(clubkey).removeValue();
+//                            LoaddatafromdatabaseRevanue();
+
+                        }
+                        if(clubkey.isEmpty()){
+                            Toast.makeText(ExpensesHistory.this, "Empty ", Toast.LENGTH_SHORT).show();
+                            LoaddatafromdatabaseRevanue();
+
+                        }else {
+                            databaseReference.child(clubkey).removeValue();
+                            LoaddatafromdatabaseRevanue();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                return true;
+
+//            case 122:
+//                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onStart() {
         super.onStart();
@@ -110,8 +158,7 @@ public class ExpensesHistory extends AppCompatActivity {
 
 
             LoaddatafromdatabaseExpenses();
-        }
-        else{
+        } else {
             Context context = getApplicationContext();
             CharSequence message = "Loading...";
             int duration = Toast.LENGTH_SHORT; //How long the toastmessage will lasts
@@ -121,8 +168,6 @@ public class ExpensesHistory extends AppCompatActivity {
 
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
     }
@@ -139,7 +184,6 @@ public class ExpensesHistory extends AppCompatActivity {
 //    }
 
 
-
     //load data from firebase
     public void LoaddatafromdatabaseExpenses() {
 
@@ -147,7 +191,6 @@ public class ExpensesHistory extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
 
 
         expenseData = new ArrayList<>();
@@ -162,12 +205,13 @@ public class ExpensesHistory extends AppCompatActivity {
                     expenseData.add(data);
                     adapter = new ExpenseAdapter(expenseData);
                     //////////////////////////////////////////////////////
-                     id =databaseReference.push().getKey();
-//                    System.out.println(id);
+                    id = databaseReference.getKey();
                     ////////////////////////////////////////////////////////
                     recyclerView.setAdapter(adapter);
+
                 }
 
+                System.out.println(id);
 
             }
 
@@ -198,11 +242,7 @@ public class ExpensesHistory extends AppCompatActivity {
                     ExpenseData data = ds.getValue(ExpenseData.class);
                     expenseData.add(data);
                     adapter = new ExpenseAdapter(expenseData);
-                    //////////////////////////////////////////
-                    String clubkey =ds.getKey();
-                    System.out.println(clubkey);
-//                    id =databaseReference.push().getKey();
-                    //////////////////////////////////////////
+
                     recyclerView.setAdapter(adapter);
                 }
 
