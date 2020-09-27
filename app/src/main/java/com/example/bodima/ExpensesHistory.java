@@ -106,8 +106,14 @@ public class ExpensesHistory extends AppCompatActivity {
                             ExpenseData data = ds.getValue(ExpenseData.class);
 
                             clubkey = ds.getKey();
-                            data.setUid(clubkey);
+
+
+//                            Double val= .;
+//                            System.out.println(val);
+
 //                            databaseReference.child(clubkey).removeValue();
+//                            System.out.println("llllllll"+clubkey);
+
 //                            LoaddatafromdatabaseRevanue();
 
                         }
@@ -205,7 +211,9 @@ public class ExpensesHistory extends AppCompatActivity {
                     expenseData.add(data);
                     adapter = new ExpenseAdapter(expenseData);
                     //////////////////////////////////////////////////////
-                    id = databaseReference.getKey();
+                    id = ds.getKey();
+                    System.out.println("nnnnnnnnnnnnnnnn"+id);
+
                     ////////////////////////////////////////////////////////
                     recyclerView.setAdapter(adapter);
 

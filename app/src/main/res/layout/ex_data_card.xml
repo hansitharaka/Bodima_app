@@ -38,11 +38,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constrain_expense1"
-                android:layout_width="280dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btnDel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -78,7 +77,7 @@
 
                     <TextView
                         android:id="@+id/date_expense"
-                        android:layout_width="180dp"
+                        android:layout_width="259dp"
                         android:layout_height="wrap_content"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/medium"
@@ -116,7 +115,7 @@
 
                     <TextView
                         android:id="@+id/amount_ex_text"
-                        android:layout_width="175dp"
+                        android:layout_width="259dp"
                         android:layout_height="match_parent"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/bold"
@@ -142,7 +141,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/medium"
                         android:padding="10dp"
-                        android:text=""
+                        android:text="Type"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp" />
 
@@ -155,7 +154,7 @@
 
                     <TextView
                         android:id="@+id/Type1"
-                        android:layout_width="180dp"
+                        android:layout_width="259dp"
                         android:layout_height="wrap_content"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/medium"
@@ -167,21 +166,6 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <ImageButton
-                android:id="@+id/btnDel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_margin="10dp"
-                android:background="@drawable/button"
-                android:backgroundTint="@color/colorPink"
-                android:contentDescription="@string/deletebtn"
-                android:fontFamily="@font/bold"
-                android:padding="20dp"
-                android:src="@drawable/delete"
-                android:textColor="@color/colorPrimaryDark" />
 
 
         </androidx.cardview.widget.CardView>

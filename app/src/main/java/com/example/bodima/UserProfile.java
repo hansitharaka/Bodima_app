@@ -54,8 +54,6 @@ public class UserProfile extends AppCompatActivity {
         PhoneNumber = findViewById(R.id.userphone);
         Submitbtn = findViewById(R.id.btnUpdate);
 
-        name=Username.getText().toString();
-        phone=PhoneNumber.getText().toString();
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -91,9 +89,12 @@ public class UserProfile extends AppCompatActivity {
                 userprofile.setPhone(phone);
                 userprofile.setId(CurrentUser);
 
-
-
+                name=Username.getText().toString();
+                phone=PhoneNumber.getText().toString();
                 databaseReference.setValue(userprofile);
+
+
+
             }
         });
     }
