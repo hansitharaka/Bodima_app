@@ -5,29 +5,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyPlaces extends AppCompatActivity {
+public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAdapter.OnItemClickListener{
 
     //variables
     private RecyclerView recyclerView;
     private List<Place> placeArrayList;
+    private List<String> keyList;
     private myplaceRecyclerViewAdapter recyclerAdapter;
 
+    private FirebaseStorage mStorage;
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
 
@@ -45,11 +53,17 @@ public class MyPlaces extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
 
         //Database
+        mStorage = FirebaseStorage.getInstance();
         mreff = FirebaseDatabase.getInstance().getReference("Places");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //ArrayList
         placeArrayList = new ArrayList<>();
+        keyList = new ArrayList<>();
+
+        recyclerAdapter = new myplaceRecyclerViewAdapter(getApplicationContext(), placeArrayList);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnItemClickListener(MyPlaces.this);
 
         //Clear
         ClearAll();
@@ -66,14 +80,10 @@ public class MyPlaces extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
 
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Place place = dataSnapshot.getValue(Place.class);
+                    keyList.add(dataSnapshot.getKey());
                     placeArrayList.add(place);
-                    recyclerAdapter = new myplaceRecyclerViewAdapter(getApplicationContext(), placeArrayList);
-                    recyclerView.setAdapter(recyclerAdapter);
-                    //TODO: image should be there
-
-
                 }
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -96,4 +106,35 @@ public class MyPlaces extends AppCompatActivity {
             placeArrayList = new ArrayList<>();
         }
     }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MyPlaces.this, place_details.class);
+        intent.putExtra("key", keyList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        Place selectedItem =  placeArrayList.get(position);
+        final String selectedKey = keyList.get(position);
+
+        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mreff.child(selectedKey).removeValue();
+                Toast.makeText(MyPlaces.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onEditClick(int position) {
+
+//        Intent
+    }
+
+
 }
+

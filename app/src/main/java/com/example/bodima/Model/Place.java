@@ -1,31 +1,31 @@
 package com.example.bodima.Model;
 
-
-import java.util.Date;
+import com.google.firebase.database.Exclude;
 
 public class Place {
 
     private String uid, username, title, desc, city, address, phone, date, imgUrl;
     private String beds,baths;
     private String amount;
+    private String mKey;
 
     public Place() {
     }
 
-    public Place(String uid, String username, String title, String desc, String city, String address, String date,
-                 String beds, String baths, String phone, String amount, String imgUrl) {
+    public Place(String uid, String username, String title, String desc, String city, String address, String phone, String date, String imgUrl, String beds, String baths, String amount, String mKey) {
         this.uid = uid;
         this.username = username;
         this.title = title;
         this.desc = desc;
         this.city = city;
         this.address = address;
+        this.phone = phone;
         this.date = date;
+        this.imgUrl = imgUrl;
         this.beds = beds;
         this.baths = baths;
-        this.phone = phone;
         this.amount = amount;
-        this.imgUrl = imgUrl;
+        this.mKey = mKey;
     }
 
     public String getUid() {
@@ -76,12 +76,28 @@ public class Place {
         this.address = address;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getBeds() {
@@ -100,14 +116,6 @@ public class Place {
         this.baths = baths;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getAmount() {
         return amount;
     }
@@ -116,12 +124,13 @@ public class Place {
         this.amount = amount;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    @Exclude
+    public String getmKey() {
+        return mKey;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    @Exclude
+    public void setmKey(String mKey) {
+        this.mKey = mKey;
     }
-
 }

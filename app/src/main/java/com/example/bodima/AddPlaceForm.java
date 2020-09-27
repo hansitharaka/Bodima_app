@@ -48,11 +48,10 @@ public class AddPlaceForm extends AppCompatActivity {
     private TextView username, date;
     private EditText title, desc, amount, nBeds, nBaths, phone, city, address;
     private Button addImg, btnSave;
-    private ImageView img1, img2, img3;
+    private ImageView img1;
     private ProgressBar progBar;
     private LinearLayout imgLayout;
     private String pUid, pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
-    private ArrayList<Uri> ImageList = new ArrayList<Uri>();
     private Uri mImgUri;
     private int upload_count = 0;
 
@@ -90,8 +89,6 @@ public class AddPlaceForm extends AppCompatActivity {
 
         imgLayout = (LinearLayout) findViewById(R.id.imagesLayout);
         img1 = (ImageView) findViewById(R.id.imgV1);
-//        img2 = (ImageView) findViewById(R.id.imgV2);
-//        img3 = (ImageView) findViewById(R.id.imgV3);
 
         addImg = (Button) findViewById(R.id.addImg);
         btnSave = (Button) findViewById(R.id.btnSave);
@@ -204,7 +201,6 @@ public class AddPlaceForm extends AppCompatActivity {
         // choose files
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");                                      //only see images
-        //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);       //allow multiple inputs
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
@@ -219,14 +215,6 @@ public class AddPlaceForm extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            int countClipData = data.getClipData().getItemCount();
-//            int currentImageSelect = 0;
-//
-//            while (currentImageSelect < countClipData) {
-//                mImgUri = data.getClipData().getItemAt(currentImageSelect).getUri();
-//                ImageList.add(mImgUri);
-//                currentImageSelect++;
-//            }
             mImgUri = data.getData();
 
             //load the image to the view
@@ -234,7 +222,7 @@ public class AddPlaceForm extends AppCompatActivity {
             img1.setImageURI(mImgUri);
 
         } else {
-            Toast.makeText(this, "You need to select 3 images", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
         }
     }
 

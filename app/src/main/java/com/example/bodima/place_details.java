@@ -54,10 +54,10 @@ public class place_details extends AppCompatActivity {
         viewRating = (FloatingActionButton) findViewById(R.id.floatCall);
 
         //for now
-        final String pid = "-MI-gzoc-EoFG_wm6BsU";
+        final String key = getIntent().getStringExtra("key");
 
         //Database
-        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(pid);
+        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(key);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
             //retrieve data from the database

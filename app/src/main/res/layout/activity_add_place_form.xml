@@ -489,26 +489,6 @@
                         android:background="@color/bgdarkPurple"
                         android:scaleType="centerCrop" />
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/imgV2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="150dp"-->
-<!--                        android:layout_margin="10dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:background="@color/bgdarkPurple"-->
-<!--                        android:scaleType="centerCrop" />-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/imgV3"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="150dp"-->
-<!--                        android:layout_margin="10dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:background="@color/bgdarkPurple"-->
-<!--                        android:scaleType="centerCrop" />-->
-
                     <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="match_parent"
