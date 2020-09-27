@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyReminders extends AppCompatActivity {
+public class OtherReminders extends AppCompatActivity {
 
     List<Reminders> reminders;
     RecyclerView recyclerView;
@@ -45,17 +45,17 @@ public class MyReminders extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reminders);
+        setContentView(R.layout.activity_other_reminders);
         //setContentView(R.layout.activity_ratings_recyclerview);
 
-        final Intent intent = getIntent();
+        Intent intent = getIntent();
 
         recyclerView = findViewById(R.id.recylerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(reminderHelperAdapter);
         reminders = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Payment");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Other");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -84,31 +84,29 @@ public class MyReminders extends AppCompatActivity {
         bPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, MyReminders.class));
+                startActivity(new Intent(OtherReminders.this, MyReminders.class));
             }
         });
 
         bBday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MyReminders.this,BirthdayReminders.class);
-                startActivity(intent1);
+                startActivity(new Intent(OtherReminders.this, BirthdayReminders.class));
             }
         });
 
         bOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, OtherReminders.class));
+                startActivity((new Intent(OtherReminders.this, OtherReminders.class)));
             }
         });
 
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, AddReminder.class));
+                startActivity((new Intent(OtherReminders.this, AddReminder.class)));
             }
         });
-
     }
 }
