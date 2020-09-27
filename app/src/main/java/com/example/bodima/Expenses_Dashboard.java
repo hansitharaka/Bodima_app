@@ -3,6 +3,7 @@ package com.example.bodima;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -46,7 +47,15 @@ public class Expenses_Dashboard extends AppCompatActivity {
     RadioButton Rent;
     RadioButton Bill;
 
-    String CurrentUser;
+
+    int EX_Total;
+    int Re_Total;
+
+    int Status;
+
+    int amount;
+    int amount1;
+
 
     String ValueA;
 
@@ -68,16 +77,15 @@ public class Expenses_Dashboard extends AppCompatActivity {
         //get id's from resources
         Minus = findViewById(R.id.btnMinus);
         Add = findViewById(R.id.btnPlus);
+        CurrentBalnacePreview = findViewById(R.id.current_balance);
 
 
     }
 
 
-
-
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
         // start coding to minus button
         Add.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +106,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
                 amountInput = findViewById(R.id.in_amount);
+
                 Salary = findViewById(R.id.Salary);
                 Bank_Intrest = findViewById(R.id.intrest);
                 Loan = findViewById(R.id.Loan);
@@ -145,7 +154,12 @@ public class Expenses_Dashboard extends AppCompatActivity {
 //                intent.putExtra("Type_in", Type);
 //                intent.putExtra("DateAndTime", datetime);
 
-                sendDataToFireBaseforRevanue();
+                if (ValueA.isEmpty()) {
+                    Toast.makeText(context, "Empty amount", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendDataToFireBaseforRevanue();
+                }
+
 
                 startActivity(intent);
 
@@ -226,13 +240,35 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 intent.putExtra("Type_in", Type);
                 intent.putExtra("DateAndTime", datetime);
 
-                sendDataToFireBaseforExpenses();
+                if (ValueA.isEmpty()) {
+                    Toast.makeText(context, "Empty amount", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendDataToFireBaseforExpenses();
+                }
+
 
                 startActivity(intent);
             }
         });
+        getStatusOfValut();
+        //CurrentBalnacePreview.setText(String.valueOf(Status));
+//        Status=Re_Total-EX_Total;
+//        System.out.println(Status);
+//        String.valueOf(Status);
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Status=0;
+        EX_Total = 0;
+        Re_Total = 0;
+
+        Log.d("TAG","onPuase Called");
+        System.out.println("QQQQ"+Status);
     }
 
     public void sendDataToFireBaseforExpenses() {
@@ -279,7 +315,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
     }
 
-    public void sendDataToFireBaseforRevanue(){
+    public void sendDataToFireBaseforRevanue() {
         //create datebase path
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("ExpenseManeger");
@@ -317,5 +353,58 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
     }
 
+    public void getStatusOfValut() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    ExpenseData data = ds.getValue(ExpenseData.class);
+
+
+                    //////////////////////////////////////////////////////
+                    amount = Integer.parseInt(data.getAmount());
+                    EX_Total = amount + EX_Total;
+                    ////////////////////////////////////////////////////////
+
+
+                }
+
+                databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
+
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            ExpenseData data = ds.getValue(ExpenseData.class);
+                            amount1 = Integer.parseInt(data.getAmount());
+                            Re_Total = amount1 + Re_Total;
+
+                        }
+
+                        //get diffrence
+                        Status = Re_Total - EX_Total;
+                        CurrentBalnacePreview.setText(String.valueOf(Status));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
 
 }

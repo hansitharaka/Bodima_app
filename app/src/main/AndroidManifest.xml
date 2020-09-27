@@ -16,8 +16,8 @@
         <activity android:name=".AddPlaceForm" />
         <activity android:name=".AllAdvertisements"/>
         <activity android:name=".LandAdDetails" />
-        <activity android:name=".Expenses_Dashboard" />
-        <activity android:name=".Register">
+        <activity android:name=".Register" />
+        <activity android:name=".Expenses_Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

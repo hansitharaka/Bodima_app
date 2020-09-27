@@ -128,65 +128,143 @@
                 app:layout_constraintTop_toBottomOf="@id/amount_constraint"
                 app:layout_goneMarginEnd="10dp">
 
+
                 <RadioGroup
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp">
 
-                    <RadioButton
-                        android:id="@+id/Salary"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/salary"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/intrest"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/interst"
-                        android:textColor="@color/colorPrimaryDark" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                    <RadioButton
-                        android:id="@+id/Loan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/Loan"
-                        android:textColor="@color/colorPrimaryDark" />
+                            <RadioButton
+                                android:id="@+id/Salary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/salary"
+                                android:textColor="@color/colorPrimaryDark" />
 
-                    <RadioButton
-                        android:id="@+id/Lend"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/lending"
-                        android:textColor="@color/colorPrimaryDark" />
+                            <RadioButton
+                                android:id="@+id/intrest"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/interst"
+                                android:textColor="@color/colorPrimaryDark" />
 
-                    <RadioButton
-                        android:id="@+id/addother"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/other"
-                        android:textColor="@color/colorPrimaryDark" />
+                            <RadioButton
+                                android:id="@+id/Loan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/Loan"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/Lend"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/lending"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/addother"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/other"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <RadioButton
+                                android:id="@+id/food"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/food"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/transport"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/transport"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/clothes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/clothes"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/rent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/rent"
+                                android:textColor="@color/colorPrimaryDark" />
+
+                            <RadioButton
+                                android:id="@+id/bill"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/medium"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:text="@string/bill"
+                                android:textColor="@color/colorPrimaryDark" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
                 </RadioGroup>
 
                 <RadioGroup
@@ -194,60 +272,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp">
 
-                    <RadioButton
-                        android:id="@+id/food"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/food"
-                        android:textColor="@color/colorPrimaryDark" />
 
-                    <RadioButton
-                        android:id="@+id/transport"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/transport"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <RadioButton
-                        android:id="@+id/clothes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/clothes"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <RadioButton
-                        android:id="@+id/rent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/rent"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <RadioButton
-                        android:id="@+id/bill"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        android:fontFamily="@font/medium"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:text="@string/bill"
-                        android:textColor="@color/colorPrimaryDark" />
                 </RadioGroup>
 
             </LinearLayout>

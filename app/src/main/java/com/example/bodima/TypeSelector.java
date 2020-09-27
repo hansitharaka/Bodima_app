@@ -38,7 +38,7 @@ public class TypeSelector extends AppCompatActivity {
         setContentView(R.layout.activity_type_selector);
         Revanue=findViewById(R.id.re);
         Expense= findViewById(R.id.ex);
-        Restbtn= findViewById(R.id.reset);
+//        Restbtn= findViewById(R.id.reset);
 
         Intent intent = new Intent(this, ExpensesHistory.class);
 

@@ -52,6 +52,8 @@ public class ExpensesHistory extends AppCompatActivity {
     String Type_;
     String id;
 
+    int EX_Total;
+    int Re_Total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,18 +85,16 @@ public class ExpensesHistory extends AppCompatActivity {
     }
 
 
-
-// Running Code
+    // Running Code for delete
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case 121:
                 expenseData = new ArrayList<>();
 
-                if (Type_.equalsIgnoreCase("Revanue")){
+                if (Type_.equalsIgnoreCase("Revanue")) {
                     databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
-                }
-                else {
+                } else {
                     databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
                 }
 
@@ -107,24 +107,24 @@ public class ExpensesHistory extends AppCompatActivity {
 
                             clubkey = ds.getKey();
 
-
-//                            Double val= .;
-//                            System.out.println(val);
-
-//                            databaseReference.child(clubkey).removeValue();
-//                            System.out.println("llllllll"+clubkey);
-
-//                            LoaddatafromdatabaseRevanue();
+;
 
                         }
-                        if(clubkey.isEmpty()){
-                            Toast.makeText(ExpensesHistory.this, "Empty ", Toast.LENGTH_SHORT).show();
+                        if (clubkey.isEmpty()) {
+
+
                             LoaddatafromdatabaseRevanue();
 
-                        }else {
+                        } else {
                             databaseReference.child(clubkey).removeValue();
                             LoaddatafromdatabaseRevanue();
+
+                            //load intent
+                            Intent intent = getIntent();
+                            finish();
+                            startActivity(intent);
                         }
+
 
                     }
 
@@ -145,8 +145,7 @@ public class ExpensesHistory extends AppCompatActivity {
     }
 
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onStart() {
         super.onStart();
@@ -212,14 +211,17 @@ public class ExpensesHistory extends AppCompatActivity {
                     adapter = new ExpenseAdapter(expenseData);
                     //////////////////////////////////////////////////////
                     id = ds.getKey();
-                    System.out.println("nnnnnnnnnnnnnnnn"+id);
+                    System.out.println("nnnnnnnnnnnnnnnn" + id);
+
+                    int amount = Integer.parseInt(data.getAmount());
+                    EX_Total = amount + EX_Total;
 
                     ////////////////////////////////////////////////////////
                     recyclerView.setAdapter(adapter);
 
                 }
+                System.out.println(EX_Total);
 
-                System.out.println(id);
 
             }
 
@@ -250,10 +252,15 @@ public class ExpensesHistory extends AppCompatActivity {
                     ExpenseData data = ds.getValue(ExpenseData.class);
                     expenseData.add(data);
                     adapter = new ExpenseAdapter(expenseData);
+                    id = ds.getKey();
+                    System.out.println("nnnnnnnnnnnnnnnn" + id);
+
+                    int amount = Integer.parseInt(data.getAmount());
+                    Re_Total = amount + Re_Total;
 
                     recyclerView.setAdapter(adapter);
                 }
-
+                System.out.println(Re_Total);
 
             }
 
