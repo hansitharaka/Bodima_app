@@ -115,14 +115,11 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
                 amountInput = findViewById(R.id.in_amount);
-
                 Salary = findViewById(R.id.Salary);
                 Bank_Intrest = findViewById(R.id.intrest);
                 Loan = findViewById(R.id.Loan);
                 Lending = findViewById(R.id.Lend);
                 Other = findViewById(R.id.addother);
-
-
                 Food = findViewById(R.id.food);
                 Transport = findViewById(R.id.transport);
                 Clothes = findViewById(R.id.clothes);
@@ -136,7 +133,6 @@ public class Expenses_Dashboard extends AppCompatActivity {
                     Type = Loan.getText().toString();
                 } else if (Bank_Intrest.isChecked()) {
                     Type = Bank_Intrest.getText().toString();
-
                 } else if (Lending.isChecked()) {
                     Type = Lending.getText().toString();
                 } else if (Other.isChecked()) {
@@ -158,10 +154,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
                 datetime = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
-//
-//                intent.putExtra("AmountEnter", ValueA);
-//                intent.putExtra("Type_in", Type);
-//                intent.putExtra("DateAndTime", datetime);
+
 
                 if (ValueA.isEmpty()) {
                     Toast.makeText(context, "Empty amount", Toast.LENGTH_SHORT).show();
@@ -236,18 +229,12 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 //get values
                 ValueA = amountInput.getText().toString();
 
-//                Calendar calendar = Calendar.getInstance();
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yyyy");
-//                datetime = simpleDateFormat.format(calendar.getTime());
 
                 //get and set date and time
                 datetime = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
 
-//                pasing data to next activity
-                intent.putExtra("AmountEnter", ValueA);
-                intent.putExtra("Type_in", Type);
-                intent.putExtra("DateAndTime", datetime);
+//10
 
                 if (ValueA.isEmpty()) {
                     Toast.makeText(context, "Empty amount", Toast.LENGTH_SHORT).show();
@@ -259,14 +246,14 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //set value to text field
         getStatusOfValut();
-        //CurrentBalnacePreview.setText(String.valueOf(Status));
-//        Status=Re_Total-EX_Total;
-//        System.out.println(Status);
-//        String.valueOf(Status);
 
 
     }
+
+
 
     @Override
     protected void onPause() {

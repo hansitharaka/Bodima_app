@@ -199,6 +199,8 @@
                                 android:text="@string/other"
                                 android:textColor="@color/colorPrimaryDark" />
 
+
+
                         </LinearLayout>
 
                         <LinearLayout

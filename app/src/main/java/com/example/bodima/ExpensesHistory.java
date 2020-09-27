@@ -101,9 +101,9 @@ public class ExpensesHistory extends AppCompatActivity {
                 expenseData = new ArrayList<>();
 
                 if (Type_.equalsIgnoreCase("Revanue")) {
-                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
+                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue").child(CurrentUser);
                 } else {
-                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
+                    databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses").child(CurrentUser);
                 }
 
 
