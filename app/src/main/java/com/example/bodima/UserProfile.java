@@ -2,6 +2,7 @@ package com.example.bodima;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,7 +56,6 @@ public class UserProfile extends AppCompatActivity {
         Submitbtn = findViewById(R.id.btnUpdate);
 
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -67,20 +67,24 @@ public class UserProfile extends AppCompatActivity {
             boolean emailVerified = user.isEmailVerified();
         }
 
-        ;
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        sendUsetDetailsToDataBase();
+
+    }
+
+    public void sendUsetDetailsToDataBase() {
 
         Submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                System.out.println("SSSSSSSSSSSSSSS");
 
                 firebaseDatabase = FirebaseDatabase.getInstance();
-                databaseReference = firebaseDatabase.getReference("UserDetails");
+                databaseReference = firebaseDatabase.getReference("User");
 
                 userprofile = new User();
 
@@ -89,11 +93,12 @@ public class UserProfile extends AppCompatActivity {
                 userprofile.setPhone(phone);
                 userprofile.setId(CurrentUser);
 
-                name=Username.getText().toString();
-                phone=PhoneNumber.getText().toString();
-                databaseReference.setValue(userprofile);
+                name = Username.getText().toString();
+                phone = PhoneNumber.getText().toString();
+                databaseReference.child(CurrentUser).setValue(userprofile);
 
-
+                Intent intent = new Intent(UserProfile.this, Expenses_Dashboard.class);
+                startActivity(intent);
 
             }
         });

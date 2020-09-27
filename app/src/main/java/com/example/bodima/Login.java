@@ -127,12 +127,12 @@ public class Login extends AppCompatActivity {
 
                 if (Seller.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("User");
+                    reference = rootNode.getReference("Type");
                     reference.setValue("seller");
                 }
                 if (Buyer.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("User");
+                    reference = rootNode.getReference("Type");
                     reference.setValue("buyer");
                 }
 

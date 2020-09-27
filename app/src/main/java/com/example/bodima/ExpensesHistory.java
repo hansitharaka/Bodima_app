@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bodima.Model.ExpenseAdapter;
 import com.example.bodima.Model.ExpenseData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,7 +53,7 @@ public class ExpensesHistory extends AppCompatActivity {
     String Amount;
     String Type_;
     String id;
-
+    String CurrentUser;
     int EX_Total;
     int Re_Total;
 
@@ -80,7 +82,13 @@ public class ExpensesHistory extends AppCompatActivity {
 //        TypeView.setText(intent.getStringExtra("Type_in"));
 //        DateView.setText(intent.getStringExtra("DateAndTime"));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            CurrentUser = user.getUid();
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
 
+        }
 
     }
 
@@ -200,7 +208,7 @@ public class ExpensesHistory extends AppCompatActivity {
 
         expenseData = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
+        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses").child(CurrentUser);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -243,7 +251,7 @@ public class ExpensesHistory extends AppCompatActivity {
 
         expenseData = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
+        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue").child(CurrentUser);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

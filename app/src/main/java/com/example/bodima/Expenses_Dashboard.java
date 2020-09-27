@@ -58,6 +58,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
     String ValueA;
+    String CurrentUser;
 
     String Type;
     String datetime;
@@ -78,6 +79,14 @@ public class Expenses_Dashboard extends AppCompatActivity {
         Minus = findViewById(R.id.btnMinus);
         Add = findViewById(R.id.btnPlus);
         CurrentBalnacePreview = findViewById(R.id.current_balance);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            CurrentUser = user.getUid();
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+        }
 
 
     }
@@ -271,6 +280,8 @@ public class Expenses_Dashboard extends AppCompatActivity {
         System.out.println("QQQQ"+Status);
     }
 
+
+
     public void sendDataToFireBaseforExpenses() {
 //send data to a firebse
         //create datebase path
@@ -280,7 +291,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-//            CurrentUser = user.getUid();
+             CurrentUser = user.getUid();
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
 
@@ -290,7 +301,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
         expenseData.setAmount(ValueA);
         expenseData.setDate(datetime);
         expenseData.setType(Type);
-//        expenseData.setUid("123");
+
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -301,7 +312,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 // use to upadte with addlistnerfor
 //                        databaseReference.child("Expenses").setValue(expenseData);
 
-                databaseReference.child("Expenses").push().setValue(expenseData);
+                databaseReference.child("Expenses").child(CurrentUser).push().setValue(expenseData);
                 Toast.makeText(Expenses_Dashboard.this, "data Inserted", Toast.LENGTH_SHORT).show();
 
             }
@@ -314,6 +325,9 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
     }
+
+
+
 
     public void sendDataToFireBaseforRevanue() {
         //create datebase path
@@ -337,7 +351,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                        databaseReference.child("Revanue").setValue(expenseData);use for update
-                databaseReference.child("Revanue").push().setValue(expenseData);
+                databaseReference.child("Revanue").child(CurrentUser).push().setValue(expenseData);
 
 
                 Toast.makeText(Expenses_Dashboard.this, "data Inserted", Toast.LENGTH_SHORT).show();
@@ -353,8 +367,11 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
     }
 
+
+
+
     public void getStatusOfValut() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses");
+        databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses").child(CurrentUser);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -372,7 +389,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
                 }
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue");
+                databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Revanue").child(CurrentUser);
 
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
