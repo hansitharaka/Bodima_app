@@ -53,7 +53,7 @@ public class place_details extends AppCompatActivity {
 
         viewRating = (FloatingActionButton) findViewById(R.id.floatCall);
 
-        //for now
+
         final String key = getIntent().getStringExtra("key");
 
         //Database

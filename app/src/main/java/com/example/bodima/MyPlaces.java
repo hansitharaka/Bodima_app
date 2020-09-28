@@ -125,13 +125,19 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
             public void onSuccess(Void aVoid) {
                 mreff.child(selectedKey).removeValue();
                 Toast.makeText(MyPlaces.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
     }
 
     @Override
     public void onEditClick(int position) {
-
+        Intent i = new Intent(MyPlaces.this, AddPlaceForm.class);
+        i.putExtra("key", keyList.get(position));
+        startActivity(i);
 //        Intent
     }
 

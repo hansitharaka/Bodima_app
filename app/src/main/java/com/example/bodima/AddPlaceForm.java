@@ -28,8 +28,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -41,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class AddPlaceForm extends AppCompatActivity {
 
@@ -54,6 +58,9 @@ public class AddPlaceForm extends AppCompatActivity {
     private String pUid, pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
     private Uri mImgUri;
     private int upload_count = 0;
+    private String key;
+
+    List<Place> placeArrayList = new ArrayList<>();
 
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -101,6 +108,15 @@ public class AddPlaceForm extends AppCompatActivity {
 
         date.setText(DateFormat.getDateInstance().format(new Date()));
 
+
+        key = getIntent().getStringExtra("key");
+
+        if (key != null) {
+            GetDataFromFirebase(key);
+            btnSave.setText("Update");
+
+            AddPlace();
+        }
 
         //add images button
         addImg.setOnClickListener(new View.OnClickListener() {
@@ -230,8 +246,6 @@ public class AddPlaceForm extends AppCompatActivity {
     private void AddPlace() {
 
         if (isValid()) {
-            //TODO: add images should be validate too
-
             //calling images upload
             if (uploadTask != null && uploadTask.isInProgress()) {
                 Toast.makeText(AddPlaceForm.this, "Upload in progress", Toast.LENGTH_SHORT).show();
@@ -268,26 +282,35 @@ public class AddPlaceForm extends AppCompatActivity {
                                     myPlaces.put("amount", pAmount);
                                     myPlaces.put("imgUrl", String.valueOf(uri));
 
-                                    mReff.push().setValue(myPlaces).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            //if the upload is success, reset the progress bar to 0
-                                            Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    progBar.setProgress(0);
-                                                }
-                                            }, 500); //delays the progress by half seconds
-                                        }
-                                    });
+                                    if (key != null) {
+                                        mReff.child(key).setValue(myPlaces).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(AddPlaceForm.this, "Data has been updated", Toast.LENGTH_SHORT).show();
+                                                //go to home page
+                                                startActivity(new Intent(AddPlaceForm.this, MyPlaces.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(AddPlaceForm.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if (key == null) {
+                                        mReff.push().setValue(myPlaces).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(AddPlaceForm.this, "Data inserted successfully", Toast.LENGTH_SHORT).show();
+                                                //go to home page
+                                                startActivity(new Intent(AddPlaceForm.this, MyPlaces.class));
+                                            }
+                                        });
+                                    }
+
                                 }
                             });
 
-                            Toast.makeText(AddPlaceForm.this, "Data inserted successfully", Toast.LENGTH_SHORT).show();
 
-                            //go to home page
-                            startActivity(new Intent(AddPlaceForm.this, MyPlaces.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -312,4 +335,33 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
         }}
+
+    private void GetDataFromFirebase(String mKey) {
+
+        mReff.child(mKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Place place = snapshot.getValue(Place.class);
+                username.setText(place.getUsername());
+                date.setText(place.getDate());
+                title.setText(place.getTitle());
+                desc.setText(place.getDesc());
+                amount.setText(place.getAmount());
+                nBaths.setText(place.getBaths());
+                nBeds.setText(place.getBeds());
+                phone.setText(place.getPhone());
+                city.setText(place.getCity());
+                address.setText(place.getAddress());
+                img1.setImageURI(Uri.parse(place.getImgUrl()));
+                
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
