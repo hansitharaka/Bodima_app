@@ -3,6 +3,8 @@ package com.example.bodima.Model;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.Exclude;
+
 public class Reminders {
 
     String category;
@@ -10,6 +12,7 @@ public class Reminders {
     String day;
     String amount;
     String description;
+    String key;
 
     public Reminders() {
     }
@@ -60,5 +63,15 @@ public class Reminders {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Exclude
+    public String getKey() {
+        return key;
+    }
+
+    @Exclude
+    public void setKey(String key) {
+        this.key = key;
     }
 }

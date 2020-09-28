@@ -4,7 +4,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,16 +28,14 @@ import static androidx.core.content.ContextCompat.getSystemService;
 public class ReminderHelperAdapter extends RecyclerView.Adapter {
 
     List<Reminders> remindersList;
-    Context context;
+    private OnItemClickListener itemClick;
 
-//    public ReminderHelperAdapter(List<Reminders> remindersList, Context context) {
-//        this.remindersList = remindersList;
-//        this.context = context;
-//    }
 
     public ReminderHelperAdapter(List<Reminders> remindersList){
         this.remindersList = remindersList;
     }
+
+
 
     @NonNull
     @Override
@@ -42,13 +43,6 @@ public class ReminderHelperAdapter extends RecyclerView.Adapter {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.reminder_layout, parent, false);
         viewHolderClass viewHolderClass = new viewHolderClass(view);
-
-//        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-//        int date = calendar.get(Calendar.DATE);
-//
-//        if(fetchData.getDay().equals(date)){
-//            addNotification(holder.;
-//        }
 
         return viewHolderClass;
     }
@@ -64,37 +58,17 @@ public class ReminderHelperAdapter extends RecyclerView.Adapter {
         viewHolderClass.day.setText(fetchData.getDay());
         viewHolderClass.month.setText(fetchData.getMonth());
         viewHolderClass.amount.setText(fetchData.getAmount());
-
-//        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-//        int date = calendar.get(Calendar.DATE);
-//
-//        if(fetchData.getDay().equals(date)){
-//            addNotification(holder.);
-//        }
-
     }
 
-//    public void addNotification(Context context){
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-//                .setSmallIcon(R.mipmap.ic_launcher_round)
-//                .setContentTitle("You have a Reminder")
-//                .setContentText("Today is your Special day");
-//
-//        Intent notificationIntent = new Intent(context, MyReminders.class);
-//        PendingIntent contentIntent = PendingIntent.getActivity(context, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        builder.setContentIntent(contentIntent);
-//
-//        NotificationManager manager = (NotificationManager) getSystemService(context.Notification);
-//        manager.notify(0, builder.build());
-//
-//    }
 
     @Override
     public int getItemCount() {
         return remindersList.size();
     }
 
-    public class viewHolderClass extends RecyclerView.ViewHolder{
+    public class viewHolderClass extends RecyclerView.ViewHolder
+        implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener
+    {
 
         TextView description;
         TextView month;
@@ -107,6 +81,35 @@ public class ReminderHelperAdapter extends RecyclerView.Adapter {
             day = itemView.findViewById(R.id.day);
             month = itemView.findViewById(R.id.month);
             amount = itemView.findViewById(R.id.amount);
+
+            itemView.setOnCreateContextMenuListener(this);
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem delete = menu.add(Menu.NONE, 1, 1, "Delete");
+
+            delete.setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if(itemClick != null){
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+                    itemClick.onDeleteClick(position);
+                    return true;
+                }
+            }
+            return  false;
+        }
+    }
+
+    public  interface OnItemClickListener{
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        itemClick = listener;
     }
 }
