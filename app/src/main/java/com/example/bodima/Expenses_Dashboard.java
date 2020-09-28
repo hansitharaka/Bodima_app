@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bodima.Model.ExpenseData;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
     TextView CurrentBalnacePreview;
     Button Minus;
     Button Add;
+    FloatingActionButton Next;
 
 
     EditText amountInput;
@@ -48,25 +50,21 @@ public class Expenses_Dashboard extends AppCompatActivity {
     RadioButton Bill;
 
 
-    int EX_Total;
-    int Re_Total;
-
-    int Status;
-
-    int amount;
-    int amount1;
+    float EX_Total;
+    float Re_Total;
+    float Status;
+    float amount;
+    float amount1;
 
 
     String ValueA;
     String CurrentUser;
-
     String Type;
     String datetime;
 
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
-
     ExpenseData expenseData;
 
     @Override
@@ -87,6 +85,15 @@ public class Expenses_Dashboard extends AppCompatActivity {
             boolean emailVerified = user.isEmailVerified();
 
         }
+
+        Next=findViewById(R.id.history);
+        Next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Expenses_Dashboard.this, TypeSelector.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -278,7 +285,7 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-             CurrentUser = user.getUid();
+            CurrentUser = user.getUid();
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
 
@@ -312,8 +319,6 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
 
     }
-
-
 
 
     public void sendDataToFireBaseforRevanue() {
@@ -355,8 +360,6 @@ public class Expenses_Dashboard extends AppCompatActivity {
     }
 
 
-
-
     public void getStatusOfValut() {
         databaseReference = FirebaseDatabase.getInstance().getReference("ExpenseManeger").child("Expenses").child(CurrentUser);
 
@@ -367,10 +370,10 @@ public class Expenses_Dashboard extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     ExpenseData data = ds.getValue(ExpenseData.class);
 
-
-                    //////////////////////////////////////////////////////
-                    amount = Integer.parseInt(data.getAmount());
-                    EX_Total = amount + EX_Total;
+                                     //////////////////////////////////////////////////////
+                    amount = Float.parseFloat(data.getAmount());
+                    getTotalExpense(amount);
+//                    EX_Total = amount + EX_Total;
                     ////////////////////////////////////////////////////////
 
 
@@ -382,14 +385,18 @@ public class Expenses_Dashboard extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
+
                             ExpenseData data = ds.getValue(ExpenseData.class);
-                            amount1 = Integer.parseInt(data.getAmount());
-                            Re_Total = amount1 + Re_Total;
+                            amount1 = Float.parseFloat(data.getAmount());
+                            getTotalRevanue(amount1);
+//                            Re_Total = amount1 + Re_Total;
 
                         }
 
                         //get diffrence
-                        Status = Re_Total - EX_Total;
+//                        Status = Re_Total - EX_Total;
+                        getDifference(Re_Total,EX_Total);
+
                         CurrentBalnacePreview.setText(String.valueOf(Status));
 
                     }
@@ -409,6 +416,27 @@ public class Expenses_Dashboard extends AppCompatActivity {
         });
 
 
+    }
+
+    //get the total of expenses
+    public float getTotalExpense( float amount){
+
+        EX_Total = amount + EX_Total;
+        return EX_Total;
+    }
+
+    //get the totla of revanue
+    public float getTotalRevanue(float amount1){
+        Re_Total = amount1 + Re_Total;
+        return  Re_Total;
+    }
+
+    //get the difference of Expences and Revanues
+    public float getDifference(float Re,float Ex){
+        Re_Total=Re;
+        EX_Total=Ex;
+        Status = Re_Total - EX_Total;
+        return Status;
     }
 
 }

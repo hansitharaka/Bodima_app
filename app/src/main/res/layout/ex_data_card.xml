@@ -23,14 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="8dp">
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="400dp"
-            android:layout_height="196dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
+            android:padding="10dp"
             android:backgroundTint="@color/ashyPurple"
             android:orientation="vertical"
             app:cardCornerRadius="20dp"
@@ -38,8 +39,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constrain_expense1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="349dp"
+                android:layout_height="163dp"
                 android:layout_margin="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

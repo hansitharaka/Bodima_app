@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VehicleForm"
+    android:background="@drawable/bgdark">
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/scrollHouseForm"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="20dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                &lt;!&ndash;                title&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/titlelayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    tools:layout_editor_absoluteX="16dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/title_label"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:paddingEnd="5dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:text="@string/title_label"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/title"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:backgroundTint="@color/gray"-->
+<!--                        android:ems="10"-->
+<!--                        android:fontFamily="@font/light"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:hint="@string/title"-->
+<!--                        android:inputType="text"-->
+<!--                        android:maxLength="20"-->
+<!--                        android:paddingTop="10dp"-->
+<!--                        android:paddingBottom="20dp"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textColorHint="@color/gray"-->
+<!--                        android:textSize="15sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;                city&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/citylayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    tools:layout_editor_absoluteX="16dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/city_label"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:paddingEnd="5dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:text="@string/city_label"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/city"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:backgroundTint="@color/gray"-->
+<!--                        android:ems="10"-->
+<!--                        android:fontFamily="@font/light"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:hint="@string/city"-->
+<!--                        android:inputType="text"-->
+<!--                        android:maxLength="20"-->
+<!--                        android:paddingTop="10dp"-->
+<!--                        android:paddingBottom="20dp"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textColorHint="@color/gray"-->
+<!--                        android:textSize="15sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;                type&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/type"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    tools:layout_editor_absoluteX="16dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/typetxt"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:paddingEnd="5dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:text="@string/type"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/vtypepinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/custom_rounded_rectangle"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:paddingStart="20dp"-->
+<!--                        android:paddingEnd="20dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:paddingTop="10dp">-->
+
+<!--                        <Spinner-->
+<!--                            android:id="@+id/pickVtype1"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:entries="@array/type_id"-->
+<!--                            android:backgroundTint="@color/colorPrimaryDark"/>-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;                Condition&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/Condition"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    tools:layout_editor_absoluteX="16dp"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/conditiontxt"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:paddingEnd="5dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:text="@string/condition_label"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:autoSizeTextType="uniform" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/conditionspinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/custom_rounded_rectangle"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:paddingStart="20dp"-->
+<!--                        android:paddingEnd="20dp"-->
+<!--                        android:paddingBottom="10dp"-->
+<!--                        android:paddingTop="10dp">-->
+
+<!--                        <Spinner-->
+<!--                            android:id="@+id/pickVcondition2"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:entries="@array/condition_id"-->
+<!--                            android:backgroundTint="@color/colorPrimaryDark"/>-->
+
+<!--                    </LinearLayout>-->
+
+
+
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;                Fuel&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                brand&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                model&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                description&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                amount&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                facility&ndash;&gt;-->
+
+<!--                &lt;!&ndash;                Name&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/addressName"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    tools:layout_editor_absoluteX="16dp">-->
+
+<!--                </LinearLayout>-->
+
+<!--                &lt;!&ndash;                phone number&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/phonelayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    tools:layout_editor_absoluteX="16dp"/>-->
+
+<!--                &lt;!&ndash;                buttons&ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/buttonLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    tools:layout_editor_absoluteX="16dp">-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/btnSave"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@drawable/button"-->
+<!--                        android:backgroundTint="@color/colorPink"-->
+<!--                        android:fontFamily="@font/medium"-->
+<!--                        android:padding="15dp"-->
+<!--                        android:text="@string/btnSave"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        app:autoSizeTextType="uniform"-->
+<!--                        android:textSize="15sp"/>-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    </ScrollView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

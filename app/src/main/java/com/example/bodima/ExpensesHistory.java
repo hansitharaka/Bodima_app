@@ -115,7 +115,7 @@ public class ExpensesHistory extends AppCompatActivity {
 
                             clubkey = ds.getKey();
 
-;
+                            ;
 
                         }
                         if (clubkey.isEmpty()) {

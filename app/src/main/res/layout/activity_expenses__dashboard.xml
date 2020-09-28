@@ -93,7 +93,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/calender_pick"
+                        android:id="@+id/history"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -103,7 +103,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/amount_layout"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/calendar" />
+                        app:srcCompat="@drawable/history" />
 
                 </LinearLayout>
 
@@ -129,10 +129,6 @@
                 app:layout_goneMarginEnd="10dp">
 
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -143,6 +139,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/group1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp">
 
                             <RadioButton
                                 android:id="@+id/Salary"
@@ -199,7 +201,7 @@
                                 android:text="@string/other"
                                 android:textColor="@color/colorPrimaryDark" />
 
-
+                            </RadioGroup>
 
                         </LinearLayout>
 
@@ -207,6 +209,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/group2">
+
+
                             <RadioButton
                                 android:id="@+id/food"
                                 android:layout_width="match_parent"
@@ -261,21 +270,16 @@
                                 android:paddingEnd="10dp"
                                 android:text="@string/bill"
                                 android:textColor="@color/colorPrimaryDark" />
+
+                            </RadioGroup>
+
                         </LinearLayout>
 
                     </LinearLayout>
 
 
 
-                </RadioGroup>
 
-                <RadioGroup
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp">
-
-
-                </RadioGroup>
 
             </LinearLayout>
 
