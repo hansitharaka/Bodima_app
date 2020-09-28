@@ -133,7 +133,7 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/house_s_label"
+                        android:text="House Size (Sqft)"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         app:autoSizeTextType="uniform" />
@@ -176,7 +176,7 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/land_s_label"
+                        android:text="Land Size (Ph)"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         app:autoSizeTextType="uniform" />
@@ -509,7 +509,41 @@
                         android:textSize="15sp"
                         app:autoSizeTextType="uniform" />
                 </LinearLayout>
-                
+
+                <!--                img display-->
+                <LinearLayout
+                    android:id="@+id/imagesLayout"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/bgdarkPurple"
+                        android:scaleType="centerCrop" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
                 <!--                buttons-->
                 <LinearLayout
                     android:id="@+id/buttonLayout"
@@ -532,6 +566,15 @@
                         android:textColor="@color/colorPrimaryDark"
                         app:autoSizeTextType="uniform"
                         android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="here will be alert"
+                        android:textSize="20sp"
+                        android:id="@+id/alert"
+                        android:textAlignment="center"
+                        android:visibility="gone"/>
 
                     <Button
                         android:id="@+id/btnSave"

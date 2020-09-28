@@ -545,6 +545,37 @@
                         app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
+                <!--                img display-->
+                <LinearLayout
+                    android:id="@+id/imagesLayout"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/bgdarkPurple"
+                        android:scaleType="centerCrop" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+
+
+
+
                 <!--                buttons-->
                 <LinearLayout
                     android:id="@+id/buttonLayout"

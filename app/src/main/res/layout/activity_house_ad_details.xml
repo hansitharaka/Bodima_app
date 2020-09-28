@@ -20,58 +20,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--   Image Slider   -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/imgslider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <!--   Image  -->
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPagerLand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="350dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/dimgray"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <!--    Add following attributes of ImageView to fit image to screen
-                                adjustViewBounds="true"
-                                scaleType="centerCrop"-->
-
-                    <!--connected with custom_layout_imgs lider-->
-
-
-                </androidx.viewpager.widget.ViewPager>
-
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:alpha="0.4"
-                    android:background="@color/black"
-                    android:paddingStart="15dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/imgCount"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="@+id/viewPagerLand"
-                    app:layout_constraintEnd_toEndOf="@+id/viewPagerLand"
-                    app:layout_constraintTop_toTopOf="@+id/viewPagerLand"
-                    app:layout_constraintVertical_bias="0.0" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--****************************************************************************************************************************************************************-->
 
             <!--   Title   -->
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:adjustViewBounds="true"
+                android:background="@color/dimgray"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <!--    Add following attributes of ImageView to fit image to screen
+                                adjustViewBounds="true"
+                                scaleType="centerCrop"-->
+
+                <!--connected with custom_layout_imgs lider-->
+
+
+            </ImageView>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutTitle"
                 android:layout_width="match_parent"
@@ -95,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bold"
-                        android:text="@string/ad_title_land"
+                        android:text="House for Sale"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25sp"
                         app:autoSizeTextType="uniform"
@@ -495,7 +469,7 @@
 
                         <TextView
                             android:id="@+id/phone"
-                            android:layout_width="50dp"
+                            android:layout_width="55dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:paddingTop="10dp"

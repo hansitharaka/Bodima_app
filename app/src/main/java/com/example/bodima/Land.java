@@ -7,9 +7,21 @@ public class Land {
     private String Des;
     private String Amount;
     private String Name;
-    private Long Phone;
+    private String Phone;
+    private String ImgUrl;
 
     public Land() {
+    }
+
+    public Land(String title, String city, String landSize, String des, String amount, String name, String phone, String imgUrl) {
+        Title = title;
+        City = city;
+        LandSize = landSize;
+        Des = des;
+        Amount = amount;
+        Name = name;
+        Phone = phone;
+        ImgUrl = imgUrl;
     }
 
     public String getTitle() {
@@ -60,11 +72,19 @@ public class Land {
         Name = name;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return Phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getImgUrl() {
+        return ImgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
     }
 }

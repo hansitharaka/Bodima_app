@@ -12,11 +12,12 @@ public class Vehicle {
     private String Amount;
     private String Name;
     private String Phone; //TODO:make phone type string in other models
+    private String ImgUrl;
 
     public Vehicle() {
     }
 
-    public Vehicle(String title, String city, String type, String condition, String fuel, String brand, String model, String des, String amount, String name, String phone) {
+    public Vehicle(String title, String city, String type, String condition, String fuel, String brand, String model, String des, String amount, String name, String phone, String imgUrl) {
         Title = title;
         City = city;
         Type = type;
@@ -28,6 +29,7 @@ public class Vehicle {
         Amount = amount;
         Name = name;
         Phone = phone;
+        ImgUrl = imgUrl;
     }
 
     public String getTitle() {
@@ -116,5 +118,13 @@ public class Vehicle {
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getImgUrl() {
+        return ImgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
     }
 }

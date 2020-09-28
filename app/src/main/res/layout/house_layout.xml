@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/imgHouseAd"
                 android:layout_width="130dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:adjustViewBounds="true"
                 android:background="@color/colorPrimaryDark"
@@ -38,7 +38,7 @@
 
             <LinearLayout
                 android:id="@+id/house_card"
-                android:layout_width="200dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"

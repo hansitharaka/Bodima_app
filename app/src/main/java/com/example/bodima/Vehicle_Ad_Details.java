@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,19 +18,14 @@ import com.google.firebase.database.ValueEventListener;
 public class Vehicle_Ad_Details extends AppCompatActivity {
 
     TextView Title,City,Type,Condition,Fuel,Brand,Model,Amount,Description,Name,Phone;
-    private DatabaseReference mDatabase;
 
-    ViewPager viewPager;
+    private DatabaseReference mDatabase;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle__ad__details);
-
-        /* IMAGE SLIDER */
-        viewPager = (ViewPager) findViewById(R.id.viewPagerVehicle);
-        ViewPageAdapter viewPageAdapter = new ViewPageAdapter(this);
-        viewPager.setAdapter(viewPageAdapter);
 
          Title=findViewById(R.id.txtTitle);
          Brand=findViewById(R.id.txtBrand);
@@ -41,8 +38,9 @@ public class Vehicle_Ad_Details extends AppCompatActivity {
          Description=findViewById(R.id.txtDescription);
          Name=findViewById(R.id.txtName);
          Phone=findViewById(R.id.txtPhone);
+         imageView =findViewById(R.id.img);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles").child("-MI3_Dltx3d3el8x_o6D");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles").child("-MIEzE9c8aZD57FLpihL");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -57,12 +55,13 @@ public class Vehicle_Ad_Details extends AppCompatActivity {
                 String vCondition=snapshot.child("condition").getValue().toString();
                 String vType=snapshot.child("type").getValue().toString();
                 String vFuel=snapshot.child("fuel").getValue().toString();
+                String pImgUrl=snapshot.child("imgUrl").getValue().toString();
 
                 Title.setText(vTitle);
                 Brand.setText(vBrand);
                 Model.setText(vModel);
                 City.setText(vCity);
-                Amount.setText(vAmount);
+                Amount.setText(String.format("Rs. %s ",vAmount));
                 Description.setText(vDes);
                 Name.setText(sName);
                 Phone.setText(sPhone);
@@ -70,6 +69,9 @@ public class Vehicle_Ad_Details extends AppCompatActivity {
                 Type.setText(vType);
                 Fuel.setText(vFuel);
 
+                Glide.with(getApplicationContext())
+                        .load(pImgUrl)
+                        .into(imageView);
             }
 
             @Override

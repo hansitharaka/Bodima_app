@@ -1,5 +1,7 @@
 package com.example.bodima;
 
+import com.google.firebase.database.Exclude;
+
 public class House {
     private String Title;
     private String City;
@@ -7,12 +9,29 @@ public class House {
     private String LandSize;
     private String Des;
     private String Amount;
-    private Integer Beds;
-    private Integer Baths;
+    private String Beds;
+    private String Baths;
     private String Name;
-    private Long Phone;
+    private String Phone;
+    private String ImgUrl;
+    private String mKey;
 
     public House() {
+    }
+
+    public House(String title, String city, String size, String landSize, String des, String amount, String beds, String baths, String name, String phone, String imgUrl,String mKey) {
+        Title = title;
+        City = city;
+        Size = size;
+        LandSize = landSize;
+        Des = des;
+        Amount = amount;
+        Beds = beds;
+        Baths = baths;
+        Name = name;
+        Phone = phone;
+        ImgUrl = imgUrl;
+
     }
 
     public String getTitle() {
@@ -63,19 +82,19 @@ public class House {
         Amount = amount;
     }
 
-    public Integer getBeds() {
+    public String getBeds() {
         return Beds;
     }
 
-    public void setBeds(Integer beds) {
+    public void setBeds(String beds) {
         Beds = beds;
     }
 
-    public Integer getBaths() {
+    public String getBaths() {
         return Baths;
     }
 
-    public void setBaths(Integer baths) {
+    public void setBaths(String baths) {
         Baths = baths;
     }
 
@@ -87,11 +106,28 @@ public class House {
         Name = name;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return Phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getImgUrl() {
+        return ImgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        ImgUrl = imgUrl;
+    }
+
+    @Exclude
+    public String getmKey() {
+        return mKey;
+    }
+    @Exclude
+    public void setmKey(String mKey) {
+        this.mKey = mKey;
     }
 }

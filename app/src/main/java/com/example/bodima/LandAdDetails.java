@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,17 +21,14 @@ public class LandAdDetails extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-    ViewPager viewPager;
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_ad_details);
 
-        /* IMAGE SLIDER */
-        viewPager = (ViewPager) findViewById(R.id.viewPagerHouse);
-        ViewPageAdapter viewPageAdapter = new ViewPageAdapter(this);
-        viewPager.setAdapter(viewPageAdapter);
 
         Title=findViewById(R.id.txtTitle);
         City=findViewById(R.id.txtCity);
@@ -38,9 +37,9 @@ public class LandAdDetails extends AppCompatActivity {
         Description=findViewById(R.id.txtDescription);
         Name=findViewById(R.id.txtName);
         Phone=findViewById(R.id.txtPhone);
+        imageView =findViewById(R.id.img);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands").child("-MHySeAqQjDTwfFboZE0");
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands").child("-MIHF2dBTYEBOTeMkcET");
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -52,15 +51,19 @@ public class LandAdDetails extends AppCompatActivity {
                 String lLand=snapshot.child("landSize").getValue().toString();
                 String Sname= snapshot.child("name").getValue().toString();
                 String Sphone=snapshot.child("phone").getValue().toString();
+                String pImgUrl=snapshot.child("imgUrl").getValue().toString();
 
                 Title.setText(lTitle);
                 City.setText(lCity);
-                Amount.setText(lAmount);
-                LandSize.setText(lLand);
+                Amount.setText(String.format("Rs. %s ", lAmount));
+                LandSize.setText(String.format("%s Perches", lLand)); //TODO: Perches print
                 Description.setText(lDes);
                 Name.setText(Sname);
                 Phone.setText(Sphone);
 
+                Glide.with(getApplicationContext())
+                        .load(pImgUrl)
+                        .into(imageView);
 
             }
 

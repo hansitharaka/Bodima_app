@@ -1,21 +1,28 @@
 package com.example.bodima;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<House> houseArrayList;
+    private Context mContext;
+    private List<House> houseArrayList;
 
-    public houseRecyclerViewAdapter(ArrayList<House> houseArrayList){
-       this.houseArrayList =houseArrayList;
+    public houseRecyclerViewAdapter(Context context, List<House> houseArrayList){
+        this.mContext =context;
+        this.houseArrayList =houseArrayList;
 
     }
 
@@ -25,7 +32,6 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
 
         //instenciate the view //get the data and put in here
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_layout,parent,false);
-
         return new ViewHolder(view);
 
     }
@@ -45,23 +51,30 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
 
 
         //load image
+        Glide.with(mContext)
+                .load(fetchHousesData.getImgUrl())
+                .into(viewHolder.imageView);
+
 
     }
 
     @Override
     public int getItemCount() {
+
         return houseArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         //widgets
-        TextView Title,City,Amount,BedsNo,BathsNo,HouseSize,LandSize,Description,Name,Phone;
+        TextView Title,City,Amount,BedsNo,BathsNo;
         //image add
+        ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             //image view
+            imageView = itemView.findViewById(R.id.imgHouseAd);
             Title=itemView.findViewById(R.id.houseTitle);
             City=itemView.findViewById(R.id.houseCity);
             Amount=itemView.findViewById(R.id.housePrice);

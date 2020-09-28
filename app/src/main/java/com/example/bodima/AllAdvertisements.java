@@ -13,25 +13,33 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllAdvertisements extends AppCompatActivity {
     //variables
     private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
-    private ArrayList<House> houseArrayList;
+    private List<House> houseArrayList;
+    private List<String> keyList;
     private houseRecyclerViewAdapter recyclerAdapter;
+    private House house;
     private Button bHouse, bLand, bVehicle;
+    private FloatingActionButton viewform;
 
     //firebase
     private DatabaseReference mDatabase;
+    private FirebaseStorage mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +47,13 @@ public class AllAdvertisements extends AppCompatActivity {
         setContentView(R.layout.activity_all_advertisements);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
         bHouse = (Button) findViewById(R.id.btnHouse);
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
+
+        //button float
+        viewform = findViewById(R.id.floatCall);
 
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -49,10 +61,16 @@ public class AllAdvertisements extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
 
         //database
-        mDatabase= FirebaseDatabase.getInstance().getReference("Advertisements");
+        mDatabase = FirebaseDatabase.getInstance().getReference("Advertisements");
+        mStorage= FirebaseStorage.getInstance();
 
         //ArrayList
-        houseArrayList= new ArrayList<>();
+        houseArrayList = new ArrayList<>();
+        keyList=new ArrayList<>();
+
+        recyclerAdapter= new houseRecyclerViewAdapter(getApplicationContext(), houseArrayList);
+        recyclerView.setAdapter(recyclerAdapter);
+       // recyclerAdapter.setOnItemClickListener(AllAdvertisements.this);
 
         //Clear ArrayList
         ClearAll();
@@ -64,7 +82,7 @@ public class AllAdvertisements extends AppCompatActivity {
         bHouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllAdvertisements.this, AllAdvertisements.class));
+                startActivity(new Intent(AllAdvertisements.this, VehicleAllAds.class));
             }
         });
 
@@ -82,21 +100,33 @@ public class AllAdvertisements extends AppCompatActivity {
             }
         });
 
+        //floation button
+        viewform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
+                Toast.makeText(AllAdvertisements.this, "Redirecting to House Form ..", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+        });
+
     }
 
-
-
+//get data to the recycler view
     private void GetDataFromFirebase() {
-//        Query query = mDatabase.child("Houses");
+
         mDatabase.child("Houses").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    House house = dataSnapshot.getValue(House.class);
-                    houseArrayList.add(house);
-                    recyclerAdapter = new houseRecyclerViewAdapter(houseArrayList);
-                    recyclerView.setAdapter(recyclerAdapter);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                     house = dataSnapshot.getValue(House.class);
+                     houseArrayList.add(house);
+                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
+                     recyclerView.setAdapter(recyclerAdapter);
+//                    keyList.add(dataSnapshot.getKey());
+//                    houseArrayList.add(house);
 
                     //TODO:image
                 }
@@ -113,14 +143,16 @@ public class AllAdvertisements extends AppCompatActivity {
     }
 
     //checking if arraylist id empty
-    private void ClearAll(){
-        if(houseArrayList != null){
+    private void ClearAll() {
+        if (houseArrayList != null) {
             houseArrayList.clear();
 
-            if(recyclerAdapter != null){
+            if (recyclerAdapter != null) {
                 recyclerAdapter.notifyDataSetChanged();
             }
         }
-        houseArrayList=new ArrayList<>();
+        houseArrayList = new ArrayList<>();
     }
+
+
 }

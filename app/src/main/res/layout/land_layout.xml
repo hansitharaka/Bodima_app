@@ -29,7 +29,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:contentDescription="@string/placeimg"
                 android:elevation="10dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:layout_margin="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
