@@ -108,7 +108,7 @@
                         android:gravity="center_vertical"
                         android:hint="@string/title"
                         android:inputType="text"
-                        android:maxLength="20"
+                        android:maxLength="100"
                         android:paddingTop="10dp"
                         android:paddingBottom="20dp"
                         android:textColor="@color/colorPrimaryDark"
@@ -151,8 +151,7 @@
                         android:hint="@string/desc_txt"
                         android:inputType="textMultiLine"
                         android:lines="5"
-                        android:maxLength="200"
-                        android:maxLines="10"
+                        android:maxLength="500"
                         android:minLines="1"
                         android:paddingTop="10dp"
                         android:paddingBottom="20dp"
@@ -308,6 +307,7 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:hint="@string/beds_num"
                             android:inputType="number"
+                            android:maxLength="2"
                             android:paddingStart="10dp"
                             android:paddingTop="10dp"
                             android:paddingEnd="10dp"
@@ -328,6 +328,7 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:hint="@string/baths_num"
                             android:inputType="number"
+                            android:maxLength="2"
                             android:paddingStart="10dp"
                             android:paddingTop="10dp"
                             android:paddingEnd="10dp"
@@ -374,7 +375,7 @@
                         android:gravity="center_vertical"
                         android:hint="@string/phone"
                         android:inputType="phone"
-                        android:maxLength="20"
+                        android:maxLength="10"
                         android:paddingTop="10dp"
                         android:paddingBottom="20dp"
                         android:textColor="@color/colorPrimaryDark"
@@ -417,7 +418,7 @@
                         android:gravity="center_vertical"
                         android:hint="@string/city"
                         android:inputType="text"
-                        android:maxLength="20"
+                        android:maxLength="30"
                         android:paddingTop="10dp"
                         android:paddingBottom="20dp"
                         android:textColor="@color/colorPrimaryDark"
@@ -469,6 +470,35 @@
                         android:textSize="15sp"
                         app:autoSizeTextType="uniform" />
                 </LinearLayout>
+
+                <!--                img display-->
+                <LinearLayout
+                    android:id="@+id/imagesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgV1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/bgdarkPurple"
+                        android:scaleType="centerCrop" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+
 
                 <!--                buttons-->
                 <LinearLayout
