@@ -39,9 +39,7 @@
             android:padding="20dp"
             android:id="@+id/recylerView">
 
-
         </androidx.recyclerview.widget.RecyclerView>
-
 
     </ScrollView>
 

@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".OtherReminders"/>
+        <activity android:name=".BirthdayReminders" />
         <activity android:name=".AreaCalculation"/>
         <activity android:name=".TypeSelector" />
         <activity android:name=".LandForm" />
@@ -17,18 +19,25 @@
         <activity android:name=".AddPlaceForm" />
         <activity android:name=".AllAdvertisements" />
         <activity android:name=".LandAdDetails" />
-        <activity android:name=".Register">
+        <activity android:name=".Register"/>
+
+        <activity android:name=".HouseAdDetails" />
+        <activity android:name=".AddReview" />
+        <activity android:name=".AddReminder" />
+
+        <activity android:name=".RatingsAndReviews" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".ExpensesHistory" />
+        <activity android:name=".MyPlaces"/>
+        <activity android:name=".Vehicle_Ad_Details" />
+        <activity android:name=".WelcomPage" />
+        <activity android:name=".MyReminders">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HouseAdDetails" />
-        <activity android:name=".AddReview" />
-        <activity android:name=".AddReminder" />
-        <activity android:name=".RatingsAndReviews" />
-        <activity android:name=".UserProfile" />
         <activity android:name=".Vehicle_Ad_Details" />
         <activity android:name=".WelcomPage" />
         <activity android:name=".MyReminders" />

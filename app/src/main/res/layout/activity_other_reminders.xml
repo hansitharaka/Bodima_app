@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyReminders"
+    tools:context=".OtherReminders"
     android:background="@drawable/bgdark">
 
     <!--    Floating Add Button   -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatCall"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
@@ -42,42 +42,42 @@
                 android:id="@+id/modes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/usertype"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/button"
+                    android:background="#00000000"
                     android:backgroundTint="@color/colorPink"
-                    android:text="@string/payment"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:text="@string/payment" />
 
                 <Button
                     android:id="@+id/bday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="#00000000"
                     android:backgroundTint="@color/colorPink"
-                    android:text="@string/birthday"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:text="@string/birthday" />
 
                 <Button
                     android:id="@+id/other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00000000"
+                    android:background="@drawable/button"
                     android:backgroundTint="@color/colorPink"
-                    android:text="@string/other"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/other" />
 
 
             </LinearLayout>

@@ -48,12 +48,15 @@
             android:id="@+id/starRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
             android:clickable="true"
             android:progressBackgroundTint="@color/colorAccent"
             android:progressTint="@color/colorPrimaryDark"
             android:focusable="true"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:stepSize="1"
+            android:numStars="5"
+            android:isIndicator="false"
+            android:rating="1"/>
 
         <EditText
             android:id="@+id/review"

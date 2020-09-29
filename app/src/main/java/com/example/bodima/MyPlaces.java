@@ -11,6 +11,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +43,13 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
 
+    //variables
+    private RecyclerView recyclerView;
+    private ArrayList<Place> placeArrayList;
+
+    private DatabaseReference mreff;
+    private FirebaseUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +70,7 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
         //ArrayList
         placeArrayList = new ArrayList<>();
+
         keyList = new ArrayList<>();
 
         recyclerAdapter = new myplaceRecyclerViewAdapter(getApplicationContext(), placeArrayList);
@@ -74,7 +86,6 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     }
 
     private void GetDataFromFirebase() {
-
         mreff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -138,7 +149,6 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         Intent i = new Intent(MyPlaces.this, AddPlaceForm.class);
         i.putExtra("key", keyList.get(position));
         startActivity(i);
-//        Intent
     }
 
 
