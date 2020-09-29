@@ -18,13 +18,13 @@
     <string name="title_display">Room for Rent</string>
     <string name="baths_no">2</string>
     <string name="beds_no">5</string>
-    <string name="price">Rs. 0,000 / month</string>
-    <string name="postDate">posted on 20th August 2020</string>
+    <string name="price">Rs. %1$s / month</string>
+    <string name="postDate">posted on %1$s</string>
     <string name="currentdate">20 Aug 2020</string>
     <string name="description_label">Description</string>
-    <string name="desc_txt">Write a description..... (max 200 characters)</string>
+    <string name="desc_txt">Write a description..... (max 500 characters)</string>
     <string name="title_label">Title</string>
-    <string name="title">max 20 characters</string>
+    <string name="title">max 100 characters</string>
     <string name="amount_rs">Rs.</string>
     <string name="amount_txt">0,000</string>
     <string name="amount_month">/ month</string>
@@ -64,8 +64,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="imgCount">3/3</string>
-    <string name="details">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna et pharetra pharetra massa massa ultricies mi quis. In nibh mauris cursus mattis molestie a. Nec feugiat in fermentum posuere. Arcu non odio euismod lacinia at. Sed id semper risus in. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis nisl. "</string>
-    <string name="postUser">for rent by John Doe</string>
+    <string name="details">%1$s</string>
+    <string name="postUser">for rent by %1$s</string>
     <string name="addressFull">No. 000, Lorem Ipsum, dolor sit amet.</string>
     <string name="btn_reviews">Ratings and Reviews</string>
     <string name="amounlabel">Amount</string>
@@ -223,6 +223,5 @@
         <item>Purch</item>
         <item>Arches</item>
     </string-array>
-
 
 </resources>
