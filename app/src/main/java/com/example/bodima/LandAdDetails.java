@@ -39,7 +39,9 @@ public class LandAdDetails extends AppCompatActivity {
         Phone=findViewById(R.id.txtPhone);
         imageView =findViewById(R.id.img);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands").child("-MIHF2dBTYEBOTeMkcET");
+        final String key = getIntent().getStringExtra("key");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands").child(key);
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override

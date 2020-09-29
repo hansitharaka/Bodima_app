@@ -38,9 +38,10 @@
 
             <LinearLayout
                 android:id="@+id/vehicle_card"
-                android:layout_width="260dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgVehicleAd"
                 app:layout_constraintTop_toTopOf="parent">
@@ -48,11 +49,15 @@
                 <!-- Title -->
                 <TextView
                     android:id="@+id/vehicleTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/bold"
                     android:paddingEnd="10dp"
+                    android:ellipsize="none"
+                    android:singleLine="false"
+                    android:scrollHorizontally="false"
+                    android:layout_weight="1"
                     android:paddingStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/ad_vehicle_display"

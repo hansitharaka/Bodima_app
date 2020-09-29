@@ -1,7 +1,10 @@
 package com.example.bodima;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
 
     private Context mContext;
     private List<Land> landArrayList;
+    private OnItemClickListener mListener;
 
     public landRecyclerViewAdapter(Context context,List<Land> landArrayList){
         this.mContext =context;
@@ -44,8 +48,8 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
         //put the data into the layout
         viewHolder.Title.setText(fetchLandData.getTitle());
         viewHolder.City.setText(fetchLandData.getCity());
-        viewHolder.Amount.setText( String.format("Rs. %s ", fetchLandData.getAmount()));
-        viewHolder.LandSize.setText(fetchLandData.getLandSize());
+        viewHolder.Amount.setText(String.format("Rs. %s ", fetchLandData.getAmount()));
+        viewHolder.LandSize.setText(String.format("%s perches ", fetchLandData.getLandSize()));
         //load image
 
         Glide.with(mContext)
@@ -59,7 +63,8 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
         return landArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
         //widgets
         TextView Title,City,Amount,LandSize;
         //TODO:image add
@@ -75,6 +80,62 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
             Amount=itemView.findViewById(R.id.landPrice);
             LandSize=itemView.findViewById(R.id.landSize);
 
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
+
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem edit = menu.add(Menu.NONE, 1, 1, "Edit");
+            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+
+            edit.setOnMenuItemClickListener(this);
+            delete.setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(position);
+                }
+            }
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    switch (item.getItemId()) {
+                        case 1:
+                            mListener.onEditClick(position);
+                            return true;
+                        case 2:
+                            mListener.onDeleteClick(position);
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+
+        void onDeleteClick(int position);
+
+        void onEditClick(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 }

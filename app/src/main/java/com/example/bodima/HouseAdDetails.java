@@ -40,9 +40,11 @@ public class HouseAdDetails extends AppCompatActivity {
         Name=findViewById(R.id.txtName);
         Phone=findViewById(R.id.txtPhone);
         imageView =findViewById(R.id.img);
-//        viewform = findViewById(R.id.floatCall);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses").child("-MIAKd48p9gPE9XkwlYm");
+
+        final String key = getIntent().getStringExtra("key");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses").child(key);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -61,7 +63,7 @@ public class HouseAdDetails extends AppCompatActivity {
 
                 Title.setText(hTitle);
                 City.setText(hCity);
-                Amount.setText(String.format("Rs. %s /month", hAmount)); //TODO:print RS layout in the details form
+                Amount.setText(String.format("Rs. %s / month", hAmount));
                 BedsNo.setText(hBeds);
                 BathsNo.setText(hBaths);
                 HouseSize.setText(String.format("%s Sqft",hSize));

@@ -21,8 +21,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +35,7 @@ import com.google.firebase.storage.UploadTask;
 public class LandForm extends AppCompatActivity {
     //variables
     private static final int PICK_IMAGE_REQUEST = 1;
-    EditText landTitle, landCity, landSize, landDesc, landAmount, name, phone;
+    EditText Title, City, LandSize, Description, Amount, Name, Phone;
     Button addImg, btnSave;
     private ImageView img2;
 
@@ -42,24 +45,27 @@ public class LandForm extends AppCompatActivity {
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    private String key;
 
     private DatabaseReference mDatabase;
     private StorageReference storageRef;
     private StorageTask uploadTask;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_form);
+
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 
-        landTitle = findViewById(R.id.title);
-        landCity = findViewById(R.id.city);
-        landSize = findViewById(R.id.landS);
-        landDesc = findViewById(R.id.description);
-        landAmount = findViewById(R.id.amount);
-        name = findViewById(R.id.name);
-        phone = findViewById(R.id.phone);
+        Title = findViewById(R.id.title);
+        City = findViewById(R.id.city);
+        LandSize = findViewById(R.id.landS);
+        Description = findViewById(R.id.description);
+        Amount = findViewById(R.id.amount);
+        Name = findViewById(R.id.name);
+        Phone = findViewById(R.id.phone);
 
         imgLayout = (LinearLayout) findViewById(R.id.imagesLayout);
         img2 = (ImageView) findViewById(R.id.img);
@@ -69,14 +75,16 @@ public class LandForm extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         progBar=findViewById(R.id.progressBar);
 
-        //progressDialog.setMessage("Image Uploading please wait...");
+        key = getIntent().getStringExtra("key");
 
-        addImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageChoose();
-            }
-        });
+        if (key != null) {
+            GetDataFromFirebase(key);
+            btnSave.setText("Update");
+
+            AddLand();
+        }
+
+
 
         land = new Land();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands");
@@ -89,73 +97,82 @@ public class LandForm extends AppCompatActivity {
                 AddLand();
             }
         });
+
+        addImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageChoose();
+            }
+        });
     }
 
 
 
+
     public boolean isValid() {
-        String lTitle = landTitle.getText().toString().trim();
-        String lCity = landCity.getText().toString().trim();
-        String lAmount = landAmount.getText().toString().trim();
-        String lSize = landSize.getText().toString().trim();
-        String lDes = landDesc.getText().toString().trim();
-        String Sname = name.getText().toString().trim();
-        String Sphone = phone.getText().toString().trim();
+        String lTitle = Title.getText().toString().trim();
+        String lCity = City.getText().toString().trim();
+        String lAmount = Amount.getText().toString().trim();
+        String lSize = LandSize.getText().toString().trim();
+        String lDes = Description.getText().toString().trim();
+        String Sname = Name.getText().toString().trim();
+        String Sphone = Phone.getText().toString().trim();
 
         if (TextUtils.isEmpty(lTitle)) {
-            landTitle.setError("This field cannot be empty");
-            landTitle.requestFocus();
+            Title.setError("This field cannot be empty");
+            Title.requestFocus();
             return false;
-        } else if (TextUtils.isEmpty(lCity)) {
-            landCity.setError("This field cannot be empty");
-            landCity.requestFocus();
+        }
+        else if (TextUtils.isEmpty(lCity)) {
+            City.setError("This field cannot be empty");
+            City.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(lDes)) {
-            landDesc.setError("This field cannot be empty");
-            landDesc.requestFocus();
+            Description.setError("This field cannot be empty");
+            Description.requestFocus();
             return false;
 
         } else if (lDes.length() < 20) {
-            landDesc.setError("Description should have at least 10 characters");
-            landDesc.requestFocus();
+            Description.setError("Description should have at least 10 characters");
+            Description.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(lAmount)) {
-            landAmount.setError("This field cannot be empty");
-            landAmount.requestFocus();
+            Amount.setError("This field cannot be empty");
+            Amount.requestFocus();
             return false;
 
         } else if (Integer.parseInt(lAmount) < 1000) {
-            landAmount.setError("Amount should be at least Rs.1000");
-            landAmount.requestFocus();
+            Amount.setError("Amount should be at least Rs.1000");
+            Amount.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(Sphone)) {
-            phone.setError("This field cannot be empty");
-            phone.requestFocus();
+            Phone.setError("This field cannot be empty");
+            Phone.requestFocus();
             return false;
 
         } else if (Sphone.length() < 10) {
-            phone.setError("Phone number should have 10 digits");
-            phone.requestFocus();
+            Phone.setError("Phone number should have 10 digits");
+            Phone.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(lSize)) {
-            landSize.setError("This field cannot be empty");
-            landSize.requestFocus();
+            LandSize.setError("This field cannot be empty");
+            LandSize.requestFocus();
             return false;
 
         }
         else if (Integer.parseInt(lSize) <= 0) {
-            landSize.setError("Please enter a valid land size");
-            landSize.requestFocus();
+            LandSize.setError("Please enter a valid land size");
+            LandSize.requestFocus();
             return false;
 
         }
         else if (TextUtils.isEmpty(Sname)) {
-            name.setError("This field cannot be empty");
-            name.requestFocus();
+            Name.setError("This field cannot be empty");
+            Name.requestFocus();
             return false;
         } else {
             return true;
@@ -200,35 +217,43 @@ public class LandForm extends AppCompatActivity {
                                         Toast.makeText(LandForm.this, "No images selected", Toast.LENGTH_SHORT).show();
                                     }
 
-                                    land.setTitle(landTitle.getText().toString());
-                                    land.setCity(landCity.getText().toString());
-                                    land.setLandSize(landSize.getText().toString());
-                                    land.setDes(landDesc.getText().toString());
-                                    land.setAmount(landAmount.getText().toString());
-                                    land.setName(name.getText().toString());
-                                    land.setPhone(phone.getText().toString());
+                                    land.setTitle(Title.getText().toString());
+                                    land.setCity(City.getText().toString());
+                                    land.setLandSize(LandSize.getText().toString());
+                                    land.setDes(Description.getText().toString());
+                                    land.setAmount(Amount.getText().toString());
+                                    land.setName(Name.getText().toString());
+                                    land.setPhone(Phone.getText().toString());
                                     land.setImgUrl(String.valueOf(uri));
                                     // mDatabase.push().setValue(house);
 
-                                    mDatabase.push().setValue(land).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            //if the upload is success, reset the progress bar to 0
-                                            Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    progBar.setProgress(0);
-                                                }
-                                            }, 500); //delays the progress by half seconds
-                                        }
-                                    });
+                                    if (key != null) {
+                                        mDatabase.child(key).setValue(land).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(LandForm.this, "Land Data has been updated!!", Toast.LENGTH_LONG).show();
+
+                                                startActivity(new Intent(LandForm.this, LandAllAds.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(LandForm.this, "Error Occured: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if (key == null) {
+                                        mDatabase.push().setValue(land).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(LandForm.this, "Land Data inserted successfully!!", Toast.LENGTH_LONG).show();
+                                                startActivity(new Intent(LandForm.this, LandAllAds.class));
+                                            }
+                                        });
+                                    }
                                 }
                             });
-                            Toast.makeText(LandForm.this, "Land Data inserted successfully!!", Toast.LENGTH_LONG).show();
-
-                            startActivity(new Intent(LandForm.this, LandAllAds.class));
                         }
+
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -247,7 +272,6 @@ public class LandForm extends AppCompatActivity {
                 }
             }
         }
-
 
     }
 
@@ -270,6 +294,30 @@ public class LandForm extends AppCompatActivity {
             Toast.makeText(this, "Please Select an image",Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void GetDataFromFirebase(String mKey) {
+        mDatabase.child(mKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                land =snapshot.getValue(Land.class);
+                Title.setText(land.getTitle());
+                City.setText(land.getCity());
+                Amount.setText(land.getAmount());
+                LandSize.setText(land.getLandSize());
+                Description.setText(land.getDes());
+                Name.setText(land.getName());
+                Phone.setText(land.getPhone());
+                img2.setImageURI(Uri.parse(land.getImgUrl()));
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

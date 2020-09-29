@@ -124,10 +124,12 @@ public class House {
 
     @Exclude
     public String getmKey() {
+
         return mKey;
     }
     @Exclude
-    public void setmKey(String mKey) {
+    public void setmKey(String mKey)
+    {
         this.mKey = mKey;
     }
 }

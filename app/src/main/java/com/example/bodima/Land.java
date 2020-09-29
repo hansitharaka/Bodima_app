@@ -1,5 +1,7 @@
 package com.example.bodima;
 
+import com.google.firebase.database.Exclude;
+
 public class Land {
     private String Title;
     private String City;
@@ -9,6 +11,7 @@ public class Land {
     private String Name;
     private String Phone;
     private String ImgUrl;
+    private String mKey;
 
     public Land() {
     }
@@ -86,5 +89,16 @@ public class Land {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    @Exclude
+    public String getmKey() {
+
+        return mKey;
+    }
+    @Exclude
+    public void setmKey(String mKey)
+    {
+        this.mKey = mKey;
     }
 }

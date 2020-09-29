@@ -38,9 +38,11 @@
 
             <LinearLayout
                 android:id="@+id/land_card"
-                android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                android:layout_width="250dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgLandAd"
                 app:layout_constraintTop_toTopOf="parent">

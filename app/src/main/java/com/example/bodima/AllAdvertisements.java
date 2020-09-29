@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,15 +24,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllAdvertisements extends AppCompatActivity {
+public class AllAdvertisements extends AppCompatActivity implements houseRecyclerViewAdapter.OnItemClickListener {
     //variables
     private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
     private List<House> houseArrayList;
     private List<String> keyList;
+
     private houseRecyclerViewAdapter recyclerAdapter;
     private House house;
     private Button bHouse, bLand, bVehicle;
@@ -70,7 +73,7 @@ public class AllAdvertisements extends AppCompatActivity {
 
         recyclerAdapter= new houseRecyclerViewAdapter(getApplicationContext(), houseArrayList);
         recyclerView.setAdapter(recyclerAdapter);
-       // recyclerAdapter.setOnItemClickListener(AllAdvertisements.this);
+        recyclerAdapter.setOnItemClickListener(AllAdvertisements.this);
 
         //Clear ArrayList
         ClearAll();
@@ -123,12 +126,11 @@ public class AllAdvertisements extends AppCompatActivity {
 
                      house = dataSnapshot.getValue(House.class);
                      houseArrayList.add(house);
-                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
-                     recyclerView.setAdapter(recyclerAdapter);
-//                    keyList.add(dataSnapshot.getKey());
-//                    houseArrayList.add(house);
+//                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
+//                     recyclerView.setAdapter(recyclerAdapter);
+                    keyList.add(dataSnapshot.getKey());
+                    houseArrayList.add(house);
 
-                    //TODO:image
                 }
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -150,9 +152,42 @@ public class AllAdvertisements extends AppCompatActivity {
             if (recyclerAdapter != null) {
                 recyclerAdapter.notifyDataSetChanged();
             }
+        }else {
+            houseArrayList = new ArrayList<>();
         }
-        houseArrayList = new ArrayList<>();
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(AllAdvertisements.this, HouseAdDetails.class);
+        intent.putExtra("key", keyList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        House selectedItem =  houseArrayList.get(position);
+        final String selectedKey = keyList.get(position);
+
+        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabase.child(selectedKey).removeValue();
+                Toast.makeText(AllAdvertisements.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+    }
+
+    @Override
+    public void onEditClick(int position) {
+        Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
+        i.putExtra("key", keyList.get(position));
+        startActivity(i);
+    }
 }
