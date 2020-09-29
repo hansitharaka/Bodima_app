@@ -19,7 +19,8 @@ public class AddReview extends AppCompatActivity {
     private String userId = "User01";
     private Button post;
 
-//    private  int count;
+    private  int count;
+
     DatabaseReference database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class AddReview extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 }

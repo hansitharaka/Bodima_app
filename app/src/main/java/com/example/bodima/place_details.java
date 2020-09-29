@@ -2,14 +2,14 @@ package com.example.bodima;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,11 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 public class place_details extends AppCompatActivity {
 
     //variables
-    private ViewPager viewPager;
     private TextView username, date, title, desc, amount, nBeds, nBaths, phone, city,address;
     private FloatingActionButton viewRating;
+    private ImageView imageView;
 
-    private String pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress;
+    private String pUsername, pDate, pTitle, pDesc, pAmount, pBaths, pBeds, pPhone, pCity, pAddress, pImgUrl;
 
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
@@ -37,10 +37,6 @@ public class place_details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_details);
 
-        /* IMAGE SLIDER */
-        viewPager = (ViewPager) findViewById(R.id.viewPagerPlace);
-        ViewPageAdapter viewPageAdapter = new ViewPageAdapter(this);
-        viewPager.setAdapter(viewPageAdapter);
 
         //initialize
         username = (TextView) findViewById(R.id.txtUser);
@@ -53,14 +49,15 @@ public class place_details extends AppCompatActivity {
         phone = (TextView) findViewById(R.id.txtPhone);
         city = (TextView) findViewById(R.id.txtCity);
         address = (TextView) findViewById(R.id.txtAddress);
+        imageView = (ImageView) findViewById(R.id.img);
 
         viewRating = (FloatingActionButton) findViewById(R.id.floatCall);
 
-        //for now
-        final String pid = "-MHqplawpHoqebZWkRPu";
+        final String key = getIntent().getStringExtra("key");
 
         //Database
-        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(pid);
+        mreff = FirebaseDatabase.getInstance().getReference().child("Places").child(key);
+      
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
             //retrieve data from the database
@@ -78,6 +75,7 @@ public class place_details extends AppCompatActivity {
                     pPhone = snapshot.child("phone").getValue().toString();
                     pCity = snapshot.child("city").getValue().toString();
                     pAddress = snapshot.child("address").getValue().toString();
+                    pImgUrl = snapshot.child("imgUrl").getValue().toString();
 
                     //set data to the view
                     username.setText(pUsername);
@@ -90,6 +88,10 @@ public class place_details extends AppCompatActivity {
                     phone.setText(pPhone);
                     city.setText(pCity);
                     address.setText(pAddress);
+
+                    Glide.with(getApplicationContext())
+                            .load(pImgUrl)
+                            .into(imageView);
                 }
 
                 @Override
