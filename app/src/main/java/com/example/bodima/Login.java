@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             mdialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), MyPlaces.class));
+                            startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
                             Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
                         } else {
                             mdialog.dismiss();
@@ -127,12 +127,12 @@ public class Login extends AppCompatActivity {
 
                 if (Seller.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("User");
+                    reference = rootNode.getReference("Type");
                     reference.setValue("seller");
                 }
                 if (Buyer.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("User");
+                    reference = rootNode.getReference("Type");
                     reference.setValue("buyer");
                 }
 
