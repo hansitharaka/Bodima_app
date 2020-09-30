@@ -29,7 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
-public class MyReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener {
+public class BirthdayReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener {
 
     List<String> keyList;
     List<Reminders> reminders;
@@ -53,10 +53,10 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reminders);
+        setContentView(R.layout.activity_birthday_reminders);
         //setContentView(R.layout.activity_ratings_recyclerview);
 
-        final Intent intent = getIntent();
+        Intent intent = getIntent();
 
         recyclerView = findViewById(R.id.recylerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -66,10 +66,9 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         reminderHelperAdapter = new ReminderHelperAdapter(reminders);
         recyclerView.setAdapter(reminderHelperAdapter);
-        reminderHelperAdapter.setOnItemClickListener(MyReminders.this);
+        reminderHelperAdapter.setOnItemClickListener(BirthdayReminders.this);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        int date = calendar.get(Calendar.DATE);
 
         String[] monthName = {"January", "February",
                 "March", "April", "May", "June", "July",
@@ -77,9 +76,10 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                 "December"};
         final String month = monthName[calendar.get(Calendar.MONTH)];
 
+        int date = calendar.get(Calendar.DATE);
         final String C_date = String.valueOf(date);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Payment");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Birthday");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,8 +87,8 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                 ClearAll();
                 for (DataSnapshot ds:snapshot.getChildren()){
                     Reminders data = ds.getValue(Reminders.class);
-                    keyList.add(ds.getKey());
                     reminders.add(data);
+                    keyList.add(ds.getKey());
 
                     if (data.getMonth().equalsIgnoreCase(month) || data.getMonth().equalsIgnoreCase("Every Month")){
                         if (data.getDay().equalsIgnoreCase(C_date)){
@@ -113,39 +113,37 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         bPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, MyReminders.class));
+                startActivity(new Intent(BirthdayReminders.this, MyReminders.class));
             }
         });
 
         bBday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MyReminders.this,BirthdayReminders.class);
-                startActivity(intent1);
+                startActivity(new Intent(BirthdayReminders.this, BirthdayReminders.class));
             }
         });
 
         bOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, OtherReminders.class));
+                startActivity((new Intent(BirthdayReminders.this, OtherReminders.class)));
             }
         });
 
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, AddReminder.class));
+                startActivity((new Intent(BirthdayReminders.this, AddReminder.class)));
             }
         });
-
     }
 
     public void addNotification(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("You have a Payment Reminder.")
-                .setContentText("Payment due on today.");
+                .setContentTitle("You have a Birthday Reminder.")
+                .setContentText("Your Friend's Birthday is today.");
 
         Intent notificationIntent = new Intent(this, MyReminders.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -153,7 +151,6 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         NotificationManager manager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
-
     }
 
     @Override
@@ -163,9 +160,9 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Intent intent = new Intent(MyReminders.this, MyReminders.class);
+                Intent intent = new Intent(BirthdayReminders.this, BirthdayReminders.class);
                 startActivity(intent);
-                Toast.makeText(MyReminders.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BirthdayReminders.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
             }
         });
     }

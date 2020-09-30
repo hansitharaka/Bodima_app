@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,6 +18,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
     private Button Login;
@@ -29,18 +33,27 @@ public class Login extends AppCompatActivity {
     String Emailin;
     String Pwdin;
 
+    RadioButton Buyer;
+    RadioButton Seller;
+
     private ProgressDialog mdialog;
 
     private FirebaseAuth firebaseAuth;
-
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Login = findViewById(R.id.signup);
-        Register = findViewById(R.id.signin);
+        Login = findViewById(R.id.signin);
+        Register = findViewById(R.id.signup);
+
+        Buyer = findViewById(R.id.buyer);
+        Seller = findViewById(R.id.seller);
+      
 
         firebaseAuth = FirebaseAuth.getInstance();
         mdialog = new ProgressDialog(this);
@@ -100,7 +113,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             mdialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), MyPlaces.class));
+                            startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
                             Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
                         } else {
                             mdialog.dismiss();
@@ -110,8 +123,41 @@ public class Login extends AppCompatActivity {
 
                     }
                 });
+
+                if (Seller.isChecked()) {
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference("Type");
+                    reference.setValue("seller");
+                }
+                if (Buyer.isChecked()) {
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference("Type");
+                    reference.setValue("buyer");
+                }
+
+
+
             }
+
+
+
+
+
+
         });
+
+
+
+//
+//        rootNode = FirebaseDatabase.getInstance();
+//        reference=rootNode.getReference("User");
+//
+//
+//
+//
+//
+//
+//        reference.setValue("first data");
 
 
     }

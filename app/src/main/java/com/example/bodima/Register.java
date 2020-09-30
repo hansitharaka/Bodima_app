@@ -50,16 +50,48 @@ public class Register extends AppCompatActivity {
         Pwd = findViewById(R.id.userpsw);
         Reg = findViewById(R.id.btnReg);
 
-        Login=findViewById(signin);
-        Register=findViewById(signup);
+        Login=findViewById(R.id.signin);
+        Register=findViewById(R.id.signup);
 
 
+
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+        Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Register.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Registration();
+    }
+
+    public void Registration(){
         Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                 Emailin = Email.getText().toString();
-                 Pwdin = Pwd.getText().toString();
-
+                Emailin = Email.getText().toString();
+                Pwdin = Pwd.getText().toString();
 
                 if (Emailin.isEmpty()) {
                     Email.setError("Enter email");
@@ -87,8 +119,7 @@ public class Register extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
 
                                     } else {
-
-                                        startActivity(new Intent(Register.this, MyPlaces.class));
+                                        startActivity(new Intent(Register.this, UserProfile.class));
                                         finish();
 
                                     }
@@ -101,34 +132,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
-
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Register.this, Login.class);
-                startActivity(intent);
-
-
-
-            }
-        });
-
-        Register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Register.this, Register.class);
-                startActivity(intent);
-
-
-
-            }
-        });
-
-
-
-
-
-
 
     }
 }
