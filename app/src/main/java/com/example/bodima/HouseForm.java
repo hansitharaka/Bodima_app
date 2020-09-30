@@ -4,13 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -22,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -90,16 +88,16 @@ public class HouseForm extends AppCompatActivity {
 
         key = getIntent().getStringExtra("key");
 
-//        if (key != null) {
-//            GetDataFromFirebase(key);
-//            btnSave.setText("Update");
-//
-//            AddHouse();
-//        }
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
 
+        if (key != null) {
+            GetDataFromFirebase(key);
+            btnSave.setText("Update");
 
+            AddHouse();
+        }
         //save data in firebase on btn click
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,22 +262,21 @@ public class HouseForm extends AppCompatActivity {
                                     house.setImgUrl(String.valueOf(uri));
                                     // mDatabase.push().setValue(house);
 
-//                                    if (key != null) {
-//                                        mDatabase.child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                            @Override
-//                                            public void onSuccess(Void aVoid) {
-//                                                Toast.makeText(HouseForm.this, "House Data has been updated!!", Toast.LENGTH_LONG).show();
-//
-//                                                startActivity(new Intent(HouseForm.this, AllAdvertisements.class));
-//                                            }
-//                                        }).addOnFailureListener(new OnFailureListener() {
-//                                            @Override
-//                                            public void onFailure(@NonNull Exception e) {
-//                                                Toast.makeText(HouseForm.this, "Error Occured: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        });
-//                                    } else
-                                        if (key == null) {
+                                    if (key != null) {
+                                        mDatabase.child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(HouseForm.this, "House Data has been updated!!", Toast.LENGTH_LONG).show();
+
+                                                startActivity(new Intent(HouseForm.this, AllAdvertisements.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(HouseForm.this, "Error Occured: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if (key == null) {
                                         mDatabase.push().setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -333,34 +330,38 @@ public class HouseForm extends AppCompatActivity {
     }
 
 
-//    private void GetDataFromFirebase(String mKey) {
-//
-//        mDatabase.child(mKey).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                House house = snapshot.getValue(House.class);
-//                Title.setText(house.getTitle());
-//                City.setText(house.getCity());
-//                HouseSize.setText(house.getSize());
-//                LandSize.setText(house.getLandSize());
-//                Description.setText(house.getDes());
-//                Amount.setText(house.getAmount());
-//                BedsNo.setText(house.getBeds());
-//                BathsNo.setText(house.getBaths());
-//                Name.setText(house.getName());
-//                Phone.setText(house.getPhone());
-//                img1.setImageURI(Uri.parse(house.getImgUrl()));
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void GetDataFromFirebase(String mKey) {
+
+        mDatabase.child(mKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                House house = snapshot.getValue(House.class);
+
+                if (house != null) {
+                    Title.setText(house.getTitle());
+                    City.setText(house.getCity());
+                    HouseSize.setText(house.getSize());
+                    LandSize.setText(house.getLandSize());
+                    Description.setText(house.getDes());
+                    Amount.setText(house.getAmount());
+                    BedsNo.setText(house.getBeds());
+                    BathsNo.setText(house.getBaths());
+                    Name.setText(house.getName());
+                    Phone.setText(house.getPhone());
+                    img1.setImageURI(Uri.parse(house.getImgUrl()));
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }
 

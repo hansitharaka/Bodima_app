@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.bodima.Model.House;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecyclerViewAdapter.ViewHolder> {

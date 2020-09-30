@@ -1,4 +1,4 @@
-package com.example.bodima;
+package com.example.bodima.Model;
 
 import com.google.firebase.database.Exclude;
 
