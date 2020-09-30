@@ -61,6 +61,7 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
         mStorage= FirebaseStorage.getInstance();
         //ArrayList
         landArrayList= new ArrayList<>();
+
         keyList=new ArrayList<>();
 
         recyclerAdapter= new landRecyclerViewAdapter(getApplicationContext(), landArrayList);
@@ -118,9 +119,7 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
 //                    recyclerAdapter = new landRecyclerViewAdapter(getApplicationContext(),landArrayList);
 //                    recyclerView.setAdapter(recyclerAdapter);
                     keyList.add(dataSnapshot.getKey());
-                    landArrayList.add(land);
-
-
+//                    landArrayList.add(land);
                 }
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -158,10 +157,11 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
         Land selectedItem =  landArrayList.get(position);
         final String selectedKey = keyList.get(position);
 
-        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        StorageReference imgRef = mStorage.getReferenceFromUrl(selectedItem.getImgUrl() );
         imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
                 mDatabase.child(selectedKey).removeValue();
                 Toast.makeText(LandAllAds.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();

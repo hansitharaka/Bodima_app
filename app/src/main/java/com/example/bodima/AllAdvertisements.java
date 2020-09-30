@@ -36,7 +36,7 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
     private List<String> keyList;
 
     private houseRecyclerViewAdapter recyclerAdapter;
-    private House house;
+//    private House house;
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
 
@@ -124,12 +124,12 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
                 ClearAll();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                     house = dataSnapshot.getValue(House.class);
+                     House house = dataSnapshot.getValue(House.class);
                      houseArrayList.add(house);
 //                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
 //                     recyclerView.setAdapter(recyclerAdapter);
                     keyList.add(dataSnapshot.getKey());
-                    houseArrayList.add(house);
+//                    houseArrayList.add(house);
 
                 }
                 recyclerAdapter.notifyDataSetChanged();
@@ -174,7 +174,7 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                mDatabase.child(selectedKey).removeValue();
+                mDatabase.child("Houses").child(selectedKey).removeValue();
                 Toast.makeText(AllAdvertisements.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
                 overridePendingTransition(0, 0);

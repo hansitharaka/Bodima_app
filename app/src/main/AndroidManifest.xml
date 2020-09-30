@@ -43,7 +43,6 @@
 <!--             </intent-filter>-->
         </activity>
         <activity android:name=".HouseForm">
-
 <!--             <intent-filter>-->
 <!--             <action android:name="android.intent.action.MAIN" />-->
 
