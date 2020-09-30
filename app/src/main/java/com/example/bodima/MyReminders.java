@@ -47,7 +47,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
     String monthText;
     String amountText;
 
-    Button bPay, bBday, bOther;
+    Button bPay, bday, bOther;
     FloatingActionButton bAdd;
 
     @Override
@@ -106,7 +106,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         });
 
         bPay = (Button) findViewById(R.id.pay);
-        bBday = (Button) findViewById(R.id.bday);
+        bday = (Button) findViewById(R.id.bday);
         bOther = (Button) findViewById(R.id.other);
         bAdd = (FloatingActionButton) findViewById(R.id.floatCall);
 
@@ -117,7 +117,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
             }
         });
 
-        bBday.setOnClickListener(new View.OnClickListener() {
+        bday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(MyReminders.this,BirthdayReminders.class);

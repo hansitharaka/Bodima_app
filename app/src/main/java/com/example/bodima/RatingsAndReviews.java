@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.bodima.Model.Reviews;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +36,7 @@ public class RatingsAndReviews extends AppCompatActivity {
     RatingBar userRate;
 
     Button deleteButton;
+    FloatingActionButton rAdd;
 
     String reviewText;
     String usernameText;
@@ -49,6 +53,8 @@ public class RatingsAndReviews extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(reviewsHelperAdapter);
         reviews = new ArrayList<>();
+
+       rAdd = (FloatingActionButton) findViewById(R.id.floatCallRate);
 
         database = FirebaseDatabase.getInstance().getReference("Ratings");
 
@@ -71,6 +77,15 @@ public class RatingsAndReviews extends AppCompatActivity {
             }
         });
 
+
+        rAdd = (FloatingActionButton) findViewById(R.id.floatCallRate);
+
+        rAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RatingsAndReviews.this, AddReview.class));
+            }
+        });
 
     }
 }
