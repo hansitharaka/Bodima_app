@@ -2,6 +2,7 @@ package com.example.bodima;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,7 @@ public class AddReview extends AppCompatActivity {
                     Reviews reviews = new Reviews(userId, rateNumber, reviewText);
                     database.push().setValue(reviews);
                     Toast.makeText(AddReview.this, "success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddReview.this, RatingsAndReviews.class));
                 }
             }
         });
