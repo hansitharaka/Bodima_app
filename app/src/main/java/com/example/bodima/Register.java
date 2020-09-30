@@ -53,11 +53,44 @@ public class Register extends AppCompatActivity {
         Register=findViewById(R.id.signup);
 
 
+
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+        Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Register.class);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Registration();
+    }
+
+    public void Registration(){
         Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                 Emailin = Email.getText().toString();
-                 Pwdin = Pwd.getText().toString();
+                Emailin = Email.getText().toString();
+                Pwdin = Pwd.getText().toString();
 
 
                 if (Emailin.isEmpty()) {
@@ -100,34 +133,5 @@ public class Register extends AppCompatActivity {
 
             }
         });
-
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Register.this, Login.class);
-                startActivity(intent);
-
-
-
-            }
-        });
-
-        Register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Register.this, Register.class);
-                startActivity(intent);
-
-
-
-            }
-        });
-
-
-
-
-
-
-
     }
 }
