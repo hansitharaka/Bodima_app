@@ -43,13 +43,6 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
 
-    //variables
-    private RecyclerView recyclerView;
-    private ArrayList<Place> placeArrayList;
-
-    private DatabaseReference mreff;
-    private FirebaseUser currentUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
