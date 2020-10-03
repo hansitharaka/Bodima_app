@@ -40,7 +40,9 @@ public class Vehicle_Ad_Details extends AppCompatActivity {
          Phone=findViewById(R.id.txtPhone);
          imageView =findViewById(R.id.img);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles").child("-MIEzE9c8aZD57FLpihL");
+        final String key = getIntent().getStringExtra("key");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles").child(key);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

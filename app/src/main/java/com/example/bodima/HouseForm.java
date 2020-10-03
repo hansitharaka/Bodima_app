@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,17 +44,18 @@ public class HouseForm extends AppCompatActivity {
     private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone;
     private Button addImg, btnSave;
     private ImageView img1;
-    private TextView alert;
+    private FirebaseUser currentUser;
+
     //image array
 
     private Uri imgUri;
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    //key variable
     private String key;
 
     List<House> houseArrayList = new ArrayList<>();
-
 
     FirebaseDatabase rootNode;
     private DatabaseReference mDatabase;
@@ -86,12 +89,13 @@ public class HouseForm extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         progBar = findViewById(R.id.progressBar);
 
+        //get key
         key = getIntent().getStringExtra("key");
 
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+    //if not null change to update
         if (key != null) {
             GetDataFromFirebase(key);
             btnSave.setText("Update");
@@ -263,7 +267,7 @@ public class HouseForm extends AppCompatActivity {
                                     // mDatabase.push().setValue(house);
 
                                     if (key != null) {
-                                        mDatabase.child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        mDatabase.push().child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(HouseForm.this, "House Data has been updated!!", Toast.LENGTH_LONG).show();
@@ -309,7 +313,6 @@ public class HouseForm extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -350,10 +353,7 @@ public class HouseForm extends AppCompatActivity {
                     Name.setText(house.getName());
                     Phone.setText(house.getPhone());
                     img1.setImageURI(Uri.parse(house.getImgUrl()));
-
                 }
-
-
             }
 
             @Override

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,9 +28,11 @@ import java.util.List;
 
 public class AllAdvertisements extends AppCompatActivity implements houseRecyclerViewAdapter.OnItemClickListener {
     //variables
-    private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
+    private RecyclerView recyclerView;
     private List<House> houseArrayList;
     private List<String> keyList;
+
+    private FirebaseUser currentUser;
 
     private houseRecyclerViewAdapter recyclerAdapter;
 //    private House house;

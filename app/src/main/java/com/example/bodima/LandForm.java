@@ -39,12 +39,14 @@ public class LandForm extends AppCompatActivity {
     Button addImg, btnSave;
     private ImageView img2;
 
-    Land land;
+    //Land land;
 
     private Uri imgUri;
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    //key variable
+
     private String key;
 
     private DatabaseReference mDatabase;
@@ -75,20 +77,19 @@ public class LandForm extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         progBar=findViewById(R.id.progressBar);
 
+        //get key
         key = getIntent().getStringExtra("key");
 
+        //land = new Land();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands");
+
+        //if not null change to update
         if (key != null) {
             GetDataFromFirebase(key);
             btnSave.setText("Update");
 
             AddLand();
         }
-
-
-
-        land = new Land();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands");
-
 
         //onclick save
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +218,7 @@ public class LandForm extends AppCompatActivity {
                                         Toast.makeText(LandForm.this, "No images selected", Toast.LENGTH_SHORT).show();
                                     }
 
+                                    Land land = new Land();
                                     land.setTitle(Title.getText().toString());
                                     land.setCity(City.getText().toString());
                                     land.setLandSize(LandSize.getText().toString());
@@ -295,21 +297,23 @@ public class LandForm extends AppCompatActivity {
         }
 
     }
-
+//get data from firebase when updating
     private void GetDataFromFirebase(String mKey) {
         mDatabase.child(mKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                land =snapshot.getValue(Land.class);
-                Title.setText(land.getTitle());
-                City.setText(land.getCity());
-                Amount.setText(land.getAmount());
-                LandSize.setText(land.getLandSize());
-                Description.setText(land.getDes());
-                Name.setText(land.getName());
-                Phone.setText(land.getPhone());
-                img2.setImageURI(Uri.parse(land.getImgUrl()));
 
+                Land land =snapshot.getValue(Land.class);
+                if(land != null) {
+                    Title.setText(land.getTitle());
+                    City.setText(land.getCity());
+                    Amount.setText(land.getAmount());
+                    LandSize.setText(land.getLandSize());
+                    Description.setText(land.getDes());
+                    Name.setText(land.getName());
+                    Phone.setText(land.getPhone());
+                    img2.setImageURI(Uri.parse(land.getImgUrl()));
+                }
 
             }
 

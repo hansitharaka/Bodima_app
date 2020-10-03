@@ -145,6 +145,7 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
         }
 
         public void setOnItemClickListener(OnItemClickListener listener) {
-            mListener = listener;
+
+        mListener = listener;
         }
     }
