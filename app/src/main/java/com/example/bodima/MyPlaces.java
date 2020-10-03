@@ -8,11 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +44,10 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
 
+    private FloatingActionButton floatingActionButton;
+    private Button bSearch;
+    private EditText searchText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,9 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
         //initialize
         recyclerView = (RecyclerView) findViewById(R.id.recylerView);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.addPlaceFab);
+        bSearch = (Button) findViewById(R.id.btnSearch);
+        searchText = (EditText) findViewById(R.id.search);
 
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -71,6 +83,65 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         //Get Data
         GetDataFromFirebase();
 
+        //floatingAction button
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyPlaces.this, AddPlaceForm.class));
+            }
+        });
+
+        searchText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!searchText.getText().toString().isEmpty()) {
+                    searchText.getText().clear();
+
+                    GetDataFromFirebase();
+                }
+            }
+        });
+
+        //search
+        bSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchCity = searchText.getText().toString().trim();
+
+                if(searchCity.isEmpty()) {
+                    Toast.makeText(MyPlaces.this, "Enter a city", Toast.LENGTH_SHORT).show();
+                } else {
+                    searchCity(searchCity);
+                }
+            }
+        });
+
+
+    }
+
+    private void searchCity(String city) {
+        mreff.orderByChild("city").equalTo(city).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    ClearAll();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Place place = dataSnapshot.getValue(Place.class);
+                        keyList.add(dataSnapshot.getKey());
+                        placeArrayList.add(place);
+                    }
+                    recyclerAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(MyPlaces.this, "No item found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void GetDataFromFirebase() {
