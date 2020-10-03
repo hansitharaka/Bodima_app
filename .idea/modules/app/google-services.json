@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "190159143859",
+    "firebase_url": "https://bodima-bd918.firebaseio.com",
+    "project_id": "bodima-bd918",
+    "storage_bucket": "bodima-bd918.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190159143859:android:04f724a76cfd55211241c6",
+        "android_client_info": {
+          "package_name": "com.example.bodima"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190159143859-4s89fhnnau45tmnrt805laocnof9mmih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bodima",
+            "certificate_hash": "2d60f30cee1569508ce8aae0f37825dd559acedb"
+          }
+        },
+        {
+          "client_id": "190159143859-vshulovhqtjncg9lbiljt8tpghbpdq8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1euXEJLNXvr2BSOLDB5RbgsbDdUaEUN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190159143859-vshulovhqtjncg9lbiljt8tpghbpdq8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

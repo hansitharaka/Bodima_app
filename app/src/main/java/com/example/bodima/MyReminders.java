@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.example.bodima.Model.Reminders;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
     RecyclerView recyclerView;
     ReminderHelperAdapter reminderHelperAdapter;
     DatabaseReference databaseReference;
+    FirebaseAuth firebaseAuth;
 
     TextView description;
     TextView day;
@@ -78,8 +81,9 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         final String month = monthName[calendar.get(Calendar.MONTH)];
 
         final String C_date = String.valueOf(date);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Payment");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child(String.valueOf(user)).child("Payment");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

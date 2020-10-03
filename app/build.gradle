@@ -73,4 +73,12 @@ dependencies {
     //noinspection GradleCompatible
     implementation "com.android.support:support-compat:28.0.0"
 
+    //for local test cases
+    testImplementation'junit:junit:4.12'
+
+    //for instrumented tests
+    androidTestImplementation 'com.android.support:support-annotations:24.0.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
 }
