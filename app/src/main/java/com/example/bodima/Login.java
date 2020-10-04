@@ -105,63 +105,69 @@ public class Login extends AppCompatActivity {
                 }
 
 
-                mdialog.setMessage("Processing....");
-                mdialog.show();
-
-
-                firebaseAuth.signInWithEmailAndPassword(Emailin, Pwdin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            mdialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
-                            Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
-                        } else {
-                            mdialog.dismiss();
-                            Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    CurrentUser = user.getUid();
-                    // Check if user's email is verified
-                    boolean emailVerified = user.isEmailVerified();
-
-                }
-
-
                 if (Seller.isChecked()) {
+
+
+                    Loginfunction();
+
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
                     reference.child(CurrentUser).child("type").setValue("seller");
+
+
                 }
                 if (Buyer.isChecked()) {
+                    Loginfunction();
+
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
                     reference.child(CurrentUser).child("type").setValue("buyer");
-                }
 
+
+                }
+                if (!(Seller.isChecked()) && (!(Buyer.isChecked()))) {
+                    Toast.makeText(Login.this, "select user type", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
 
 
-
-
-
-
         });
 
+    }
+
+    public void Loginfunction() {
 
 
+        mdialog.setMessage("Processing....");
+        mdialog.show();
 
 
+        firebaseAuth.signInWithEmailAndPassword(Emailin, Pwdin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+
+                    mdialog.dismiss();
+                    startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
+                    Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
+                } else {
+                    mdialog.dismiss();
+                    Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
 
 
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            CurrentUser = user.getUid();
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+        }
 
     }
 }
