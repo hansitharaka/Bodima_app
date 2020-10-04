@@ -1,7 +1,11 @@
 package com.example.bodima;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -31,9 +36,13 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAdapter.OnItemClickListener{
+public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAdapter.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     //variables
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+
     private RecyclerView recyclerView;
     private List<Place> placeArrayList;
     private List<String> keyList;
@@ -47,6 +56,32 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_places);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* HOOKS */
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /* TOOLBAR */
+        setSupportActionBar(toolbar);
+        this.setTitle("Places");
+
+        /* NAVIGATION */
+        navigationView.bringToFront();
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        //selected nav item
+        navigationView.setCheckedItem(R.id.nav_places);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         //initialize
         recyclerView = (RecyclerView) findViewById(R.id.recylerView);
@@ -142,6 +177,52 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         Intent i = new Intent(MyPlaces.this, AddPlaceForm.class);
         i.putExtra("key", keyList.get(position));
         startActivity(i);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //menu items action
+        switch (item.getItemId()) {
+            case R.id.nav_places:
+                break;
+
+            case R.id.nav_ads:
+                startActivity(new Intent(MyPlaces.this, AllAdvertisements.class));
+                break;
+
+            case R.id.nav_remind:
+                startActivity(new Intent(MyPlaces.this, MyReminders.class));
+                break;
+
+            case R.id.nav_expense:
+                startActivity(new Intent(MyPlaces.this, Expenses_Dashboard.class));
+                break;
+
+            case R.id.nav_profile:
+                startActivity(new Intent(MyPlaces.this, UserProfile.class));
+                break;
+
+            case R.id.nav_logout:
+                //logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MyPlaces.this, Login.class));
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if back pressed while the navigation drawer is open, it will close the drawer
+        // instead of exiting from the app
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
 

@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Reminders;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -93,8 +95,9 @@ public class AddReminder extends AppCompatActivity implements AdapterView.OnItem
 
         amount = findViewById(R.id.amount);
         description = findViewById(R.id.description);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        database = FirebaseDatabase.getInstance().getReference().child("Reminders");
+        database = FirebaseDatabase.getInstance().getReference().child("Reminders").child(String.valueOf(user));
 
         save = findViewById(R.id.btnSave);
         save.setOnClickListener(new View.OnClickListener() {
