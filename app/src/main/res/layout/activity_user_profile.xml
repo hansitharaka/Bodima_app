@@ -32,15 +32,6 @@
             android:backgroundTint="@color/dimgray"
             android:src="@drawable/person" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/medium"
-            android:gravity="center"
-            android:text="@string/buyer"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -133,17 +124,6 @@
                 android:text="@string/update"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="5dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button"
-                android:backgroundTint="@color/colorAccent"
-                android:text="@string/delete"
-                android:layout_margin="5dp"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"/>
 
 

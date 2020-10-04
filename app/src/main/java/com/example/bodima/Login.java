@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
 
     String Emailin;
     String Pwdin;
+    String CurrentUser;
 
 
     RadioButton Buyer;
@@ -123,17 +125,24 @@ public class Login extends AppCompatActivity {
 
                     }
                 });
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    CurrentUser = user.getUid();
+                    // Check if user's email is verified
+                    boolean emailVerified = user.isEmailVerified();
+
+                }
 
 
                 if (Seller.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("Type");
-                    reference.setValue("seller");
+                    reference = rootNode.getReference("User");
+                    reference.child(CurrentUser).child("type").setValue("seller");
                 }
                 if (Buyer.isChecked()) {
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("Type");
-                    reference.setValue("buyer");
+                    reference = rootNode.getReference("User");
+                    reference.child(CurrentUser).child("type").setValue("buyer");
                 }
 
 
@@ -146,19 +155,6 @@ public class Login extends AppCompatActivity {
 
 
         });
-
-
-
-//
-//        rootNode = FirebaseDatabase.getInstance();
-//        reference=rootNode.getReference("User");
-//
-//
-//
-//
-//
-//
-//        reference.setValue("first data");
 
 
 
