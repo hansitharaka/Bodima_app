@@ -1,6 +1,6 @@
 package com.example.bodima;
+
 import android.content.Context;
-import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,31 +14,31 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
-import com.example.bodima.Model.Place;
+import com.example.bodima.Model.House;
 
 import java.util.List;
 
-public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecyclerViewAdapter.ViewHolder> {
+public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecyclerViewAdapter.ViewHolder> {
+
     private Context mContext;
-    private List<Place> placeArrayList;
+    private List<House> houseArrayList;
     private OnItemClickListener mListener;
 
-    public myplaceRecyclerViewAdapter(Context context, List<Place> placeArrayList) {
+    public houseRecyclerViewAdapter(Context context, List<House> houseArrayList) {
         this.mContext = context;
-        this.placeArrayList = placeArrayList;
+        this.houseArrayList = houseArrayList;
+
     }
 
     @NonNull
     @Override
-    public myplaceRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public houseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        //instantiate the view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.myplace_item_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        //instenciate the view //get the data and put in here
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_layout, parent, false);
+        return new ViewHolder(view);
 
-        return viewHolder;
     }
 
     @Override
@@ -46,48 +46,50 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
         //load text
         ViewHolder viewHolder = (ViewHolder) holder;
 
-        Place fecthPlacesData = placeArrayList.get(position);
+        House fetchHousesData = houseArrayList.get(position);
 
-        viewHolder.title.setText(fecthPlacesData.getTitle());
-        viewHolder.city.setText(fecthPlacesData.getCity());
-        viewHolder.nBeds.setText(fecthPlacesData.getBeds());
-        viewHolder.nBaths.setText(fecthPlacesData.getBaths());
-        viewHolder.price.setText(String.format("Rs. %s /month", fecthPlacesData.getAmount()));   //price is formatted
-        viewHolder.date.setText(String.format("posted on %s ", fecthPlacesData.getDate()));      //date is formatted
+        viewHolder.Title.setText(fetchHousesData.getTitle());
+        viewHolder.City.setText(fetchHousesData.getCity());
+        viewHolder.Amount.setText(String.format("Rs. %s /month", fetchHousesData.getAmount()));
+        viewHolder.BedsNo.setText(String.valueOf(fetchHousesData.getBeds()));
+        viewHolder.BathsNo.setText(String.valueOf(fetchHousesData.getBaths()));
+
 
         //load image
         Glide.with(mContext)
-                .load(fecthPlacesData.getImgUrl())
+                .load(fetchHousesData.getImgUrl())
                 .into(viewHolder.imageView);
+
+
     }
 
     @Override
     public int getItemCount() {
-        return placeArrayList.size();
+        return houseArrayList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        //Variables
+        //widgets
+        TextView Title, City, Amount, BedsNo, BathsNo;
+        //image add
         ImageView imageView;
-        TextView title, city, nBeds, nBaths, price, date;
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //initialize
-            imageView = itemView.findViewById(R.id.imgPlace);
-            title = (TextView) itemView.findViewById(R.id.title);
-            city = (TextView) itemView.findViewById(R.id.city);
-            nBeds = (TextView) itemView.findViewById(R.id.cBeds);
-            nBaths = (TextView) itemView.findViewById(R.id.cBaths);
-            price = (TextView) itemView.findViewById(R.id.placePrice);
-            date = (TextView) itemView.findViewById(R.id.date);
+            //image view
+            imageView = itemView.findViewById(R.id.imgHouseAd);
+            Title = itemView.findViewById(R.id.houseTitle);
+            City = itemView.findViewById(R.id.houseCity);
+            Amount = itemView.findViewById(R.id.housePrice);
+            BedsNo = itemView.findViewById(R.id.beds2);
+            BathsNo = itemView.findViewById(R.id.baths2);
 
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
-
 
         }
 
@@ -98,6 +100,7 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
 
             edit.setOnMenuItemClickListener(this);
             delete.setOnMenuItemClickListener(this);
+
         }
 
         @Override
@@ -108,9 +111,9 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
                 if (position != RecyclerView.NO_POSITION) {
                     mListener.onItemClick(position);
                 }
-
             }
         }
+
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
@@ -118,7 +121,6 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
                 int position = getAdapterPosition();
 
                 if (position != RecyclerView.NO_POSITION) {
-
                     switch (item.getItemId()) {
                         case 1:
                             mListener.onEditClick(position);
@@ -127,24 +129,22 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
                             mListener.onDeleteClick(position);
                             return true;
                     }
-
                 }
             }
             return false;
         }
     }
 
+        public interface OnItemClickListener {
+            void onItemClick(int position);
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-        void onDeleteClick(int position);
-        void onEditClick(int position);
+            void onDeleteClick(int position);
 
+            void onEditClick(int position);
+
+        }
+
+        public void setOnItemClickListener(OnItemClickListener listener) {
+            mListener = listener;
+        }
     }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-
-}

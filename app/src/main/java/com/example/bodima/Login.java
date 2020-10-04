@@ -34,7 +34,6 @@ public class Login extends AppCompatActivity {
     String Pwdin;
     String CurrentUser;
 
-
     RadioButton Buyer;
     RadioButton Seller;
 
@@ -43,7 +42,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
+  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class Login extends AppCompatActivity {
 
         Buyer = findViewById(R.id.buyer);
         Seller = findViewById(R.id.seller);
-
+      
 
         firebaseAuth = FirebaseAuth.getInstance();
         mdialog = new ProgressDialog(this);
@@ -115,6 +114,11 @@ public class Login extends AppCompatActivity {
                     reference.child(CurrentUser).child("type").setValue("seller");
 
 
+                if (Seller.isChecked()) {
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference("Type");
+                    reference.setValue("seller");
+
                 }
                 if (Buyer.isChecked()) {
                     Loginfunction();
@@ -142,6 +146,7 @@ public class Login extends AppCompatActivity {
 
         mdialog.setMessage("Processing....");
         mdialog.show();
+
 
 
         firebaseAuth.signInWithEmailAndPassword(Emailin, Pwdin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

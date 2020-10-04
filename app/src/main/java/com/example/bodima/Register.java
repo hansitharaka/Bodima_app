@@ -19,7 +19,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
+import static com.example.bodima.R.id.signin;
+import static com.example.bodima.R.id.signup;
 
 public class Register extends AppCompatActivity {
 
@@ -98,7 +99,6 @@ public class Register extends AppCompatActivity {
                 Emailin = Email.getText().toString();
                 Pwdin = Pwd.getText().toString();
 
-
                 if (Emailin.isEmpty()) {
                     Email.setError("Enter email");
                     Email.requestFocus();
@@ -125,7 +125,6 @@ public class Register extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
 
                                     } else {
-
                                         startActivity(new Intent(Register.this, UserProfile.class));
                                         finish();
 
@@ -139,5 +138,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
     }
 }

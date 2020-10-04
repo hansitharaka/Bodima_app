@@ -40,7 +40,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constrain_expense1"
                 android:layout_width="349dp"
-                android:layout_height="163dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +90,8 @@
 
                 <LinearLayout
                     android:id="@+id/amount_layout"
-                    android:layout_width="282dp"
-                    android:layout_height="73dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@id/type_layout"
                     app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +101,7 @@
                         android:id="@+id/amount_ex_label"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/medium"
                         android:padding="10dp"
@@ -117,7 +118,7 @@
                     <TextView
                         android:id="@+id/amount_ex_text"
                         android:layout_width="259dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/bold"
                         android:padding="10dp"

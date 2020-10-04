@@ -29,7 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
-public class MyReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener {
+public class OtherReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener{
 
     List<String> keyList;
     List<Reminders> reminders;
@@ -47,16 +47,16 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
     String monthText;
     String amountText;
 
-    Button bPay, bday, bOther;
+    Button bPay, bBday, bOther;
     FloatingActionButton bAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reminders);
+        setContentView(R.layout.activity_other_reminders);
         //setContentView(R.layout.activity_ratings_recyclerview);
 
-        final Intent intent = getIntent();
+        Intent intent = getIntent();
 
         recyclerView = findViewById(R.id.recylerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -66,7 +66,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         reminderHelperAdapter = new ReminderHelperAdapter(reminders);
         recyclerView.setAdapter(reminderHelperAdapter);
-        reminderHelperAdapter.setOnItemClickListener(MyReminders.this);
+        reminderHelperAdapter.setOnItemClickListener(OtherReminders.this);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int date = calendar.get(Calendar.DATE);
@@ -79,7 +79,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         final String C_date = String.valueOf(date);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Payment");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child("Other");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,8 +87,9 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                 ClearAll();
                 for (DataSnapshot ds:snapshot.getChildren()){
                     Reminders data = ds.getValue(Reminders.class);
-                    keyList.add(ds.getKey());
                     reminders.add(data);
+
+                    keyList.add(ds.getKey());
 
                     if (data.getMonth().equalsIgnoreCase(month) || data.getMonth().equalsIgnoreCase("Every Month")){
                         if (data.getDay().equalsIgnoreCase(C_date)){
@@ -106,46 +107,44 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         });
 
         bPay = (Button) findViewById(R.id.pay);
-        bday = (Button) findViewById(R.id.bday);
+        bBday = (Button) findViewById(R.id.bday);
         bOther = (Button) findViewById(R.id.other);
         bAdd = (FloatingActionButton) findViewById(R.id.floatCall);
 
         bPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, MyReminders.class));
+                startActivity(new Intent(OtherReminders.this, MyReminders.class));
             }
         });
 
-        bday.setOnClickListener(new View.OnClickListener() {
+        bBday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MyReminders.this,BirthdayReminders.class);
-                startActivity(intent1);
+                startActivity(new Intent(OtherReminders.this, BirthdayReminders.class));
             }
         });
 
         bOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, OtherReminders.class));
+                startActivity((new Intent(OtherReminders.this, OtherReminders.class)));
             }
         });
 
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MyReminders.this, AddReminder.class));
+                startActivity((new Intent(OtherReminders.this, AddReminder.class)));
             }
         });
-
     }
 
     public void addNotification(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("You have a Payment Reminder.")
-                .setContentText("Payment due on today.");
+                .setContentTitle("You have a Special Reminder.")
+                .setContentText("Today is a special day for you.");
 
         Intent notificationIntent = new Intent(this, MyReminders.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -153,7 +152,6 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         NotificationManager manager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
-
     }
 
     @Override
@@ -163,9 +161,9 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
         databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Intent intent = new Intent(MyReminders.this, MyReminders.class);
+                Intent intent = new Intent(OtherReminders.this, OtherReminders.class);
                 startActivity(intent);
-                Toast.makeText(MyReminders.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OtherReminders.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
             }
         });
     }

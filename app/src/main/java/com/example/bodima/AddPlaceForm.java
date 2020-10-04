@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,7 +63,6 @@ public class AddPlaceForm extends AppCompatActivity {
     private String key;
 
     List<Place> placeArrayList = new ArrayList<>();
-
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -136,7 +137,7 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
     }
-
+  
     private boolean isValid() {
         pUid = "Ghgsc52s1f1S";
         pDate = DateFormat.getDateInstance().format(new Date());
@@ -336,7 +337,7 @@ public class AddPlaceForm extends AppCompatActivity {
 
         }}
 
-    private void GetDataFromFirebase(String mKey) {
+  private void GetDataFromFirebase(String mKey) {
 
         mReff.child(mKey).addValueEventListener(new ValueEventListener() {
             @Override
@@ -354,11 +355,9 @@ public class AddPlaceForm extends AppCompatActivity {
                 city.setText(place.getCity());
                 address.setText(place.getAddress());
                 img1.setImageURI(Uri.parse(place.getImgUrl()));
-                
-
             }
 
-            @Override
+          @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }

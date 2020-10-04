@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgdark"
-    tools:context=".AllAdvertisements">
+    tools:context=".LandAllAds">
 
     <!--    Floating Add Button   -->
     <!-- According to currently active tab, floating button will direct to the relevant page -->
@@ -49,7 +49,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button"
+                android:background="#00000000"
                 android:backgroundTint="@color/colorPink"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
+                android:background="@drawable/button"
                 android:backgroundTint="@color/colorPink"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"

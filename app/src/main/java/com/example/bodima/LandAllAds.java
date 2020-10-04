@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -25,17 +24,16 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllAdvertisements extends AppCompatActivity implements houseRecyclerViewAdapter.OnItemClickListener {
+public class LandAllAds extends AppCompatActivity implements landRecyclerViewAdapter.OnItemClickListener {
     //variables
     private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
-    private List<House> houseArrayList;
+    private List<Land> landArrayList;
     private List<String> keyList;
+    private Land land;
+    private landRecyclerViewAdapter recyclerAdapter;
 
-    private houseRecyclerViewAdapter recyclerAdapter;
-//    private House house;
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
-
     //firebase
     private DatabaseReference mDatabase;
     private FirebaseStorage mStorage;
@@ -43,7 +41,7 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_advertisements);
+        setContentView(R.layout.activity_land_all_ads);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -51,7 +49,6 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
 
-        //button float
         viewform = findViewById(R.id.floatCall);
 
         //layout
@@ -60,16 +57,16 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         recyclerView.setAdapter(recyclerAdapter);
 
         //database
-        mDatabase = FirebaseDatabase.getInstance().getReference("Advertisements");
+        mDatabase= FirebaseDatabase.getInstance().getReference("Advertisements");
         mStorage= FirebaseStorage.getInstance();
-
         //ArrayList
-        houseArrayList = new ArrayList<>();
+        landArrayList= new ArrayList<>();
+
         keyList=new ArrayList<>();
 
-        recyclerAdapter= new houseRecyclerViewAdapter(getApplicationContext(), houseArrayList);
+        recyclerAdapter= new landRecyclerViewAdapter(getApplicationContext(), landArrayList);
         recyclerView.setAdapter(recyclerAdapter);
-        recyclerAdapter.setOnItemClickListener(AllAdvertisements.this);
+        recyclerAdapter.setOnItemClickListener(LandAllAds.this);
 
         //Clear ArrayList
         ClearAll();
@@ -81,52 +78,48 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         bHouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllAdvertisements.this, VehicleAllAds.class));
+                startActivity(new Intent(LandAllAds.this, AllAdvertisements.class));
             }
         });
 
         bLand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllAdvertisements.this, LandAllAds.class));
+                startActivity(new Intent(LandAllAds.this, LandAllAds.class));
             }
         });
 
         bVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllAdvertisements.this, VehicleAllAds.class));
+                startActivity(new Intent(LandAllAds.this, VehicleAllAds.class));
             }
         });
 
-        //floation button
         viewform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
-                Toast.makeText(AllAdvertisements.this, "Redirecting to House Form ..", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(LandAllAds.this, LandForm.class);
+                Toast.makeText(LandAllAds.this, "Redirecting to Land Form ..", Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });
-
     }
 
-//get data to the recycler view
     private void GetDataFromFirebase() {
 
-        mDatabase.child("Houses").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Lands").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-                     House house = dataSnapshot.getValue(House.class);
-                     houseArrayList.add(house);
-//                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
-//                     recyclerView.setAdapter(recyclerAdapter);
+                    land = dataSnapshot.getValue(Land.class);
+                    landArrayList.add(land);
+//                    recyclerAdapter = new landRecyclerViewAdapter(getApplicationContext(),landArrayList);
+//                    recyclerView.setAdapter(recyclerAdapter);
                     keyList.add(dataSnapshot.getKey());
-//                    houseArrayList.add(house);
-
+//                    landArrayList.add(land);
                 }
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -137,41 +130,40 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
             }
         });
 
-
     }
 
-    //checking if arraylist id empty
-    private void ClearAll() {
-        if (houseArrayList != null) {
-            houseArrayList.clear();
+    private void ClearAll(){
+        if(landArrayList!= null){
+            landArrayList.clear();
 
-            if (recyclerAdapter != null) {
+            if(recyclerAdapter != null){
                 recyclerAdapter.notifyDataSetChanged();
             }
         }else {
-            houseArrayList = new ArrayList<>();
+            landArrayList = new ArrayList<>();
         }
     }
 
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(AllAdvertisements.this, HouseAdDetails.class);
+        Intent intent = new Intent(LandAllAds.this, LandAdDetails.class);
         intent.putExtra("key", keyList.get(position));
         startActivity(intent);
     }
 
     @Override
     public void onDeleteClick(int position) {
-        House selectedItem =  houseArrayList.get(position);
+        Land selectedItem =  landArrayList.get(position);
         final String selectedKey = keyList.get(position);
 
-        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        StorageReference imgRef = mStorage.getReferenceFromUrl(selectedItem.getImgUrl() );
         imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                mDatabase.child("Houses").child(selectedKey).removeValue();
-                Toast.makeText(AllAdvertisements.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+
+                mDatabase.child(selectedKey).removeValue();
+                Toast.makeText(LandAllAds.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(getIntent());
@@ -182,7 +174,7 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
 
     @Override
     public void onEditClick(int position) {
-        Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
+        Intent i = new Intent(LandAllAds.this, LandForm.class);
         i.putExtra("key", keyList.get(position));
         startActivity(i);
     }
