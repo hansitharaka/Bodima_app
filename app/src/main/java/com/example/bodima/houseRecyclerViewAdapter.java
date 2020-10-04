@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.bodima.Model.House;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -24,10 +26,12 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
     private Context mContext;
     private List<House> houseArrayList;
     private OnItemClickListener mListener;
+    private FirebaseUser currentUser;
 
     public houseRecyclerViewAdapter(Context context, List<House> houseArrayList) {
         this.mContext = context;
         this.houseArrayList = houseArrayList;
+
 
     }
 

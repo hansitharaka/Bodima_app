@@ -101,7 +101,7 @@ public class UserProfile extends AppCompatActivity {
                 phone = PhoneNumber.getText().toString();
                 databaseReference.child(CurrentUser).setValue(userprofile);
 
-                Intent intent = new Intent(UserProfile.this, Expenses_Dashboard.class);
+                Intent intent = new Intent(UserProfile.this, AllAdvertisements.class);
                 startActivity(intent);
 
             }

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    private String uId;
 
     private DatabaseReference mDatabase;
     private StorageReference storageRef;
@@ -149,6 +151,7 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
         key = getIntent().getStringExtra("key");
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles");
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //btn save
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -343,6 +346,7 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
                                     vehicle.setCondition(vCondition);
                                     vehicle.setFuel(vFuel);
                                     vehicle.setImgUrl(String.valueOf(uri));
+                                    vehicle.setuId(uId);
 
 
                                     if (key != null) {

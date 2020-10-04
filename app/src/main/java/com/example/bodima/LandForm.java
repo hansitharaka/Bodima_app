@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +46,7 @@ public class LandForm extends AppCompatActivity {
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    private String uId;
     //key variable
 
     private String key;
@@ -82,6 +84,7 @@ public class LandForm extends AppCompatActivity {
 
         //land = new Land();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Lands");
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //if not null change to update
         if (key != null) {
@@ -227,6 +230,7 @@ public class LandForm extends AppCompatActivity {
                                     land.setName(Name.getText().toString());
                                     land.setPhone(Phone.getText().toString());
                                     land.setImgUrl(String.valueOf(uri));
+                                    land.setuId(uId);
                                     // mDatabase.push().setValue(house);
 
                                     if (key != null) {

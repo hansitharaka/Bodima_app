@@ -41,10 +41,10 @@ import java.util.List;
 public class HouseForm extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone;
+    private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone ;
     private Button addImg, btnSave;
     private ImageView img1;
-    private FirebaseUser currentUser;
+    private String uId;
 
     //image array
 
@@ -92,8 +92,9 @@ public class HouseForm extends AppCompatActivity {
         //get key
         key = getIntent().getStringExtra("key");
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     //if not null change to update
         if (key != null) {
@@ -118,6 +119,8 @@ public class HouseForm extends AppCompatActivity {
         });
 
     }
+
+
 
 
     //validation
@@ -263,11 +266,12 @@ public class HouseForm extends AppCompatActivity {
                                     house.setBaths(BathsNo.getText().toString());
                                     house.setName(Name.getText().toString());
                                     house.setPhone(Phone.getText().toString());
+                                    house.setuId(uId);
                                     house.setImgUrl(String.valueOf(uri));
                                     // mDatabase.push().setValue(house);
 
                                     if (key != null) {
-                                        mDatabase.push().child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        mDatabase.child(key).setValue(house).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(HouseForm.this, "House Data has been updated!!", Toast.LENGTH_LONG).show();
