@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.bodima.Model.ExpenseData;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +35,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
-public class Expenses_Dashboard extends AppCompatActivity {
+public class Expenses_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    //variables
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     TextView CurrentBalnacePreview;
     Button Minus;
@@ -70,8 +81,33 @@ public class Expenses_Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_expenses__dashboard);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* HOOKS */
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /* TOOLBAR */
+        setSupportActionBar(toolbar);
+        this.setTitle("Expenses Dashboard");
+
+        /* NAVIGATION */
+        navigationView.bringToFront();
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        //selected nav item
+        navigationView.setCheckedItem(R.id.nav_places);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         //get id's from resources
         Minus = findViewById(R.id.btnMinus);
@@ -437,6 +473,52 @@ public class Expenses_Dashboard extends AppCompatActivity {
         EX_Total=Ex;
         Status = Re_Total - EX_Total;
         return Status;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //menu items action
+        switch (item.getItemId()) {
+            case R.id.nav_places:
+                startActivity(new Intent(Expenses_Dashboard.this, MyPlaces.class));
+                break;
+
+            case R.id.nav_ads:
+                startActivity(new Intent(Expenses_Dashboard.this, AllAdvertisements.class));
+                break;
+
+            case R.id.nav_remind:
+                startActivity(new Intent(Expenses_Dashboard.this, MyReminders.class));
+                break;
+
+            case R.id.nav_expense:
+                break;
+
+            case R.id.nav_profile:
+                startActivity(new Intent(Expenses_Dashboard.this, UserProfile.class));
+                break;
+
+            case R.id.nav_logout:
+                //logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Expenses_Dashboard.this, Login.class));
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if back pressed while the navigation drawer is open, it will close the drawer
+        // instead of exiting from the app
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
 }

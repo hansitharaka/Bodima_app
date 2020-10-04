@@ -11,25 +11,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.bodima.Model.House;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class VehicleAllAds extends AppCompatActivity {
+public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerViewAdapter.OnItemClickListener{
     //variables
-    private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
-    private ArrayList<Vehicle> vehicleArrayList;
+    private RecyclerView recyclerView;
+    private List<Vehicle> vehicleArrayList;
+    private List<String> keyList;
+
     private vehicleRecyclerViewAdapter recyclerAdapter;
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
 
     //firebase
     private DatabaseReference mDatabase;
+    private FirebaseStorage mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +45,12 @@ public class VehicleAllAds extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_all_ads);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
         bHouse = (Button) findViewById(R.id.btnHouse);
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
+
         viewform = findViewById(R.id.floatCall);
-
-
 
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -51,9 +59,16 @@ public class VehicleAllAds extends AppCompatActivity {
 
         //database
         mDatabase= FirebaseDatabase.getInstance().getReference("Advertisements");
+        mStorage= FirebaseStorage.getInstance();
 
         //ArrayList
         vehicleArrayList= new ArrayList<>();
+        keyList=new ArrayList<>();
+
+        recyclerAdapter= new vehicleRecyclerViewAdapter(getApplicationContext(), vehicleArrayList);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnItemClickListener(VehicleAllAds.this);
+
 
         //Clear ArrayList
         ClearAll();
@@ -104,10 +119,10 @@ public class VehicleAllAds extends AppCompatActivity {
 
                     Vehicle vehicle = dataSnapshot.getValue(Vehicle.class);
                     vehicleArrayList.add(vehicle);
-                    recyclerAdapter = new vehicleRecyclerViewAdapter(getApplicationContext(),vehicleArrayList);
-                    recyclerView.setAdapter(recyclerAdapter);
+//                    recyclerAdapter = new vehicleRecyclerViewAdapter(getApplicationContext(),vehicleArrayList);
+//                    recyclerView.setAdapter(recyclerAdapter);
+                    keyList.add(dataSnapshot.getKey());
 
-                    //TODO:image
                 }
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -121,19 +136,49 @@ public class VehicleAllAds extends AppCompatActivity {
     }
 
     //checking if arraylist id empty
-    private void ClearAll(){
-        if(vehicleArrayList!= null){
+    private void ClearAll() {
+        if (vehicleArrayList != null) {
             vehicleArrayList.clear();
 
-            if(recyclerAdapter != null){
+            if (recyclerAdapter != null) {
                 recyclerAdapter.notifyDataSetChanged();
             }
+        } else {
+            vehicleArrayList = new ArrayList<>();
         }
-        vehicleArrayList=new ArrayList<>();
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(VehicleAllAds.this, Vehicle_Ad_Details.class);
+        intent.putExtra("key", keyList.get(position));
+        startActivity(intent);
+    }
 
+    @Override
+    public void onDeleteClick(int position) {
+        Vehicle selectedItem =  vehicleArrayList.get(position);
+        final String selectedKey = keyList.get(position);
 
+        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabase.child("Vehicles").child(selectedKey).removeValue();
+                Toast.makeText(VehicleAllAds.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+    }
 
+    @Override
+    public void onEditClick(int position) {
+        Intent i = new Intent(VehicleAllAds.this, VehicleForm.class);
+        i.putExtra("key", keyList.get(position));
+        startActivity(i);
+    }
 }

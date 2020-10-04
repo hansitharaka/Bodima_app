@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +25,7 @@ public class HouseAdDetails extends AppCompatActivity {
     private DatabaseReference mDatabase;
 //    private FloatingActionButton viewform;
     private ImageView imageView;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class HouseAdDetails extends AppCompatActivity {
 
 
         final String key = getIntent().getStringExtra("key");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses").child(key);
         mDatabase.addValueEventListener(new ValueEventListener() {

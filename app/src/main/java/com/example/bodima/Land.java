@@ -12,11 +12,12 @@ public class Land {
     private String Phone;
     private String ImgUrl;
     private String mKey;
+    private String uId;
 
     public Land() {
     }
 
-    public Land(String title, String city, String landSize, String des, String amount, String name, String phone, String imgUrl) {
+    public Land(String title, String city, String landSize, String des, String amount, String name, String phone, String imgUrl, String mKey, String uId) {
         Title = title;
         City = city;
         LandSize = landSize;
@@ -25,6 +26,8 @@ public class Land {
         Name = name;
         Phone = phone;
         ImgUrl = imgUrl;
+        this.mKey = mKey;
+        this.uId = uId;
     }
 
     public String getTitle() {
@@ -89,6 +92,14 @@ public class Land {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
     @Exclude

@@ -23,10 +23,15 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -36,22 +41,24 @@ import com.google.firebase.storage.UploadTask;
 public class VehicleForm extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    EditText vehicleTitle,vehicleCity,brand,model,vehicleDesc,vehicleAmount,name,phone;
+    EditText Title,City,brand,model,Description,Amount,name,phone;
     Spinner spinnerCategory,spinnerCondtion,spinnerFuel;
     String vType, vCondition, vFuel;
     private ImageView img3;
     Button addImg,btnSave;
 
-    Vehicle vehicle;
-
     private Uri imgUri;
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    private String uId;
 
     private DatabaseReference mDatabase;
     private StorageReference storageRef;
     private StorageTask uploadTask;
+
+    //key variable
+    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +123,12 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
         vCondition = spinnerCondtion.getSelectedItem().toString();
         vFuel = spinnerFuel.getSelectedItem().toString();
 
-        vehicleTitle=findViewById(R.id.vehicleTitle);
-        vehicleCity=findViewById(R.id.vehicleCity);
+        Title=findViewById(R.id.vehicleTitle);
+        City=findViewById(R.id.vehicleCity);
         brand=findViewById(R.id.brand);
         model =findViewById(R.id.model);
-        vehicleDesc=findViewById(R.id.vehicleDescription);
-        vehicleAmount=findViewById(R.id.vehicleAmount);
+        Description=findViewById(R.id.vehicleDescription);
+        Amount=findViewById(R.id.vehicleAmount);
         name=findViewById(R.id.name);
         phone=findViewById(R.id.phone);
 
@@ -140,9 +147,11 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        vehicle = new Vehicle();
+        //get key
+        key = getIntent().getStringExtra("key");
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles");
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //btn save
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -152,16 +161,23 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
+        //if not null change to update
+        if (key != null) {
+            GetDataFromFirebase(key);
+            btnSave.setText("Update");
+
+            AddVehicle();
+        }
     }
 
     //TODO:Validation
     public boolean isValid(){
-      String vTitle = vehicleTitle.getText().toString();
-      String vCity= vehicleCity.getText().toString();
+      String vTitle = Title.getText().toString();
+      String vCity= City.getText().toString();
       String vBrand =brand.getText().toString();
       String Vmodel=model.getText().toString();
-      String vDesc=vehicleDesc.getText().toString();
-      String  vAmount=vehicleAmount.getText().toString();
+      String vDesc=Description.getText().toString();
+      String  vAmount=Amount.getText().toString();
       String Sname = name.getText().toString();
       String Sphone = phone.getText().toString();
       String vType = spinnerCategory.getSelectedItem().toString();
@@ -169,33 +185,33 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
       String vFuel = spinnerFuel.getSelectedItem().toString();
 
         if (TextUtils.isEmpty(vTitle)) {
-            vehicleTitle.setError("This field cannot be empty");
-            vehicleTitle.requestFocus();
+            Title.setError("This field cannot be empty");
+            Title.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(vCity)) {
-            vehicleCity.setError("This field cannot be empty");
-            vehicleCity.requestFocus();
+            City.setError("This field cannot be empty");
+            City.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(vDesc)) {
-            vehicleDesc.setError("This field cannot be empty");
-            vehicleDesc.requestFocus();
+            Description.setError("This field cannot be empty");
+            Description.requestFocus();
             return false;
 
         } else if (vDesc.length() < 10) {
-            vehicleDesc.setError("Description should have at least 10 characters");
-            vehicleDesc.requestFocus();
+            Description.setError("Description should have at least 10 characters");
+            Description.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(vAmount)) {
-            vehicleAmount.setError("This field cannot be empty");
-            vehicleAmount.requestFocus();
+            Amount.setError("This field cannot be empty");
+            Amount.requestFocus();
             return false;
 
         } else if (Integer.parseInt(vAmount) < 1000) {
-            vehicleAmount.setError("Amount should be at least Rs.1000");
-            vehicleAmount.requestFocus();
+            Amount.setError("Amount should be at least Rs.1000");
+            Amount.requestFocus();
             return false;
 
         } else if (TextUtils.isEmpty(vBrand)) {
@@ -311,42 +327,55 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
                                         Toast.makeText(VehicleForm.this, "No images selected", Toast.LENGTH_SHORT).show();
                                     }
 
+                                    Vehicle vehicle = new Vehicle();
+
                                     String vType = spinnerCategory.getSelectedItem().toString();
                                     String vCondition = spinnerCondtion.getSelectedItem().toString();
                                     String vFuel = spinnerFuel.getSelectedItem().toString();
 
-                                    vehicle.setTitle(vehicleTitle.getText().toString());
-                                    vehicle.setCity(vehicleCity.getText().toString());
+
+                                    vehicle.setTitle(Title.getText().toString());
+                                    vehicle.setCity(City.getText().toString());
                                     vehicle.setBrand(brand.getText().toString());
                                     vehicle.setModel(model.getText().toString());
-                                    vehicle.setDes(vehicleDesc.getText().toString());
-                                    vehicle.setAmount(vehicleAmount.getText().toString());
+                                    vehicle.setDes(Description.getText().toString());
+                                    vehicle.setAmount(Amount.getText().toString());
                                     vehicle.setName(name.getText().toString());
                                     vehicle.setPhone(phone.getText().toString());
                                     vehicle.setType(vType);
                                     vehicle.setCondition(vCondition);
                                     vehicle.setFuel(vFuel);
                                     vehicle.setImgUrl(String.valueOf(uri));
+                                    vehicle.setuId(uId);
 
-                                    mDatabase.push().setValue(vehicle).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            //if the upload is success, reset the progress bar to 0
-                                            Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    progBar.setProgress(0);
-                                                }
-                                            }, 500); //delays the progress by half seconds
-                                        }
-                                    });
+
+                                    if (key != null) {
+                                        mDatabase.child(key).setValue(vehicle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(VehicleForm.this, "Vehicle Data has been updated!!", Toast.LENGTH_LONG).show();
+
+                                                startActivity(new Intent(VehicleForm.this, VehicleAllAds.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(VehicleForm.this, "Error Occured: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else if (key == null) {
+                                        mDatabase.push().setValue(vehicle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(VehicleForm.this, "Vehicle Data inserted successfully!!", Toast.LENGTH_LONG).show();
+                                                startActivity(new Intent(VehicleForm.this, VehicleAllAds.class));
+                                            }
+                                        });
+                                    }
                                 }
                             });
-                            Toast.makeText(VehicleForm.this, "Vehicle Data inserted successfully!!", Toast.LENGTH_LONG).show();
-
-                            startActivity(new Intent(VehicleForm.this, VehicleAllAds.class));
                         }
+
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -367,4 +396,39 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
         }
     }
 
+    private void GetDataFromFirebase(String mKey) {
+
+        mDatabase.child(mKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Vehicle vehicle = snapshot.getValue(Vehicle.class);
+
+                if (vehicle != null) {
+                    Title.setText(vehicle.getTitle());
+                    City.setText(vehicle.getCity());
+                    brand.setText(vehicle.getBrand());
+                    model.setText(vehicle.getModel());
+                    Description.setText(vehicle.getDes());
+                    Amount.setText(vehicle.getAmount());
+//                    vType.setText(vehicle.getType());
+//                    vCondition.setText(vehicle.getCondition());
+//                    vFuel.setText(vehicle.getFuel());
+                    name.setText(vehicle.getName());
+                    phone.setText(vehicle.getPhone());
+                    img3.setImageURI(Uri.parse(vehicle.getImgUrl()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
 }
+
+

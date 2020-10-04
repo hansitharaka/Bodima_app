@@ -147,8 +147,18 @@
     <string name="name_here">Enter your name</string>
     <string name="search">Search</string>
     <string name="search_by_city">Search by City</string>
-    <string name="R_day">Day</string>
-    <string name="R_month">Month</string>
+    <string name="R_month">month</string>
+    <string name="R_day">day</string>
+    <string name="places">Places</string>
+    <string name="advertisments">Advertisments</string>
+    <string name="utilities">Utilities</string>
+    <string name="reminders">Reminders</string>
+    <string name="expense_tracker">Expense Tracker</string>
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="nav_open">Open NavigationDrawer</string>
+    <string name="nav_close">Close NavigationDrawer</string>
     <string-array name="category_array">
         <item>Payment</item>
         <item>Birthday</item>

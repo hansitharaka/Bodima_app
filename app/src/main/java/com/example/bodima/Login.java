@@ -113,7 +113,6 @@ public class Login extends AppCompatActivity {
 
                 }
 
-
                 if (Buyer.isChecked()) {
 
                     Loginfunction();
