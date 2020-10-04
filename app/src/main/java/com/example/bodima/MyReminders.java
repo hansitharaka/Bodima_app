@@ -1,8 +1,12 @@
 package com.example.bodima;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +14,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +23,7 @@ import android.widget.Toast;
 import com.example.bodima.Model.Reminders;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +37,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
-public class MyReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener {
+public class MyReminders extends AppCompatActivity implements ReminderHelperAdapter.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+
+    //variables
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     List<String> keyList;
     List<Reminders> reminders;
@@ -57,7 +68,32 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_reminders);
-        //setContentView(R.layout.activity_ratings_recyclerview);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* HOOKS */
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /* TOOLBAR */
+        setSupportActionBar(toolbar);
+        this.setTitle("My Reminders");
+
+        /* NAVIGATION */
+        navigationView.bringToFront();
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        //selected nav item
+        navigationView.setCheckedItem(R.id.nav_remind);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         final Intent intent = getIntent();
 
@@ -185,4 +221,53 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
             reminders = new ArrayList<>();
         }
     }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //menu items action
+        switch (item.getItemId()) {
+            case R.id.nav_places:
+                startActivity(new Intent(MyReminders.this, MyPlaces.class));
+                break;
+
+            case R.id.nav_ads:
+                startActivity(new Intent(MyReminders.this, AllAdvertisements.class));
+                break;
+
+            case R.id.nav_remind:
+                break;
+
+            case R.id.nav_expense:
+                startActivity(new Intent(MyReminders.this, Expenses_Dashboard.class));
+                break;
+
+            case R.id.nav_profile:
+                startActivity(new Intent(MyReminders.this, UserProfile.class));
+                break;
+
+            case R.id.nav_logout:
+                //logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MyReminders.this, Login.class));
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if back pressed while the navigation drawer is open, it will close the drawer
+        // instead of exiting from the app
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
+
 }
