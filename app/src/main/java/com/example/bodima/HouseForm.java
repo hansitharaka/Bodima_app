@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.bodima.Model.House;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,20 +41,21 @@ import java.util.List;
 public class HouseForm extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone;
+    private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone ;
     private Button addImg, btnSave;
     private ImageView img1;
-    private TextView alert;
+    private String uId;
+
     //image array
 
     private Uri imgUri;
     private LinearLayout imgLayout;
     private ProgressBar progBar;
     private int upload_count = 0;
+    //key variable
     private String key;
 
     List<House> houseArrayList = new ArrayList<>();
-
 
     FirebaseDatabase rootNode;
     private DatabaseReference mDatabase;
@@ -86,12 +89,14 @@ public class HouseForm extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         progBar = findViewById(R.id.progressBar);
 
+        //get key
         key = getIntent().getStringExtra("key");
 
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    //if not null change to update
         if (key != null) {
             GetDataFromFirebase(key);
             btnSave.setText("Update");
@@ -114,6 +119,8 @@ public class HouseForm extends AppCompatActivity {
         });
 
     }
+
+
 
 
     //validation
@@ -259,6 +266,7 @@ public class HouseForm extends AppCompatActivity {
                                     house.setBaths(BathsNo.getText().toString());
                                     house.setName(Name.getText().toString());
                                     house.setPhone(Phone.getText().toString());
+                                    house.setuId(uId);
                                     house.setImgUrl(String.valueOf(uri));
                                     // mDatabase.push().setValue(house);
 
@@ -309,7 +317,6 @@ public class HouseForm extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -350,10 +357,7 @@ public class HouseForm extends AppCompatActivity {
                     Name.setText(house.getName());
                     Phone.setText(house.getPhone());
                     img1.setImageURI(Uri.parse(house.getImgUrl()));
-
                 }
-
-
             }
 
             @Override

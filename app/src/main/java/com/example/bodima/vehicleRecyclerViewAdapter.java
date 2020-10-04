@@ -1,7 +1,10 @@
 package com.example.bodima;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ public class vehicleRecyclerViewAdapter extends RecyclerView.Adapter<vehicleRecy
 
     private Context mContext;
     private List<Vehicle> vehicleArrayList;
+    private OnItemClickListener mListener;
 
     public vehicleRecyclerViewAdapter(Context context, List<Vehicle> vehicleArrayList){
         this.mContext =context;
@@ -59,7 +63,8 @@ public class vehicleRecyclerViewAdapter extends RecyclerView.Adapter<vehicleRecy
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         //widgets
         TextView Title,City,Amount,Type;
         //image add
@@ -74,10 +79,67 @@ public class vehicleRecyclerViewAdapter extends RecyclerView.Adapter<vehicleRecy
             Type=itemView.findViewById(R.id.vehcileType);
             Amount=itemView.findViewById(R.id.VehiclePrice);
 
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
+
+        }
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem edit = menu.add(Menu.NONE, 1, 1, "Edit");
+            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+
+            edit.setOnMenuItemClickListener(this);
+            delete.setOnMenuItemClickListener(this);
 
         }
 
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(position);
+                }
+            }
+        }
+
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    switch (item.getItemId()) {
+                        case 1:
+                            mListener.onEditClick(position);
+                            return true;
+                        case 2:
+                            mListener.onDeleteClick(position);
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+
+        void onDeleteClick(int position);
+
+        void onEditClick(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
 }
+
+
+
