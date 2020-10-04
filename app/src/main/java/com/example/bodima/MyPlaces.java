@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.example.bodima.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -46,11 +48,15 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
     private FirebaseStorage mStorage;
     private DatabaseReference mreff;
+    DatabaseReference user;
     private FirebaseUser currentUser;
 
     private FloatingActionButton floatingActionButton;
     private Button bSearch;
     private EditText searchText;
+
+    private String utype;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,10 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         mreff = FirebaseDatabase.getInstance().getReference("Places");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //get from user node
+        userId = currentUser.getUid();
+        user = FirebaseDatabase.getInstance().getReference("User").child(userId);
+
         //ArrayList
         placeArrayList = new ArrayList<>();
 
@@ -82,11 +92,10 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.setOnItemClickListener(MyPlaces.this);
 
-        //Clear
-        ClearAll();
 
-        //Get Data
-        GetDataFromFirebase();
+        //get current user type
+        GetCurrentUserType();
+
 
         //floatingAction button
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +133,39 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
     }
 
+    private void GetCurrentUserType() {
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    utype = user.getType();
+
+                    if (utype.equals("seller")) {
+
+                        ClearAll();
+                        GetSellerDataFromDatabase();
+
+                    } else if (utype.equals("buyer")) {
+
+                        ClearAll();
+                        GetDataFromFirebase();
+                        floatingActionButton.setVisibility(View.GONE);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("GetUserType", error.getMessage());
+            }
+
+        });
+
+    }
+
+    //search function
     private void searchCity(String city) {
         mreff.orderByChild("city").equalTo(city).addValueEventListener(new ValueEventListener() {
             @Override
@@ -149,6 +191,33 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         });
     }
 
+    //retrieve method for seller
+    private void GetSellerDataFromDatabase() {
+        mreff.orderByChild("uid").equalTo(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    ClearAll();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Place place = dataSnapshot.getValue(Place.class);
+                        keyList.add(dataSnapshot.getKey());
+                        placeArrayList.add(place);
+                    }
+                    recyclerAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(MyPlaces.this, "No item found", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    //retrieve method for buyer
     private void GetDataFromFirebase() {
         mreff.addValueEventListener(new ValueEventListener() {
             @Override
