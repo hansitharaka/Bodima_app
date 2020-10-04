@@ -96,7 +96,7 @@
     <string name="name">Name</string>
     <string name="password_confirm">Confirm password</string>
     <string name="register">Register</string>
-    <string name="update">Update</string>
+    <string name="update">Save</string>
     <string name="placename">Place name</string>
     <string name="review">Enter yout review here...</string>
     <string name="review_warning">*Please note that your reviews are visible for all users</string>

@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity {
 
     String Emailin;
     String Pwdin;
+    String CurrentUser;
 
     RadioButton Buyer;
     RadioButton Seller;
@@ -41,7 +42,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-  
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class Login extends AppCompatActivity {
 
         Buyer = findViewById(R.id.buyer);
         Seller = findViewById(R.id.seller);
-      
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         mdialog = new ProgressDialog(this);
@@ -103,62 +104,66 @@ public class Login extends AppCompatActivity {
                 }
 
 
-                mdialog.setMessage("Processing....");
-                mdialog.show();
-
-
-                firebaseAuth.signInWithEmailAndPassword(Emailin, Pwdin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            mdialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(), AllAdvertisements.class));
-                            Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
-                        } else {
-                            mdialog.dismiss();
-                            Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-
                 if (Seller.isChecked()) {
+
+                    Loginfunction();
                     rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("Type");
-                    reference.setValue("seller");
-                }
-                if (Buyer.isChecked()) {
-                    rootNode = FirebaseDatabase.getInstance();
-                    reference = rootNode.getReference("Type");
-                    reference.setValue("buyer");
+                    reference = rootNode.getReference("User");
+                    reference.child(CurrentUser).child("type").setValue("seller");
+
                 }
 
+                if (Buyer.isChecked()) {
+
+                    Loginfunction();
+
+                    rootNode = FirebaseDatabase.getInstance();
+                    reference = rootNode.getReference("User");
+                    reference.child(CurrentUser).child("type").setValue("buyer");
+
+
+                }
+                if (!(Seller.isChecked()) && (!(Buyer.isChecked()))) {
+                    Toast.makeText(Login.this, "select user type", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
+        });
+    }
+
+    public void Loginfunction() {
 
 
+        mdialog.setMessage("Processing....");
+        mdialog.show();
 
 
+        firebaseAuth.signInWithEmailAndPassword(Emailin, Pwdin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+
+                    mdialog.dismiss();
+                    startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
+                    Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
+                } else {
+                    mdialog.dismiss();
+                    Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
 
 
+            }
         });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            CurrentUser = user.getUid();
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
 
-
-//
-//        rootNode = FirebaseDatabase.getInstance();
-//        reference=rootNode.getReference("User");
-//
-//
-//
-//
-//
-//
-//        reference.setValue("first data");
-
+        }
 
     }
 }
+

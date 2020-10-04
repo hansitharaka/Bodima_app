@@ -120,16 +120,18 @@ public class AddReminder extends AppCompatActivity implements AdapterView.OnItem
                     if(categoryText.equals("Payment")){
                         database.child("Payment").push().setValue(reminders);
                         Toast.makeText(AddReminder.this, "Successfully Added the Payment Reminder", Toast.LENGTH_SHORT).show();
+                        startActivity((new Intent(AddReminder.this, MyReminders.class)));
                     }
                     else if(categoryText.equals("Birthday")){
                         database.child("Birthday").push().setValue(reminders);
                         Toast.makeText(AddReminder.this, "Successfully Added the Birthday Reminder", Toast.LENGTH_SHORT).show();
+                        startActivity((new Intent(AddReminder.this, BirthdayReminders.class)));
                     }
                     else {
                         database.child("Other").push().setValue(reminders);
                         Toast.makeText(AddReminder.this, "Successfully Added the Other Reminder", Toast.LENGTH_SHORT).show();
+                        startActivity((new Intent(AddReminder.this, OtherReminders.class)));
                     }
-                    startActivity((new Intent(AddReminder.this, MyReminders.class)));
                 }
             }
         });

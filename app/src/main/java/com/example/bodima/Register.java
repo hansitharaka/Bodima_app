@@ -60,7 +60,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Login.class);
+//                overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 startActivity(intent);
+                finish();
 
 
 
@@ -71,7 +74,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Register.class);
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 startActivity(intent);
+                finish();
 
 
 
