@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
-import com.example.bodima.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Continuation;
@@ -64,15 +62,11 @@ public class AddPlaceForm extends AppCompatActivity {
     private int upload_count = 0;
     private String key;
 
-    private String userId;
-    private String type;        //TODO: Get usertype from db; this method goes to MyPlaces.java
-
     List<Place> placeArrayList = new ArrayList<>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
     DatabaseReference mReff;
-    DatabaseReference user;
     StorageReference storageRef;
     FirebaseUser currentUser;
     private StorageTask uploadTask;
@@ -86,10 +80,6 @@ public class AddPlaceForm extends AppCompatActivity {
         mReff = FirebaseDatabase.getInstance().getReference().child("Places");
         storageRef = FirebaseStorage.getInstance().getReference("Images");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        userId = currentUser.getUid();
-        user = FirebaseDatabase.getInstance().getReference("User").child(userId);
-
 
         //initialize
         username = (TextView) findViewById(R.id.username);
@@ -113,9 +103,9 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
         //Loading current user username and current date to the form
-        GetCurrentUserName();
-
-
+        pUsername = "Thomas Jeff";
+        username.setText(pUsername);
+        //TODO: change the dummy pUsername; it should be received by the user profile
 
         date.setText(DateFormat.getDateInstance().format(new Date()));
 
@@ -147,29 +137,9 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
     }
-
-    private void GetCurrentUserName() {
-        user.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if (user != null) {
-                    pUsername = user.getName();
-                    username.setText(pUsername);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("GetCurrentUsername", error.getMessage());
-            }
-        });
-
-
-    }
-
+  
     private boolean isValid() {
-        pUid = userId;
+        pUid = "Ghgsc52s1f1S";
         pDate = DateFormat.getDateInstance().format(new Date());
         pTitle = title.getText().toString().trim();
         pDesc = desc.getText().toString().trim();
@@ -294,7 +264,7 @@ public class AddPlaceForm extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
-                                    if (uri == null) {
+                                    if(uri == null) {
                                         Toast.makeText(AddPlaceForm.this, "No images selected", Toast.LENGTH_SHORT).show();
                                     }
 
@@ -365,10 +335,9 @@ public class AddPlaceForm extends AppCompatActivity {
             //TODO: user uid or phone number must be used instead of username as child(pUsername)
 
 
-        }
-    }
+        }}
 
-    private void GetDataFromFirebase(String mKey) {
+  private void GetDataFromFirebase(String mKey) {
 
         mReff.child(mKey).addValueEventListener(new ValueEventListener() {
             @Override
@@ -388,7 +357,7 @@ public class AddPlaceForm extends AppCompatActivity {
                 img1.setImageURI(Uri.parse(place.getImgUrl()));
             }
 
-            @Override
+          @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
