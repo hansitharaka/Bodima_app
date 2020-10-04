@@ -146,7 +146,7 @@ public class Login extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     mdialog.dismiss();
-                    startActivity(new Intent(getApplicationContext(), Expenses_Dashboard.class));
+                    startActivity(new Intent(getApplicationContext(), MyPlaces.class));
                     Toast.makeText(Login.this, "Logged in", Toast.LENGTH_SHORT).show();
                 } else {
                     mdialog.dismiss();
