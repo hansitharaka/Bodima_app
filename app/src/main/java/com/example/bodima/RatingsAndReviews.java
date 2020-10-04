@@ -47,8 +47,6 @@ public class RatingsAndReviews extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratings_recyclerview);
 
-        //TODO: pass KEY from place details page to here
-
         Intent intent = getIntent();
 
         recyclerView = findViewById(R.id.recylerView);

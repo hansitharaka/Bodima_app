@@ -16,20 +16,34 @@ public class User {
     private String Name;
     private String Email;
     private String Password;
-    private String phone;
-    private String id;
-    private String type;
+    private  String  phone;
 
-    public User() {
+    public String getId() {
+        return id;
     }
 
-    public User(String name, String email, String password, String phone, String id, String type) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private  String id;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public User(){
+
+    }
+
+    public User(String name, String email, String password) {
         Name = name;
         Email = email;
         Password = password;
-        this.phone = phone;
-        this.id = id;
-        this.type = type;
     }
 
     public String getName() {
@@ -56,27 +70,54 @@ public class User {
         Password = password;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public static class ExpensesHistory extends AppCompatActivity {
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
 
-    public String getType() {
-        return type;
-    }
+            TextView AmountView;
+            TextView TypeView;
+            TextView DateView;
 
-    public void setType(String type) {
-        this.type = type;
+            String Amount;
+            String Type_;
+            String Date;
+
+
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_expenses_history);
+
+
+            Intent intent = getIntent();
+
+            AmountView = findViewById(R.id.amount_ex_text);
+            TypeView = findViewById(R.id.type);
+            DateView = findViewById(R.id.date_expense);
+
+
+            // view data using intent
+
+
+    //        Amount = AmountView.getText().toString();
+
+    //        AmountView.setText(intent.getStringExtra("AmountEnter"));
+    //        TypeView.setText(intent.getStringExtra("Type_in"));
+    //
+    ////        DateView.setText("");
+    //        DateView.setText(intent.getStringExtra("DateAndTime"));
+    // Write a message to the database
+
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Amount");
+
+            myRef.setValue("hello");
+
+
+        }
+
+
     }
 }
