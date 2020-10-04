@@ -4,26 +4,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_rounded"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".AreaCalculation" />
-        <activity android:name=".TypeSelector" />
-        <activity android:name=".Login">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ExpensesHistory" />
-
         <activity android:name=".VehicleAllAds" />
         <activity android:name=".LandAllAds" />
-
         <activity android:name=".LandForm" />
         <activity android:name=".VehicleForm" />
         <activity android:name=".HouseForm" />
@@ -31,21 +25,30 @@
         <activity android:name=".AllAdvertisements" />
         <activity android:name=".OtherReminders" />
         <activity android:name=".BirthdayReminders" />
-        <activity android:name=".LandAdDetails" />
+        <activity android:name=".AreaCalculation" />
+        <activity android:name=".TypeSelector" />
+        <activity
+            android:name=".LandAdDetails"
+            android:parentActivityName=".LandAllAds" />
         <activity android:name=".Register" />
-        <activity android:name=".HouseAdDetails" />
+        <activity android:name=".HouseAdDetails"
+            android:parentActivityName=".AllAdvertisements" />
         <activity android:name=".AddReview" />
         <activity android:name=".AddReminder" />
         <activity android:name=".RatingsAndReviews" />
         <activity android:name=".UserProfile" />
-        <activity android:name=".MyPlaces" />
-        <activity android:name=".Vehicle_Ad_Details" />
-        <activity android:name=".WelcomPage" />
+        <activity android:name=".ExpensesHistory" />
+        <activity android:name=".MyPlaces"/>
+        <activity
+            android:name=".Vehicle_Ad_Details"
+            android:parentActivityName=".VehicleAllAds" />
+        <activity android:name=".WelcomPage"/>
         <activity android:name=".MyReminders" />
         <activity android:name=".Expenses_Dashboard" />
-
-
-        <activity android:name=".place_details" />
+        <activity android:name=".Login" />
+        <activity
+            android:name=".place_details"
+            android:parentActivityName=".MyPlaces" />
     </application>
 
 </manifest>
