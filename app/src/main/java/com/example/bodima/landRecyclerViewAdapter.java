@@ -67,7 +67,6 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
             implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
         //widgets
         TextView Title,City,Amount,LandSize;
-        //TODO:image add
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {

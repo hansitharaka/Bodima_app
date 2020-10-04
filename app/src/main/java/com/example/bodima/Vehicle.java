@@ -1,5 +1,7 @@
 package com.example.bodima;
 
+import com.google.firebase.database.Exclude;
+
 public class Vehicle {
     private String Title;
     private String City;
@@ -13,11 +15,13 @@ public class Vehicle {
     private String Name;
     private String Phone; //TODO:make phone type string in other models
     private String ImgUrl;
+    private String mKey;
+    private String uId;
 
     public Vehicle() {
     }
 
-    public Vehicle(String title, String city, String type, String condition, String fuel, String brand, String model, String des, String amount, String name, String phone, String imgUrl) {
+    public Vehicle(String title, String city, String type, String condition, String fuel, String brand, String model, String des, String amount, String name, String phone, String imgUrl, String mKey, String uId) {
         Title = title;
         City = city;
         Type = type;
@@ -30,6 +34,8 @@ public class Vehicle {
         Name = name;
         Phone = phone;
         ImgUrl = imgUrl;
+        this.mKey = mKey;
+        this.uId = uId;
     }
 
     public String getTitle() {
@@ -126,5 +132,24 @@ public class Vehicle {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    @Exclude
+    public String getmKey() {
+
+        return mKey;
+    }
+    @Exclude
+    public void setmKey(String mKey)
+    {
+        this.mKey = mKey;
     }
 }

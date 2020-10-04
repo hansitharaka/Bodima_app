@@ -29,11 +29,13 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
     private RecyclerView recyclerView; //TODO: Not sure if this is the right place to put the
     private List<Land> landArrayList;
     private List<String> keyList;
-    private Land land;
+
+    //private Land land;
     private landRecyclerViewAdapter recyclerAdapter;
 
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
+
     //firebase
     private DatabaseReference mDatabase;
     private FirebaseStorage mStorage;
@@ -49,6 +51,7 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
 
+        //button float
         viewform = findViewById(R.id.floatCall);
 
         //layout
@@ -59,9 +62,9 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
         //database
         mDatabase= FirebaseDatabase.getInstance().getReference("Advertisements");
         mStorage= FirebaseStorage.getInstance();
+
         //ArrayList
         landArrayList= new ArrayList<>();
-
         keyList=new ArrayList<>();
 
         recyclerAdapter= new landRecyclerViewAdapter(getApplicationContext(), landArrayList);
@@ -114,7 +117,7 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
                 ClearAll();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-                    land = dataSnapshot.getValue(Land.class);
+                    Land land = dataSnapshot.getValue(Land.class);
                     landArrayList.add(land);
 //                    recyclerAdapter = new landRecyclerViewAdapter(getApplicationContext(),landArrayList);
 //                    recyclerView.setAdapter(recyclerAdapter);
@@ -162,7 +165,7 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
             @Override
             public void onSuccess(Void aVoid) {
 
-                mDatabase.child(selectedKey).removeValue();
+                mDatabase.child("Lands").child(selectedKey).removeValue();
                 Toast.makeText(LandAllAds.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
                 overridePendingTransition(0, 0);
