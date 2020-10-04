@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.bodima.Model.Land;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerViewAdapter.ViewHolder> {
@@ -24,7 +24,7 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
     private List<Land> landArrayList;
     private OnItemClickListener mListener;
 
-    public landRecyclerViewAdapter(Context context, List<Land> landArrayList){
+    public landRecyclerViewAdapter(Context context,List<Land> landArrayList){
         this.mContext =context;
         this.landArrayList = landArrayList;
 
@@ -67,7 +67,6 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
             implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
         //widgets
         TextView Title,City,Amount,LandSize;
-        //TODO:image add
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {

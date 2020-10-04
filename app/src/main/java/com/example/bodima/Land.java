@@ -1,35 +1,28 @@
-package com.example.bodima.Model;
+package com.example.bodima;
 
 import com.google.firebase.database.Exclude;
 
-public class House {
+public class Land {
     private String Title;
     private String City;
-    private String Size;
     private String LandSize;
     private String Des;
     private String Amount;
-    private String Beds;
-    private String Baths;
     private String Name;
     private String Phone;
     private String ImgUrl;
     private String mKey;
     private String uId;
 
-
-    public House() {
+    public Land() {
     }
 
-    public House(String title, String city, String size, String landSize, String des, String amount, String beds, String baths, String name, String phone, String imgUrl, String mKey, String uId) {
+    public Land(String title, String city, String landSize, String des, String amount, String name, String phone, String imgUrl, String mKey, String uId) {
         Title = title;
         City = city;
-        Size = size;
         LandSize = landSize;
         Des = des;
         Amount = amount;
-        Beds = beds;
-        Baths = baths;
         Name = name;
         Phone = phone;
         ImgUrl = imgUrl;
@@ -51,14 +44,6 @@ public class House {
 
     public void setCity(String city) {
         City = city;
-    }
-
-    public String getSize() {
-        return Size;
-    }
-
-    public void setSize(String size) {
-        Size = size;
     }
 
     public String getLandSize() {
@@ -83,22 +68,6 @@ public class House {
 
     public void setAmount(String amount) {
         Amount = amount;
-    }
-
-    public String getBeds() {
-        return Beds;
-    }
-
-    public void setBeds(String beds) {
-        Beds = beds;
-    }
-
-    public String getBaths() {
-        return Baths;
-    }
-
-    public void setBaths(String baths) {
-        Baths = baths;
     }
 
     public String getName() {

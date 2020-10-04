@@ -20,58 +20,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--   Image Slider   -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/imgslider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <!--   Image  -->
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPagerHouse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="350dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/dimgray"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <!--    Add following attributes of ImageView to fit image to screen
-                                adjustViewBounds="true"
-                                scaleType="centerCrop"-->
-
-                    <!--connected with custom_layout_imgs lider-->
-
-
-                </androidx.viewpager.widget.ViewPager>
-
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:alpha="0.4"
-                    android:background="@color/black"
-                    android:paddingStart="15dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/imgCount"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="@+id/viewPagerHouse"
-                    app:layout_constraintEnd_toEndOf="@+id/viewPagerHouse"
-                    app:layout_constraintTop_toTopOf="@+id/viewPagerHouse"
-                    app:layout_constraintVertical_bias="0.0" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--****************************************************************************************************************************************************************-->
 
             <!--   Title   -->
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:adjustViewBounds="true"
+                android:background="@color/dimgray"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <!--    Add following attributes of ImageView to fit image to screen
+                                adjustViewBounds="true"
+                                scaleType="centerCrop"-->
+
+                <!--connected with custom_layout_imgs lider-->
+
+
+            </ImageView>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutTitle"
                 android:layout_width="match_parent"
@@ -95,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/bold"
-                        android:text="@string/ad_title_display"
+                        android:text="House for Sale"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25sp"
                         app:autoSizeTextType="uniform"
@@ -169,47 +143,211 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--   Size   -->
+            <!--   Facilities   -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutLand"
+                android:id="@+id/layoutFacility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_section_layout"
                 android:padding="24dp">
 
                 <LinearLayout
-                    android:id="@+id/linearLand"
+                    android:id="@+id/linearFacilities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/labelLand"
+                    <LinearLayout
+                        android:id="@+id/verticalLinear1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/medium"
-                        android:text="@string/land_s_label"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
-                        app:autoSizeTextType="uniform" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtLandSize"
+                        <LinearLayout
+                            android:id="@+id/Beds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtBedsNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/bold"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/beds_no"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="25sp"
+                                app:autoSizeTextType="uniform" />
+
+                            <TextView
+                                android:id="@+id/txtBeds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/medium"
+                                android:text="@string/beds_label"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"
+                                app:autoSizeTextType="uniform" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/verticalLine"
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/divider" />
+
+                        <LinearLayout
+                            android:id="@+id/Baths"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtBathsNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/bold"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/baths_no"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="25sp"
+                                app:autoSizeTextType="uniform" />
+
+                            <TextView
+                                android:id="@+id/txtBaths"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/medium"
+                                android:text="@string/baths_label"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"
+                                app:autoSizeTextType="uniform" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--   Sizes   -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutSizes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_section_layout"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:id="@+id/linearSizes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/verticaS1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="@string/ad_land_size"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="25sp"
-                        app:autoSizeTextType="uniform" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/HouseSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtHouseSize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/bold"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/house_size"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="25sp"
+                                app:autoSizeTextType="uniform" />
+
+                            <TextView
+                                android:id="@+id/txtSizeHouse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/medium"
+                                android:text="House Size (Sqft)"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"
+                                app:autoSizeTextType="uniform" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/verticalS2"
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/divider" />
+
+                        <LinearLayout
+                            android:id="@+id/LandSIze"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtLandSize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/bold"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:text="@string/land_size"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="25sp"
+                                app:autoSizeTextType="uniform" />
+
+                            <TextView
+                                android:id="@+id/txtSizeLand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/medium"
+                                android:text="Land Size (Ph)"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp"
+                                app:autoSizeTextType="uniform" />
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -331,7 +469,7 @@
 
                         <TextView
                             android:id="@+id/phone"
-                            android:layout_width="50dp"
+                            android:layout_width="55dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:paddingTop="10dp"

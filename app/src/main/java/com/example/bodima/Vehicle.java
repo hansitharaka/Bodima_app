@@ -1,35 +1,36 @@
-package com.example.bodima.Model;
+package com.example.bodima;
 
 import com.google.firebase.database.Exclude;
 
-public class House {
+public class Vehicle {
     private String Title;
     private String City;
-    private String Size;
-    private String LandSize;
+    private String Type;
+    private String Condition;
+    private String Fuel;
+    private String Brand;
+    private String Model;
     private String Des;
     private String Amount;
-    private String Beds;
-    private String Baths;
     private String Name;
-    private String Phone;
+    private String Phone; //TODO:make phone type string in other models
     private String ImgUrl;
     private String mKey;
     private String uId;
 
-
-    public House() {
+    public Vehicle() {
     }
 
-    public House(String title, String city, String size, String landSize, String des, String amount, String beds, String baths, String name, String phone, String imgUrl, String mKey, String uId) {
+    public Vehicle(String title, String city, String type, String condition, String fuel, String brand, String model, String des, String amount, String name, String phone, String imgUrl, String mKey, String uId) {
         Title = title;
         City = city;
-        Size = size;
-        LandSize = landSize;
+        Type = type;
+        Condition = condition;
+        Fuel = fuel;
+        Brand = brand;
+        Model = model;
         Des = des;
         Amount = amount;
-        Beds = beds;
-        Baths = baths;
         Name = name;
         Phone = phone;
         ImgUrl = imgUrl;
@@ -53,20 +54,44 @@ public class House {
         City = city;
     }
 
-    public String getSize() {
-        return Size;
+    public String getType() {
+        return Type;
     }
 
-    public void setSize(String size) {
-        Size = size;
+    public void setType(String type) {
+        Type = type;
     }
 
-    public String getLandSize() {
-        return LandSize;
+    public String getCondition() {
+        return Condition;
     }
 
-    public void setLandSize(String landSize) {
-        LandSize = landSize;
+    public void setCondition(String condition) {
+        Condition = condition;
+    }
+
+    public String getFuel() {
+        return Fuel;
+    }
+
+    public void setFuel(String fuel) {
+        Fuel = fuel;
+    }
+
+    public String getBrand() {
+        return Brand;
+    }
+
+    public void setBrand(String brand) {
+        Brand = brand;
+    }
+
+    public String getModel() {
+        return Model;
+    }
+
+    public void setModel(String model) {
+        Model = model;
     }
 
     public String getDes() {
@@ -83,22 +108,6 @@ public class House {
 
     public void setAmount(String amount) {
         Amount = amount;
-    }
-
-    public String getBeds() {
-        return Beds;
-    }
-
-    public void setBeds(String beds) {
-        Beds = beds;
-    }
-
-    public String getBaths() {
-        return Baths;
-    }
-
-    public void setBaths(String baths) {
-        Baths = baths;
     }
 
     public String getName() {

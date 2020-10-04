@@ -19,7 +19,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
+import static com.example.bodima.R.id.signin;
+import static com.example.bodima.R.id.signup;
 
 public class Register extends AppCompatActivity {
 
@@ -59,7 +60,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Login.class);
+//                overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 startActivity(intent);
+                finish();
 
 
 
@@ -70,7 +74,10 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Register.class);
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 startActivity(intent);
+                finish();
 
 
 
@@ -91,7 +98,6 @@ public class Register extends AppCompatActivity {
             public void onClick(final View view) {
                 Emailin = Email.getText().toString();
                 Pwdin = Pwd.getText().toString();
-
 
                 if (Emailin.isEmpty()) {
                     Email.setError("Enter email");
@@ -119,7 +125,6 @@ public class Register extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
 
                                     } else {
-
                                         startActivity(new Intent(Register.this, UserProfile.class));
                                         finish();
 
@@ -133,5 +138,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
     }
 }

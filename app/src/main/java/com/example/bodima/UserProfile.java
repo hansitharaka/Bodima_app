@@ -9,6 +9,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +58,6 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,16 +129,19 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
                 userprofile = new User();
 
+
+                userprofile.setId(CurrentUser);
+                name = Username.getText().toString();
+                phone = PhoneNumber.getText().toString();
+
+
                 userprofile.setName(name);
                 userprofile.setEmail(mail);
                 userprofile.setPhone(phone);
-                userprofile.setId(CurrentUser);
 
-                name = Username.getText().toString();
-                phone = PhoneNumber.getText().toString();
                 databaseReference.child(CurrentUser).setValue(userprofile);
 
-                Intent intent = new Intent(UserProfile.this, Expenses_Dashboard.class);
+                Intent intent = new Intent(UserProfile.this, AllAdvertisements.class);
                 startActivity(intent);
 
             }
