@@ -1,6 +1,4 @@
 package com.example.bodima;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;

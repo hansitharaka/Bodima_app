@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgdark"
+    tools:context=".VehicleAllAds">
+
+    <!--    Floating Add Button   -->
+    <!-- According to currently active tab, floating button will direct to the relevant page -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPink"
+        android:clickable="true"
+        android:contentDescription="@string/add_advertisement"
+        android:focusable="true"
+        android:rotationY="180"
+        android:tint="@color/colorPrimaryDark"
+        app:elevation="6dp"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/plusicon" />
+
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <LinearLayout
+            android:id="@+id/tabAds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toTopOf="@id/usertype"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/house"
+                android:id="@+id/btnHouse"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/lands"
+                android:id="@+id/btnLand"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/vehicle"
+                android:id="@+id/btnVehicle"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabLayout"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

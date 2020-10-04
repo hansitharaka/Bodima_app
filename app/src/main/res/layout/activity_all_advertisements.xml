@@ -27,391 +27,75 @@
         app:maxImageSize="30dp"
         app:srcCompat="@drawable/plusicon" />
 
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <LinearLayout
+            android:id="@+id/tabAds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toTopOf="@id/usertype"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/house"
+                android:id="@+id/btnHouse"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/lands"
+                android:id="@+id/btnLand"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/vehicle"
+                android:id="@+id/btnVehicle"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true">
+        android:layout_below="@+id/tabLayout"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp">
 
-        <LinearLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabAds"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
-                app:tabIndicator="@drawable/button"
-                app:tabIndicatorColor="@color/colorPink"
-                app:tabIndicatorGravity="stretch"
-                app:tabSelectedTextColor="@color/colorPrimaryDark"
-                app:tabTextColor="@color/gray">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/house" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lands" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vehicle" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <!--House Ad-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/ashyPurple"
-                android:clickable="true"
-                android:orientation="vertical"
-                app:cardCornerRadius="20dp"
-                android:focusable="true">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constrain_house"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imgHouseAd"
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:adjustViewBounds="true"
-                        android:background="@color/colorPrimaryDark"
-                        android:contentDescription="@string/placeimg"
-                        android:elevation="10dp"
-                        android:scaleType="fitXY"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@drawable/img2" />
-
-                    <LinearLayout
-                        android:id="@+id/house_card"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgHouseAd"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <!-- Title -->
-                        <TextView
-                            android:id="@+id/houseTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:text="@string/ad_title_display"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-
-                        <!-- City -->
-                        <TextView
-                            android:id="@+id/houseCity"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/medium"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:text="@string/city_name"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
-
-                        <!-- Facility -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp">
-
-                            <TextView
-                                android:id="@+id/beds2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableStart="@drawable/bed"
-                                android:drawablePadding="10dp"
-                                android:gravity="center_vertical"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="5dp"
-                                android:text="@string/house_beds_no"
-                                android:textAlignment="gravity"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                app:autoSizeTextType="uniform" />
-
-                            <TextView
-                                android:id="@+id/baths2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableStart="@drawable/bath"
-                                android:drawablePadding="10dp"
-                                android:gravity="center_vertical"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="5dp"
-                                android:text="@string/house_baths_no"
-                                android:textAlignment="gravity"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                app:autoSizeTextType="uniform" />
-                        </LinearLayout>
-
-                        <!-- Price -->
-                        <TextView
-                            android:id="@+id/housePrice"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:padding="10dp"
-                            android:text="@string/price"
-                            android:textColor="@color/colorPink"
-                            android:textSize="18sp" />
-
-
-                    </LinearLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!--Land Ad-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/ashyPurple"
-                android:orientation="vertical"
-                app:cardCornerRadius="20dp"
-                android:layout_marginBottom="20dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constrain_lands"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imgLandAd"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:background="@color/colorPrimaryDark"
-                        android:contentDescription="@string/placeimg"
-                        android:elevation="10dp"
-                        android:scaleType="centerCrop"
-                        android:layout_margin="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@drawable/img3" />
-
-                    <LinearLayout
-                        android:id="@+id/land_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgLandAd"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <!-- Title -->
-                        <TextView
-                            android:id="@+id/landTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/ad_title_land"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-
-                        <!-- City -->
-                        <TextView
-                            android:id="@+id/landCity"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/medium"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/city_name"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
-
-                        <!-- Land Size -->
-                        <TextView
-                            android:id="@+id/landSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/medium"
-                            android:padding="10dp"
-                            android:text="@string/ad_land_size"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="15sp" />
-
-                        <!-- Price -->
-                        <TextView
-                            android:id="@+id/landPrice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:padding="10dp"
-                            android:text="@string/land_price"
-                            android:textColor="@color/colorPink"
-                            android:textSize="18sp" />
-
-
-                    </LinearLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!--Vehicle Ad-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/ashyPurple"
-                android:orientation="vertical"
-                app:cardCornerRadius="20dp"
-                android:layout_marginBottom="20dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constrain_vehicle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imgVehicleAd"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:background="@color/colorPrimaryDark"
-                        android:contentDescription="@string/placeimg"
-                        android:elevation="10dp"
-                        android:scaleType="centerCrop"
-                        android:layout_margin="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:srcCompat="@drawable/img1" />
-
-                    <LinearLayout
-                        android:id="@+id/vehicle_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgVehicleAd"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <!-- Title -->
-                        <TextView
-                            android:id="@+id/vehicleTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/ad_vehicle_display"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-
-                        <!-- City -->
-                        <TextView
-                            android:id="@+id/vehicleCity"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/medium"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/city_name"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
-
-                        <!-- Vehicle Type -->
-                        <TextView
-                            android:id="@+id/vehcileType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/medium"
-                            android:padding="10dp"
-                            android:text="@string/v_type"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="15sp" />
-
-                        <!-- Price -->
-                        <TextView
-                            android:id="@+id/VehiclePrice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/bold"
-                            android:padding="10dp"
-                            android:text="@string/price_vehicle"
-                            android:textColor="@color/colorPink"
-                            android:textSize="18sp" />
-
-
-                    </LinearLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
     </ScrollView>
+
+
 
 
 </RelativeLayout>
