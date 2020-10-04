@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AllAdvertisements">
+    tools:context=".LandAllAds">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -21,10 +21,10 @@
         android:layout_height="wrap_content"
         android:background="@color/bgdarkPurple">
 
-        <!--        Toolbar-->
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
+
 
         <!--    Floating Add Button   -->
         <!-- According to currently active tab, floating button will direct to the relevant page -->
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
+                    android:background="#00000000"
                     android:backgroundTint="@color/colorPink"
                     android:text="@string/house"
                     android:textColor="@color/colorPrimaryDark" />
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00000000"
+                    android:background="@drawable/button"
                     android:backgroundTint="@color/colorPink"
                     android:text="@string/lands"
                     android:textColor="@color/colorPrimaryDark" />
@@ -113,6 +113,7 @@
                 android:layout_height="wrap_content" />
 
         </ScrollView>
+
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

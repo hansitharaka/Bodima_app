@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AllAdvertisements">
+    tools:context=".VehicleAllAds">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:background="@color/bgdarkPurple">
 
-        <!--        Toolbar-->
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
@@ -48,52 +47,52 @@
 
         <LinearLayout
             android:id="@+id/tabLayout"
-            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:layout_below="@id/toolbar">
 
 
             <LinearLayout
                 android:id="@+id/tabAds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/usertype"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnHouse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:backgroundTint="@color/colorPink"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_weight="1"
+                    android:text="@string/house"
+                    android:id="@+id/btnHouse"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:backgroundTint="@color/colorPink"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:text="@string/lands"
+                    android:id="@+id/btnLand"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/button"
                     android:backgroundTint="@color/colorPink"
-                    android:text="@string/house"
-                    android:textColor="@color/colorPrimaryDark" />
-
-                <Button
-                    android:id="@+id/btnLand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_weight="1"
-                    android:background="#00000000"
-                    android:backgroundTint="@color/colorPink"
-                    android:text="@string/lands"
-                    android:textColor="@color/colorPrimaryDark" />
-
-                <Button
-                    android:id="@+id/btnVehicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:backgroundTint="@color/colorPink"
                     android:text="@string/vehicle"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:id="@+id/btnVehicle"/>
             </LinearLayout>
 
 
@@ -113,6 +112,7 @@
                 android:layout_height="wrap_content" />
 
         </ScrollView>
+
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
