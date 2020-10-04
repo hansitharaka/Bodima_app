@@ -18,7 +18,18 @@ public class User {
     private String Password;
     private  String  phone;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private  String type;
+
     public String getId() {
+
         return id;
     }
 
@@ -47,10 +58,12 @@ public class User {
     }
 
     public String getName() {
+
         return Name;
     }
 
     public void setName(String name) {
+
         Name = name;
     }
 
@@ -71,53 +84,5 @@ public class User {
     }
 
 
-    public static class ExpensesHistory extends AppCompatActivity {
 
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-
-            TextView AmountView;
-            TextView TypeView;
-            TextView DateView;
-
-            String Amount;
-            String Type_;
-            String Date;
-
-
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_expenses_history);
-
-
-            Intent intent = getIntent();
-
-            AmountView = findViewById(R.id.amount_ex_text);
-            TypeView = findViewById(R.id.type);
-            DateView = findViewById(R.id.date_expense);
-
-
-            // view data using intent
-
-
-    //        Amount = AmountView.getText().toString();
-
-    //        AmountView.setText(intent.getStringExtra("AmountEnter"));
-    //        TypeView.setText(intent.getStringExtra("Type_in"));
-    //
-    ////        DateView.setText("");
-    //        DateView.setText(intent.getStringExtra("DateAndTime"));
-    // Write a message to the database
-
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Amount");
-
-            myRef.setValue("hello");
-
-
-        }
-
-
-    }
 }
