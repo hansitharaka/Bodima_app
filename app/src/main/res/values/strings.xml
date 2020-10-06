@@ -159,6 +159,7 @@
     <string name="nav_close">Close NavigationDrawer</string>
     <string name="search_by_city">Search a city</string>
     <string name="search">Search</string>
+    <string name="app">App</string>
     <string-array name="category_array">
         <item>Category</item>
         <item>Payment</item>

@@ -9,44 +9,59 @@
         android:roundIcon="@mipmap/logo_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VehicleAllAds" />
-        <activity android:name=".LandAllAds" />
-        <activity android:name=".LandForm" />
-        <activity android:name=".VehicleForm" />
-        <activity android:name=".HouseForm" />
-        <activity android:name=".AddPlaceForm" />
-        <activity android:name=".AllAdvertisements" />
-        <activity android:name=".OtherReminders" />
-        <activity android:name=".BirthdayReminders" />
-        <activity android:name=".AreaCalculation" />
-        <activity android:name=".TypeSelector" />
-        <activity
-            android:name=".LandAdDetails"
-            android:parentActivityName=".LandAllAds" />
-        <activity android:name=".Register" />
-        <activity android:name=".HouseAdDetails"
-            android:parentActivityName=".AllAdvertisements" />
-        <activity android:name=".AddReview" />
-        <activity android:name=".AddReminder" />
-        <activity android:name=".RatingsAndReviews" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".ExpensesHistory" />
-        <activity android:name=".MyPlaces"/>
-        <activity
-            android:name=".Vehicle_Ad_Details"
-            android:parentActivityName=".VehicleAllAds" />
-        <activity android:name=".WelcomPage">
+
+        <!-- CommonUIs -->
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyReminders" />
-        <activity android:name=".Expenses_Dashboard" />
+        <activity android:name=".WelcomPage" />
         <activity android:name=".Login" />
+        <activity android:name=".Register" />
+        <activity android:name=".UserProfile" />
+
+        <!-- Places -->
+        <activity android:name=".AddPlaceForm" />
+        <activity android:name=".MyPlaces" />
         <activity
             android:name=".place_details"
             android:parentActivityName=".MyPlaces" />
+
+        <!-- Ratings & Reviews -->
+        <activity android:name=".AddReview" />
+        <activity android:name=".RatingsAndReviews" />
+
+        <!-- Advertisements -->
+        <activity android:name=".HouseForm" />
+        <activity android:name=".LandForm" />
+        <activity android:name=".VehicleForm" />
+        <activity android:name=".AllAdvertisements" />
+        <activity android:name=".LandAllAds" />
+        <activity android:name=".VehicleAllAds" />
+        <activity
+            android:name=".HouseAdDetails"
+            android:parentActivityName=".AllAdvertisements" />
+        <activity
+            android:name=".LandAdDetails"
+            android:parentActivityName=".LandAllAds" />
+        <activity
+            android:name=".Vehicle_Ad_Details"
+            android:parentActivityName=".VehicleAllAds" />
+
+        <!-- Reminders -->
+        <activity android:name=".AddReminder" />
+        <activity android:name=".MyReminders" />
+        <activity android:name=".BirthdayReminders" />
+        <activity android:name=".OtherReminders" />
+
+        <!-- Expense Tracker -->
+        <activity android:name=".Expenses_Dashboard" />
+        <activity android:name=".TypeSelector" />
+        <activity android:name=".ExpensesHistory" />
+        <activity android:name=".AreaCalculation" />
     </application>
 
 </manifest>
