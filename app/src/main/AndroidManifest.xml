@@ -9,13 +9,6 @@
         android:roundIcon="@mipmap/logo_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".VehicleAllAds" />
         <activity android:name=".LandAllAds" />
         <activity android:name=".LandForm" />
@@ -42,7 +35,12 @@
         <activity
             android:name=".Vehicle_Ad_Details"
             android:parentActivityName=".VehicleAllAds" />
-        <activity android:name=".WelcomPage"/>
+        <activity android:name=".WelcomPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MyReminders" />
         <activity android:name=".Expenses_Dashboard" />
         <activity android:name=".Login" />

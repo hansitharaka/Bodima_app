@@ -60,6 +60,7 @@
                 android:background="@drawable/button"
                 android:backgroundTint="@color/ashyPurple"
                 android:drawableStart="@drawable/search"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:drawablePadding="10dp"
                 android:hint="@string/search_by_city"
                 android:paddingStart="20dp"

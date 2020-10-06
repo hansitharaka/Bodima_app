@@ -157,6 +157,8 @@
     <string name="profile">Profile</string>
     <string name="nav_open">Open NavigationDrawer</string>
     <string name="nav_close">Close NavigationDrawer</string>
+    <string name="search_by_city">Search a city</string>
+    <string name="search">Search</string>
     <string-array name="category_array">
         <item>Category</item>
         <item>Payment</item>
