@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bodima.Model.House;
+import com.example.bodima.Model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,9 +37,10 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
     private String key;
 
     private String uId;
-
+    private String type1;
     private houseRecyclerViewAdapter recyclerAdapter;
-//    private House house;
+
+    //    private House house;
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
 
@@ -57,8 +59,6 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
 
-        //button float
-        viewform = findViewById(R.id.floatCall);
 
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -66,28 +66,28 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         recyclerView.setAdapter(recyclerAdapter);
 
         //database
-        mDatabase = FirebaseDatabase.getInstance().getReference("Advertisements");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements");
         uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mStorage= FirebaseStorage.getInstance();
+
+        mStorage = FirebaseStorage.getInstance();
 
         //ArrayList
         houseArrayList = new ArrayList<>();
-        keyList=new ArrayList<>();
+        keyList = new ArrayList<>();
+
         //get key
         key = getIntent().getStringExtra("key");
 
 
-        recyclerAdapter= new houseRecyclerViewAdapter(getApplicationContext(), houseArrayList);
+        recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(), houseArrayList);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.setOnItemClickListener(AllAdvertisements.this);
 
         //Clear ArrayList
         ClearAll();
 
-        //GetDate by user type
-        GetBuyerDataFromFirebase();
-
-
+        getUserdetails();
+        System.out.println("BBB"+type1);
 
         //buttons
         bHouse.setOnClickListener(new View.OnClickListener() {
@@ -111,35 +111,36 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
             }
         });
 
+
         //floation button
-        viewform.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
-                Toast.makeText(AllAdvertisements.this, "Redirecting to House Form ..", Toast.LENGTH_SHORT).show();
-                startActivity(i);
-            }
-        });
+//        viewform.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
+//                Toast.makeText(AllAdvertisements.this, "Redirecting to House Form ..", Toast.LENGTH_SHORT).show();
+//                startActivity(i);
+//            }
+//        });
 
     }
 
-//get data to the recycler view
+    //get data to the recycler view
     private void GetBuyerDataFromFirebase() {
 
-//     Query query = mDatabase.child("Houses").child("-MIlnWN6dfRbqQTJQT57").orderByChild("amount").equalTo("50000");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
 
-        mDatabase.child("Houses").addValueEventListener(new ValueEventListener() { //TODO:Check the path
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
-//                Toast.makeText(AllAdvertisements.this, snapshot.toString(), Toast.LENGTH_SHORT).show();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                     House house = dataSnapshot.getValue(House.class);
-                     houseArrayList.add(house);
+                    House house = dataSnapshot.getValue(House.class);
+                    houseArrayList.add(house);
 //                     recyclerAdapter = new houseRecyclerViewAdapter(getApplicationContext(),houseArrayList);
 //                     recyclerView.setAdapter(recyclerAdapter);
-                     keyList.add(dataSnapshot.getKey());
+                    keyList.add(dataSnapshot.getKey());
 //                    houseArrayList.add(house);
 
                 }
@@ -151,6 +152,92 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
 
             }
         });
+
+        viewform = findViewById(R.id.floatCall);
+        viewform.setVisibility(View.GONE);
+
+    }
+
+    //    seller data retreive
+    public void GetSellerDataFromFirebase() {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Houses");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    ClearAll();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        House house = dataSnapshot.getValue(House.class);
+                        keyList.add(dataSnapshot.getKey());
+
+
+                        if (uId.equals(house.getuId())) {
+                            houseArrayList.add(house);
+                        }
+
+                    }
+                    recyclerAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(AllAdvertisements.this, "No item found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //button float
+        viewform = findViewById(R.id.floatCall);
+        viewform.setVisibility(View.VISIBLE);
+
+
+        viewform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AllAdvertisements.this, HouseForm.class);
+                Toast.makeText(AllAdvertisements.this, "Redirecting to House Form ..", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+        });
+
+    }
+
+    //get the user type from userDetails
+    public void getUserdetails() {
+
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println(uId);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(uId);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                    User user = snapshot.getValue(User.class);
+                    if (uId.equals(user.getId())) {
+                        type1 = user.getType();
+
+                    }
+                    if(type1.equals("buyer")) {
+                        GetBuyerDataFromFirebase();
+                    }
+                    else if(type1.equals("seller")) {
+                        GetSellerDataFromFirebase();
+                    }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 
@@ -162,7 +249,7 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
             if (recyclerAdapter != null) {
                 recyclerAdapter.notifyDataSetChanged();
             }
-        }else {
+        } else {
             houseArrayList = new ArrayList<>();
         }
     }
@@ -177,10 +264,10 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
 
     @Override
     public void onDeleteClick(int position) {
-        House selectedItem =  houseArrayList.get(position);
+        House selectedItem = houseArrayList.get(position);
         final String selectedKey = keyList.get(position);
 
-        StorageReference imgRef = mStorage.getReferenceFromUrl( selectedItem.getImgUrl() );
+        StorageReference imgRef = mStorage.getReferenceFromUrl(selectedItem.getImgUrl());
         imgRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

@@ -129,19 +129,17 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
                 userprofile = new User();
 
+                userprofile.setName(name);
+                userprofile.setEmail(mail);
+                userprofile.setPhone(phone);
 
                 userprofile.setId(CurrentUser);
                 name = Username.getText().toString();
                 phone = PhoneNumber.getText().toString();
 
-
-                userprofile.setName(name);
-                userprofile.setEmail(mail);
-                userprofile.setPhone(phone);
-
                 databaseReference.child(CurrentUser).setValue(userprofile);
 
-                Intent intent = new Intent(UserProfile.this, AllAdvertisements.class);
+                Intent intent = new Intent(UserProfile.this, Login.class);
                 startActivity(intent);
 
             }

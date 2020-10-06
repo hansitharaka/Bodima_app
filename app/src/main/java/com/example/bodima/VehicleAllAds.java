@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bodima.Model.House;
+import com.example.bodima.Model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +32,12 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
     private RecyclerView recyclerView;
     private List<Vehicle> vehicleArrayList;
     private List<String> keyList;
+    private String key;
 
+    private String uId;
+    private String type1;
     private vehicleRecyclerViewAdapter recyclerAdapter;
+
     private Button bHouse, bLand, bVehicle;
     private FloatingActionButton viewform;
 
@@ -50,8 +56,6 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
         bLand = (Button) findViewById(R.id.btnLand);
         bVehicle = (Button) findViewById(R.id.btnVehicle);
 
-        viewform = findViewById(R.id.floatCall);
-
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -59,11 +63,16 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
 
         //database
         mDatabase= FirebaseDatabase.getInstance().getReference("Advertisements");
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         mStorage= FirebaseStorage.getInstance();
 
         //ArrayList
         vehicleArrayList= new ArrayList<>();
         keyList=new ArrayList<>();
+
+        //get key
+        key = getIntent().getStringExtra("key");
 
         recyclerAdapter= new vehicleRecyclerViewAdapter(getApplicationContext(), vehicleArrayList);
         recyclerView.setAdapter(recyclerAdapter);
@@ -73,8 +82,8 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
         //Clear ArrayList
         ClearAll();
 
-        //GetDAtae method
-        GetDataFromFirebase();
+        getUserdetails();
+        System.out.println("BBB"+type1);
 
         //buttons
         bHouse.setOnClickListener(new View.OnClickListener() {
@@ -98,20 +107,20 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
             }
         });
 
-        viewform.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(VehicleAllAds.this, VehicleForm.class);
-                Toast.makeText(VehicleAllAds.this, "Redirecting to Vehicle Form ..", Toast.LENGTH_SHORT).show();
-                startActivity(i);
-            }
-        });
+//        viewform.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(VehicleAllAds.this, VehicleForm.class);
+//                Toast.makeText(VehicleAllAds.this, "Redirecting to Vehicle Form ..", Toast.LENGTH_SHORT).show();
+//                startActivity(i);
+//            }
+//        });
 
     }
 
-    private void GetDataFromFirebase() {
-//        Query query = mDatabase.child("Houses");
-        mDatabase.child("Vehicles").addValueEventListener(new ValueEventListener() {
+    private void GetBuyerDataFromFirebase() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles");
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
@@ -125,6 +134,91 @@ public class VehicleAllAds extends AppCompatActivity implements vehicleRecyclerV
 
                 }
                 recyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        viewform = findViewById(R.id.floatCall);
+        viewform.setVisibility(View.GONE);
+
+
+    }
+
+    //    seller data retreive
+    public void GetSellerDataFromFirebase() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Advertisements").child("Vehicles");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    ClearAll();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                      Vehicle vehicle = dataSnapshot.getValue(Vehicle.class);
+                        keyList.add(dataSnapshot.getKey());
+
+
+                        if (uId.equals(vehicle.getuId())) {
+                            vehicleArrayList.add(vehicle);
+                        }
+
+                    }
+                    recyclerAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(VehicleAllAds.this, "No item found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //button float
+        viewform = findViewById(R.id.floatCall);
+        viewform.setVisibility(View.VISIBLE);
+
+
+        viewform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(VehicleAllAds.this, VehicleForm.class);
+                Toast.makeText(VehicleAllAds.this, "Redirecting to Vehicle Form ..", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+        });
+
+    }
+
+    //get the user type from userDetails
+    public void getUserdetails() {
+
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println(uId);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(uId);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                User user = snapshot.getValue(User.class);
+                if (uId.equals(user.getId())) {
+                    type1 = user.getType();
+
+                }
+                if(type1.equals("buyer")) {
+                    GetBuyerDataFromFirebase();
+                }
+                else if(type1.equals("seller")) {
+                    GetSellerDataFromFirebase();
+                }
+
             }
 
             @Override
