@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.bodima.Model.ExpenseData;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +35,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
-public class Expenses_Dashboard extends AppCompatActivity {
+public class Expenses_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    //variables
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     TextView CurrentBalnacePreview;
     Button Minus;
@@ -70,8 +81,33 @@ public class Expenses_Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_expenses__dashboard);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* HOOKS */
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /* TOOLBAR */
+        setSupportActionBar(toolbar);
+        this.setTitle("Expenses Dashboard");
+
+        /* NAVIGATION */
+        navigationView.bringToFront();
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        //selected nav item
+        navigationView.setCheckedItem(R.id.nav_places);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         //get id's from resources
         Minus = findViewById(R.id.btnMinus);
@@ -136,24 +172,127 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
                 if (Salary.isChecked()) {
                     Type = Salary.getText().toString();
+                    Salary.setChecked(true);
+                    Bank_Intrest.setChecked(false);
+                    Loan.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
+
                 } else if (Loan.isChecked()) {
+
                     Type = Loan.getText().toString();
+                    Loan.setChecked(true);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Bank_Intrest.isChecked()) {
                     Type = Bank_Intrest.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(true);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
+
                 } else if (Lending.isChecked()) {
                     Type = Lending.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(true);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Other.isChecked()) {
                     Type = Other.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(true);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Food.isChecked()) {
                     Type = Food.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(true);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Transport.isChecked()) {
                     Type = Transport.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(true);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Clothes.isChecked()) {
                     Type = Clothes.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(true);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Rent.isChecked()) {
                     Type = Rent.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(true);
+                    Bill.setChecked(false);
                 } else if (Bill.isChecked()) {
                     Type = Bill.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(true);
                 }
 
 
@@ -211,26 +350,125 @@ public class Expenses_Dashboard extends AppCompatActivity {
 
                 if (Salary.isChecked()) {
                     Type = Salary.getText().toString();
-
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(true);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Loan.isChecked()) {
                     Type = Loan.getText().toString();
+                    Loan.setChecked(true);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Bank_Intrest.isChecked()) {
                     Type = Bank_Intrest.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(true);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
 
                 } else if (Lending.isChecked()) {
                     Type = Lending.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(true);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Other.isChecked()) {
                     Type = Other.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(true);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Food.isChecked()) {
                     Type = Food.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(true);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Transport.isChecked()) {
                     Type = Transport.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(true);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Clothes.isChecked()) {
                     Type = Clothes.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(true);
+                    Rent.setChecked(false);
+                    Bill.setChecked(false);
                 } else if (Rent.isChecked()) {
                     Type = Rent.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(true);
+                    Bill.setChecked(false);
                 } else if (Bill.isChecked()) {
                     Type = Bill.getText().toString();
+                    Loan.setChecked(false);
+                    Salary.setChecked(false);
+                    Bank_Intrest.setChecked(false);
+                    Lending.setChecked(false);
+                    Other.setChecked(false);
+                    Food.setChecked(false);
+                    Transport.setChecked(false);
+                    Clothes.setChecked(false);
+                    Rent.setChecked(false);
+                    Bill.setChecked(true);
                 }
 
                 //get values
@@ -437,6 +675,52 @@ public class Expenses_Dashboard extends AppCompatActivity {
         EX_Total=Ex;
         Status = Re_Total - EX_Total;
         return Status;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //menu items action
+        switch (item.getItemId()) {
+            case R.id.nav_places:
+                startActivity(new Intent(Expenses_Dashboard.this, MyPlaces.class));
+                break;
+
+            case R.id.nav_ads:
+                startActivity(new Intent(Expenses_Dashboard.this, AllAdvertisements.class));
+                break;
+
+            case R.id.nav_remind:
+                startActivity(new Intent(Expenses_Dashboard.this, MyReminders.class));
+                break;
+
+            case R.id.nav_expense:
+                break;
+
+            case R.id.nav_profile:
+                startActivity(new Intent(Expenses_Dashboard.this, UserProfile.class));
+                break;
+
+            case R.id.nav_logout:
+                //logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Expenses_Dashboard.this, Login.class));
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if back pressed while the navigation drawer is open, it will close the drawer
+        // instead of exiting from the app
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
 }
