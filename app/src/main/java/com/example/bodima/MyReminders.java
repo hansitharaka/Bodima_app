@@ -118,7 +118,7 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                 "December"};
         final String month = monthName[calendar.get(Calendar.MONTH)];
 
-        final String C_date = String.valueOf(date).trim();
+        final String C_date = String.valueOf(date);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        Toast.makeText(this, , Toast.LENGTH_SHORT).show();
 
@@ -135,18 +135,10 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                     keyList.add(ds.getKey());
                     reminders.add(data);
 
-//                    Log.d("day", data.getDay());
-//                    Log.d("month", data.getMonth());
-
                     if (data.getMonth().equalsIgnoreCase(month) || data.getMonth().equalsIgnoreCase("Every Month")){
-
-                        Log.d("today", C_date);
 
                         if (data.getDay().equals(C_date)){
                             addNotification();
-
-                            Log.d("day", data.getDay());
-                            Log.d("month", data.getMonth());
                         }
                     }
                 }
