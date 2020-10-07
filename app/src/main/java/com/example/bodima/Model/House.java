@@ -15,11 +15,13 @@ public class House {
     private String Phone;
     private String ImgUrl;
     private String mKey;
+    private String uId;
+
 
     public House() {
     }
 
-    public House(String title, String city, String size, String landSize, String des, String amount, String beds, String baths, String name, String phone, String imgUrl, String mKey) {
+    public House(String title, String city, String size, String landSize, String des, String amount, String beds, String baths, String name, String phone, String imgUrl, String mKey, String uId) {
         Title = title;
         City = city;
         Size = size;
@@ -31,7 +33,8 @@ public class House {
         Name = name;
         Phone = phone;
         ImgUrl = imgUrl;
-
+        this.mKey = mKey;
+        this.uId = uId;
     }
 
     public String getTitle() {
@@ -120,6 +123,14 @@ public class House {
 
     public void setImgUrl(String imgUrl) {
         ImgUrl = imgUrl;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
     @Exclude

@@ -96,7 +96,7 @@
     <string name="name">Name</string>
     <string name="password_confirm">Confirm password</string>
     <string name="register">Register</string>
-    <string name="update">Update</string>
+    <string name="update">Save</string>
     <string name="placename">Place name</string>
     <string name="review">Enter yout review here...</string>
     <string name="review_warning">*Please note that your reviews are visible for all users</string>
@@ -157,6 +157,9 @@
     <string name="profile">Profile</string>
     <string name="nav_open">Open NavigationDrawer</string>
     <string name="nav_close">Close NavigationDrawer</string>
+    <string name="search_by_city">Search a city</string>
+    <string name="search">Search</string>
+    <string name="app">App</string>
     <string-array name="category_array">
         <item>Category</item>
         <item>Payment</item>
@@ -214,17 +217,20 @@
         <item>31</item>
     </string-array>
     <string-array name="type_id">
+        <item>Select the type</item>
         <item>Car</item>
         <item>Van</item>
         <item>Bike</item>
         <item>Other</item>
     </string-array>
     <string-array name="condition_id">
+        <item>Select the Condition</item>
         <item>New</item>
         <item>Old</item>
         <item>Used</item>
     </string-array>
     <string-array name="fuel_id">
+        <item>Select Fuel Type</item>
         <item>Petrol</item>
         <item>Diesel</item>
     </string-array>

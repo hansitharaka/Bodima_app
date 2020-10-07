@@ -45,14 +45,53 @@
             app:maxImageSize="30dp"
             app:srcCompat="@drawable/plusicon" />
 
-        <SearchView
+        <LinearLayout
+            android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/toolbar"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/ashyPurple"
+                android:drawableStart="@drawable/search"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:drawablePadding="10dp"
+                android:hint="@string/search_by_city"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/dimgray" />
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:fontFamily="@font/medium"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="@string/search"
+                android:textColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/search_layout"
             android:layout_centerInParent="true">
 
             <androidx.recyclerview.widget.RecyclerView

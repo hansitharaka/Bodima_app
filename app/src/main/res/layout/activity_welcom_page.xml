@@ -13,12 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:alpha="0.3"
+        android:alpha="0.5"
         android:scaleType="centerCrop"
         android:src="@drawable/welcomebg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/frontlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
     <TextView
@@ -32,16 +45,16 @@
         android:text="@string/welcome"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="40sp"
+        app:layout_constraintTop_toBottomOf="@id/frontlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnLayout"/>
+        app:layout_constraintBottom_toTopOf="@id/welcomesub"/>
 
     <TextView
         android:id="@+id/welcomesub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/light"
         android:gravity="center"
@@ -49,9 +62,9 @@
         android:text="@string/welcomemsg"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/welcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <LinearLayout
         android:id="@+id/btnLayout"
@@ -59,7 +72,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="10dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
