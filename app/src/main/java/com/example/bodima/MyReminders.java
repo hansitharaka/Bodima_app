@@ -14,6 +14,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -118,10 +120,13 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
 
         final String C_date = String.valueOf(date);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        Toast.makeText(this, , Toast.LENGTH_SHORT).show();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child(String.valueOf(user)).child("Payment");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Reminders").child(user.getUid()).child("Payment");
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = databaseReference;
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
@@ -131,7 +136,8 @@ public class MyReminders extends AppCompatActivity implements ReminderHelperAdap
                     reminders.add(data);
 
                     if (data.getMonth().equalsIgnoreCase(month) || data.getMonth().equalsIgnoreCase("Every Month")){
-                        if (data.getDay().equalsIgnoreCase(C_date)){
+
+                        if (data.getDay().equals(C_date)){
                             addNotification();
                         }
                     }

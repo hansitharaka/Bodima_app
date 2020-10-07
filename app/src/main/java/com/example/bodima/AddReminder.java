@@ -97,7 +97,7 @@ public class AddReminder extends AppCompatActivity implements AdapterView.OnItem
         description = findViewById(R.id.description);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        database = FirebaseDatabase.getInstance().getReference().child("Reminders").child(String.valueOf(user));
+        database = FirebaseDatabase.getInstance().getReference().child("Reminders").child(user.getUid());
 
         save = findViewById(R.id.btnSave);
         save.setOnClickListener(new View.OnClickListener() {

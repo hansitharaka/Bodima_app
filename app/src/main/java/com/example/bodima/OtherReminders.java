@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -119,9 +120,11 @@ public class OtherReminders extends AppCompatActivity implements ReminderHelperA
         final String C_date = String.valueOf(date);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child(String.valueOf(user)).child("Other");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Reminders").child(user.getUid()).child("Other");
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = databaseReference;
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ClearAll();
