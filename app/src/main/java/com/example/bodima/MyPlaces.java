@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.bodima.Model.Place;
 import com.example.bodima.Model.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,6 +57,10 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
     private DatabaseReference mreff;
     private FirebaseUser currentUser;
 
+    private FloatingActionButton floatingActionButton;
+    private Button bSearch;
+    private EditText searchText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +94,9 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
         //initialize
         recyclerView = (RecyclerView) findViewById(R.id.recylerView);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.addPlaceFab);
+        bSearch = (Button) findViewById(R.id.btnSearch);
+        searchText = (EditText) findViewById(R.id.search);
 
         //layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -115,9 +123,68 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         //Get Data
         GetDataFromFirebase();
 
+        //floatingAction button
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MyPlaces.this, AddPlaceForm.class));
+            }
+        });
+
+        searchText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!searchText.getText().toString().isEmpty()) {
+                    searchText.getText().clear();
+
+                    GetDataFromFirebase();
+                }
+            }
+        });
+
+        //search
+        bSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchCity = searchText.getText().toString().trim();
+
+                if(searchCity.isEmpty()) {
+                    Toast.makeText(MyPlaces.this, "Enter a city", Toast.LENGTH_SHORT).show();
+                } else {
+                    searchCity(searchCity);
+                }
+            }
+        });
+
     }
 
+    //search
+    private void searchCity(String city) {
+        if (!city.isEmpty()) {
+            mreff.orderByChild("city").equalTo(city).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ClearAll();
 
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0 ) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Place place = dataSnapshot.getValue(Place.class);
+                            keyList.add(dataSnapshot.getKey());
+                            placeArrayList.add(place);
+                        }
+                        recyclerAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(MyPlaces.this, "No item found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.d("FIREBASE CRUD", error.getMessage());
+                }
+            });
+        }
+    }
 
     private void GetDataFromFirebase() {
         mreff.addValueEventListener(new ValueEventListener() {
