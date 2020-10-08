@@ -122,7 +122,6 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         Submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("SSSSSSSSSSSSSSS");
 
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 databaseReference = firebaseDatabase.getReference("User");

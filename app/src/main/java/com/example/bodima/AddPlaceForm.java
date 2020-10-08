@@ -3,6 +3,7 @@ package com.example.bodima;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -51,6 +52,8 @@ import java.util.List;
 public class AddPlaceForm extends AppCompatActivity {
 
     //variables
+    private Toolbar toolbar;
+
     private TextView username, date;
     private EditText title, desc, amount, nBeds, nBaths, phone, city, address;
     private Button addImg, btnSave;
@@ -75,6 +78,11 @@ public class AddPlaceForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place_form);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Add a Place");
 
         //Database
         mReff = FirebaseDatabase.getInstance().getReference().child("Places");

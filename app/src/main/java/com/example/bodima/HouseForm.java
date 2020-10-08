@@ -3,6 +3,7 @@ package com.example.bodima;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -40,6 +41,8 @@ import java.util.List;
 
 public class HouseForm extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     private static final int PICK_IMAGE_REQUEST = 1;
     private EditText Title, City, HouseSize, LandSize, Description, Amount, BedsNo, BathsNo, Name, Phone ;
     private Button addImg, btnSave;
@@ -67,6 +70,11 @@ public class HouseForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_form);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Post House Ad");
 
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 

@@ -1,144 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:background="@color/bgdarkPurple"
+    android:background="@drawable/bgdark"
     android:layout_gravity="center_vertical">
 
-    <LinearLayout
-        android:id="@+id/modes"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintBottom_toTopOf="@id/usertype"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:backgroundTint="@color/colorPink"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_weight="1"
-            android:text="@string/signup" />
-
-        <Button
-            android:id="@+id/signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button"
-            android:backgroundTint="@color/colorPink"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/signin" />
-
-    </LinearLayout>
-
-
-    <RadioGroup
-        android:id="@+id/usertype"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modes"
-        app:layout_constraintBottom_toTopOf="@id/loginform">
-
-        <RadioButton
-            android:id="@+id/seller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/dimgray"
-            android:fontFamily="@font/medium"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/seller"
-            android:textSize="16sp"
-            android:textColor="@color/dimgray" />
-
-        <RadioButton
-            android:id="@+id/buyer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/dimgray"
-            android:fontFamily="@font/medium"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/buyer"
-            android:textSize="16sp"
-            android:textColor="@color/dimgray" />
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/loginform"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="150dp">
-
-        <EditText
-            android:id="@+id/usermail"
+        <LinearLayout
+            android:id="@+id/modes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toTopOf="@id/usertype"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:text="@string/signup" />
+
+            <Button
+                android:id="@+id/signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/signin" />
+
+        </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/usertype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:layout_marginBottom="20dp"/>
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/modes"
+            app:layout_constraintBottom_toTopOf="@id/loginform">
 
-        <EditText
-            android:id="@+id/userpsw"
+            <RadioButton
+                android:id="@+id/seller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/dimgray"
+                android:fontFamily="@font/medium"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/seller"
+                android:textSize="16sp"
+                android:textColor="@color/dimgray" />
+
+            <RadioButton
+                android:id="@+id/buyer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/dimgray"
+                android:fontFamily="@font/medium"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/buyer"
+                android:textSize="16sp"
+                android:textColor="@color/dimgray" />
+
+        </RadioGroup>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/password"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:inputType="textPassword"
-            android:layout_marginBottom="50dp"/>
+            android:orientation="vertical"
+            android:id="@+id/loginform"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp">
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:backgroundTint="@color/colorPink"
-            android:text="@string/login"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginBottom="20dp"/>
+            <EditText
+                android:id="@+id/usermail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/medium"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/dimgray"
+                android:backgroundTint="@color/dimgray"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:layout_marginBottom="20dp"/>
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/userpsw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/medium"
+                android:hint="@string/password"
+                android:textColorHint="@color/dimgray"
+                android:backgroundTint="@color/dimgray"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:inputType="textPassword"
+                android:layout_marginBottom="50dp"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:text="@string/login"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</RelativeLayout>

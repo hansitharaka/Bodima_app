@@ -1,104 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddReview"
-    android:background="@color/bgdarkPurple"
+    android:background="@drawable/bgdark"
     android:layout_gravity="center">
 
-    <LinearLayout
-        android:id="@+id/rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rateform">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/placename"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placename"
-            android:textSize="25sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/bold"
-            android:paddingStart="30dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:autoSizeTextType="uniform"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/rateform"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="250dp">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
-        <RatingBar
-            android:id="@+id/starRate"
+        <LinearLayout
+            android:id="@+id/rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:progressBackgroundTint="@color/colorAccent"
-            android:progressTint="@color/colorPrimaryDark"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:stepSize="1"
-            android:numStars="5"
-            android:isIndicator="false"
-            android:rating="1"/>
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rateform">
 
-        <EditText
-            android:id="@+id/review"
+            <TextView
+                android:id="@+id/placename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placename"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/bold"
+                android:paddingStart="30dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:autoSizeTextType="uniform"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/medium"
-            android:hint="@string/review"
-            android:textSize="14sp"
-            android:textColorHint="@color/dimgray"
-            android:backgroundTint="@color/dimgray"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="30dp"/>
+            android:orientation="vertical"
+            android:id="@+id/rateform"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="100dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/review_warning"
-            android:textColor="@color/dimgray"
-            android:fontFamily="@font/light"
-            android:textSize="12sp"
-            android:padding="10dp"
-            android:gravity="start"
-            android:layout_marginBottom="50dp"/>
+            <RatingBar
+                android:id="@+id/starRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:progressBackgroundTint="@color/colorAccent"
+                android:progressTint="@color/colorPrimaryDark"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:stepSize="1"
+                android:numStars="5"
+                android:isIndicator="false"
+                android:rating="1"/>
 
-        <Button
-            android:id="@+id/btnPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:backgroundTint="@color/colorPink"
-            android:text="@string/post"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="end"/>
+            <EditText
+                android:id="@+id/review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/medium"
+                android:hint="@string/review"
+                android:textSize="14sp"
+                android:textColorHint="@color/dimgray"
+                android:backgroundTint="@color/dimgray"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="30dp"/>
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/review_warning"
+                android:textColor="@color/dimgray"
+                android:fontFamily="@font/light"
+                android:textSize="12sp"
+                android:padding="10dp"
+                android:gravity="start"
+                android:layout_marginBottom="50dp"/>
+
+            <Button
+                android:id="@+id/btnPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/colorPink"
+                android:text="@string/post"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

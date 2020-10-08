@@ -102,7 +102,7 @@ public class Expenses_Dashboard extends AppCompatActivity implements NavigationV
         actionBarDrawerToggle.syncState();
 
         //selected nav item
-        navigationView.setCheckedItem(R.id.nav_places);
+        navigationView.setCheckedItem(R.id.nav_expense);
 
         navigationView.setNavigationItemSelectedListener(this);
 

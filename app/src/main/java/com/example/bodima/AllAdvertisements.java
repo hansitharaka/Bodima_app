@@ -1,13 +1,18 @@
 package com.example.bodima;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +21,7 @@ import com.example.bodima.Model.House;
 import com.example.bodima.Model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,8 +35,12 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllAdvertisements extends AppCompatActivity implements houseRecyclerViewAdapter.OnItemClickListener {
+public class AllAdvertisements extends AppCompatActivity implements houseRecyclerViewAdapter.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
     //variables
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+
     private RecyclerView recyclerView;
     private List<House> houseArrayList;
     private List<String> keyList;
@@ -52,6 +62,32 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_advertisements);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* HOOKS */
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /* TOOLBAR */
+        setSupportActionBar(toolbar);
+        this.setTitle("Advertisements");
+
+        /* NAVIGATION */
+        navigationView.bringToFront();
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        //selected nav item
+        navigationView.setCheckedItem(R.id.nav_ads);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -287,4 +323,52 @@ public class AllAdvertisements extends AppCompatActivity implements houseRecycle
         i.putExtra("key", keyList.get(position));
         startActivity(i);
     }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //menu items action
+        switch (item.getItemId()) {
+            case R.id.nav_places:
+                startActivity(new Intent(AllAdvertisements.this, MyPlaces.class));
+                break;
+
+            case R.id.nav_ads:
+                break;
+
+            case R.id.nav_remind:
+                startActivity(new Intent(AllAdvertisements.this, MyReminders.class));
+                break;
+
+            case R.id.nav_expense:
+                startActivity(new Intent(AllAdvertisements.this, Expenses_Dashboard.class));
+                break;
+
+            case R.id.nav_profile:
+                startActivity(new Intent(AllAdvertisements.this, UserProfile.class));
+                break;
+
+            case R.id.nav_logout:
+                //logout
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(AllAdvertisements.this, Login.class));
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //if back pressed while the navigation drawer is open, it will close the drawer
+        // instead of exiting from the app
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
 }

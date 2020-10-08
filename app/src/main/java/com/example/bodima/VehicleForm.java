@@ -4,6 +4,7 @@ package com.example.bodima;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -40,6 +41,8 @@ import com.google.firebase.storage.UploadTask;
 
 public class VehicleForm extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private Toolbar toolbar;
+
     private static final int PICK_IMAGE_REQUEST = 1;
     EditText Title,City,brand,model,Description,Amount,name,phone;
     Spinner spinnerCategory,spinnerCondtion,spinnerFuel;
@@ -64,6 +67,11 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_form);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Post Vehicle Ad");
 
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 

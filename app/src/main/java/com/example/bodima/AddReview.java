@@ -1,6 +1,7 @@
 package com.example.bodima;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddReview extends AppCompatActivity {
+    private Toolbar toolbar;
+
     private EditText review;
     private RatingBar rate;
     private String userId = "User01";
@@ -27,6 +30,12 @@ public class AddReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
+
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Add a Review");
 
         database = FirebaseDatabase.getInstance().getReference().child("Ratings");
 

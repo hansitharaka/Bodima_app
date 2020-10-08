@@ -3,6 +3,7 @@ package com.example.bodima;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -35,6 +36,8 @@ import com.google.firebase.storage.UploadTask;
 
 public class LandForm extends AppCompatActivity {
     //variables
+    private Toolbar toolbar;
+
     private static final int PICK_IMAGE_REQUEST = 1;
     EditText Title, City, LandSize, Description, Amount, Name, Phone;
     Button addImg, btnSave;
@@ -60,6 +63,11 @@ public class LandForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_form);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Post Land Ad");
 
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 

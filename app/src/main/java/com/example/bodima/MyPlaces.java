@@ -70,7 +70,7 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
         /* TOOLBAR */
         setSupportActionBar(toolbar);
-        this.setTitle("Places");
+        this.setTitle("Places");        //TODO: My Places and Places
 
         /* NAVIGATION */
         navigationView.bringToFront();
@@ -116,6 +116,8 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
         GetDataFromFirebase();
 
     }
+
+
 
     private void GetDataFromFirebase() {
         mreff.addValueEventListener(new ValueEventListener() {

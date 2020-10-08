@@ -1,6 +1,7 @@
 package com.example.bodima;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddReminder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private Toolbar toolbar;
 
     private Spinner category;
     private Spinner month;
@@ -40,6 +43,12 @@ public class AddReminder extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_reminder);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Add a Reminder");
+
 
 /* * SPINNER CATEGORY * */
 

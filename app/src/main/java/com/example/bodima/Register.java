@@ -2,6 +2,8 @@ package com.example.bodima;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +26,8 @@ import static com.example.bodima.R.id.signin;
 import static com.example.bodima.R.id.signup;
 
 public class Register extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     private Button Login;
     private Button Register;
@@ -43,6 +48,12 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Sign Up");
+
         firebaseAuth = FirebaseAuth.getInstance();
 
 

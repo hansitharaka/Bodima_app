@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +31,7 @@ import java.util.List;
 
 public class ExpensesHistory extends AppCompatActivity {
 
-
-//    private List<ExpenseData> expenseData;
-//    private RecyclerView rv;
-//    private ExpenseAdapter adapter;
+    private Toolbar toolbar;
 
     List<ExpenseData> expenseData;
     RecyclerView recyclerView;
@@ -63,6 +61,12 @@ public class ExpensesHistory extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses_history);
+
+        /* TOOLBAR */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.setTitle("Expense History");
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Intent intent = getIntent();
