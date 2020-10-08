@@ -25,7 +25,7 @@
 
         <!-- Places -->
         <activity android:name=".AddPlaceForm" />
-        <activity android:name=".MyPlaces" />
+        <activity android:name=".MyPlaces"/>
         <activity
             android:name=".place_details"
             android:parentActivityName=".MyPlaces" />

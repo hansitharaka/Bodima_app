@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,9 @@ public class place_details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_details);
 
+        //fullscreen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         //initialize
         username = (TextView) findViewById(R.id.txtUser);
@@ -53,6 +57,7 @@ public class place_details extends AppCompatActivity {
 
         viewRating = (FloatingActionButton) findViewById(R.id.floatCall);
 
+        //item ID
         final String key = getIntent().getStringExtra("key");
 
         //Database
@@ -105,6 +110,7 @@ public class place_details extends AppCompatActivity {
                 public void onClick(View v) {
                     //got to ratings and reviews page
                     Intent i = new Intent(place_details.this, RatingsAndReviews.class);
+                    i.putExtra("itemKey", key);
                     startActivity(i);
                 }
             });
