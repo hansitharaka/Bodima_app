@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bodima.Model.Place;
+import com.example.bodima.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Continuation;
@@ -65,13 +67,17 @@ public class AddPlaceForm extends AppCompatActivity {
     private int upload_count = 0;
     private String key;
 
+    private String userId;
+    private String type;
+
     List<Place> placeArrayList = new ArrayList<>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    DatabaseReference mReff;
-    StorageReference storageRef;
-    FirebaseUser currentUser;
+    private DatabaseReference user;
+    private DatabaseReference mReff;
+    private StorageReference storageRef;
+    private FirebaseUser currentUser;
     private StorageTask uploadTask;
 
     @Override
@@ -88,6 +94,9 @@ public class AddPlaceForm extends AppCompatActivity {
         mReff = FirebaseDatabase.getInstance().getReference().child("Places");
         storageRef = FirebaseStorage.getInstance().getReference("Images");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        userId = currentUser.getUid();
+        user = FirebaseDatabase.getInstance().getReference("User").child(userId);
 
         //initialize
         username = (TextView) findViewById(R.id.username);
@@ -111,9 +120,7 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
         //Loading current user username and current date to the form
-        pUsername = "Thomas Jeff";
-        username.setText(pUsername);
-        //TODO: change the dummy pUsername; it should be received by the user profile
+        GetCurrentUserName();
 
         date.setText(DateFormat.getDateInstance().format(new Date()));
 
@@ -145,9 +152,29 @@ public class AddPlaceForm extends AppCompatActivity {
 
 
     }
-  
+
+    private void GetCurrentUserName() {
+
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    pUsername = user.getName();
+                    username.setText(pUsername);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("GetCurrentUsername", error.getMessage());
+            }
+        });
+
+    }
+
     private boolean isValid() {
-        pUid = "Ghgsc52s1f1S";
+        pUid = userId;
         pDate = DateFormat.getDateInstance().format(new Date());
         pTitle = title.getText().toString().trim();
         pDesc = desc.getText().toString().trim();
