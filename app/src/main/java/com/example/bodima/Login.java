@@ -115,6 +115,15 @@ public class Login extends AppCompatActivity {
                 if (Seller.isChecked()) {
 
                     Loginfunction();
+
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        CurrentUser = user.getUid();
+                        // Check if user's email is verified
+                        boolean emailVerified = user.isEmailVerified();
+
+                    }
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
                     reference.child(CurrentUser).child("type").setValue("seller");
@@ -124,6 +133,14 @@ public class Login extends AppCompatActivity {
                 if (Buyer.isChecked()) {
 
                     Loginfunction();
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        CurrentUser = user.getUid();
+                        // Check if user's email is verified
+                        boolean emailVerified = user.isEmailVerified();
+
+                    }
 
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
