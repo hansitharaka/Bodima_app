@@ -23,11 +23,19 @@ public class vehicleRecyclerViewAdapter extends RecyclerView.Adapter<vehicleRecy
     private Context mContext;
     private List<Vehicle> vehicleArrayList;
     private OnItemClickListener mListener;
+    private String usertype;
 
     public vehicleRecyclerViewAdapter(Context context, List<Vehicle> vehicleArrayList){
         this.mContext =context;
         this.vehicleArrayList = vehicleArrayList;
+    }
 
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     @NonNull
@@ -111,13 +119,25 @@ public class vehicleRecyclerViewAdapter extends RecyclerView.Adapter<vehicleRecy
                 int position = getAdapterPosition();
 
                 if (position != RecyclerView.NO_POSITION) {
-                    switch (item.getItemId()) {
-                        case 1:
-                            mListener.onEditClick(position);
-                            return true;
-                        case 2:
-                            mListener.onDeleteClick(position);
-                            return true;
+
+                    //only sellers get access to menu options
+                    if(usertype.equals("seller") ) {
+                        switch (item.getItemId()) {
+                            case 1:
+                                mListener.onEditClick(position);
+                                return true;
+                            case 2:
+                                mListener.onDeleteClick(position);
+                                return true;
+                        }
+                    } else {
+                        switch ( (item.getItemId()) ) {
+                            case 1:
+                            case 2:
+                                item.setEnabled(false);
+
+                                return false;
+                        }
                     }
                 }
             }

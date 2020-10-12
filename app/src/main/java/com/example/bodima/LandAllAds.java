@@ -250,9 +250,11 @@ public class LandAllAds extends AppCompatActivity implements landRecyclerViewAda
 
                 }
                 if(type1.equals("buyer")) {
+                    recyclerAdapter.setUsertype("buyer");
                     GetBuyerDataFromFirebase();
                 }
                 else if(type1.equals("seller")) {
+                    recyclerAdapter.setUsertype("seller");
                     GetSellerDataFromFirebase();
                 }
 

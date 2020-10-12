@@ -23,11 +23,19 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
     private Context mContext;
     private List<Land> landArrayList;
     private OnItemClickListener mListener;
+    private String usertype;
 
     public landRecyclerViewAdapter(Context context,List<Land> landArrayList){
         this.mContext =context;
         this.landArrayList = landArrayList;
+    }
 
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     @NonNull
@@ -110,13 +118,25 @@ public class landRecyclerViewAdapter extends RecyclerView.Adapter<landRecyclerVi
                 int position = getAdapterPosition();
 
                 if (position != RecyclerView.NO_POSITION) {
-                    switch (item.getItemId()) {
-                        case 1:
-                            mListener.onEditClick(position);
-                            return true;
-                        case 2:
-                            mListener.onDeleteClick(position);
-                            return true;
+
+                    //only sellers get access to menu options
+                    if(usertype.equals("seller") ) {
+                        switch (item.getItemId()) {
+                            case 1:
+                                mListener.onEditClick(position);
+                                return true;
+                            case 2:
+                                mListener.onDeleteClick(position);
+                                return true;
+                        }
+                    } else {
+                        switch ( (item.getItemId()) ) {
+                            case 1:
+                            case 2:
+                                item.setEnabled(false);
+
+                                return false;
+                        }
                     }
                 }
             }

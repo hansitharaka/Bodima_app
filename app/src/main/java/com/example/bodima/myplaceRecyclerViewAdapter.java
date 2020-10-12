@@ -130,7 +130,7 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
                 if (position != RecyclerView.NO_POSITION) {
 
                     //only sellers get access to menu options
-                    if(user.equals("buyer") ) {
+                    if(user.equals("seller") ) {
                         switch (item.getItemId()) {
                             case 1:
                                 mListener.onEditClick(position);

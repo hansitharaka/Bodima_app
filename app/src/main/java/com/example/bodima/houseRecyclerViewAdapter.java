@@ -27,12 +27,19 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
     private List<House> houseArrayList;
     private OnItemClickListener mListener;
     private FirebaseUser currentUser;
+    private String usertype;
 
     public houseRecyclerViewAdapter(Context context, List<House> houseArrayList) {
         this.mContext = context;
         this.houseArrayList = houseArrayList;
+    }
 
+    public String getUsertype() {
+        return usertype;
+    }
 
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     @NonNull
@@ -125,13 +132,25 @@ public class houseRecyclerViewAdapter extends RecyclerView.Adapter<houseRecycler
                 int position = getAdapterPosition();
 
                 if (position != RecyclerView.NO_POSITION) {
-                    switch (item.getItemId()) {
-                        case 1:
-                            mListener.onEditClick(position);
-                            return true;
-                        case 2:
-                            mListener.onDeleteClick(position);
-                            return true;
+
+                    //only sellers get access to menu options
+                    if(usertype.equals("seller") ) {
+                        switch (item.getItemId()) {
+                            case 1:
+                                mListener.onEditClick(position);
+                                return true;
+                            case 2:
+                                mListener.onDeleteClick(position);
+                                return true;
+                        }
+                    } else {
+                        switch ( (item.getItemId()) ) {
+                            case 1:
+                            case 2:
+                                item.setEnabled(false);
+
+                                return false;
+                        }
                     }
                 }
             }
