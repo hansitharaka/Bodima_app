@@ -73,6 +73,16 @@ public class VehicleForm extends AppCompatActivity implements AdapterView.OnItem
         setSupportActionBar(toolbar);
         this.setTitle("Post Vehicle Ad");
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(VehicleForm.this, VehicleAllAds.class));
+            }
+        });
+
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 
 /* * SPINNER VEHICLE TYPE * */

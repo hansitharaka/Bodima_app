@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +57,8 @@ public class Login extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.setTitle("Sign In");
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
 
         Login = findViewById(R.id.signin);
         Register = findViewById(R.id.signup);
@@ -67,6 +70,14 @@ public class Login extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         mdialog = new ProgressDialog(this);
 
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, WelcomPage.class));
+            }
+        });
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +118,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(Pwdin)) {
-                    Pwd.setError("Pwd is required");
+                    Pwd.setError("Password Required");
                     return;
                 }
 
@@ -118,6 +129,7 @@ public class Login extends AppCompatActivity {
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
                     reference.child(CurrentUser).child("type").setValue("seller");
+                    android.util.Log.d("user", "seller");
 
                 }
 
@@ -128,7 +140,8 @@ public class Login extends AppCompatActivity {
                     rootNode = FirebaseDatabase.getInstance();
                     reference = rootNode.getReference("User");
                     reference.child(CurrentUser).child("type").setValue("buyer");
-
+                    //TODO: null pointer
+                    android.util.Log.d("user", "buyer");
 
                 }
                 if (!(Seller.isChecked()) && (!(Buyer.isChecked()))) {

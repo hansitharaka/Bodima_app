@@ -10,62 +10,53 @@
         android:id="@+id/splashscreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash_screen_bg"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="centerCrop"/>
-
-    <ImageView
-        android:id="@+id/frontlogo"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="80dp"
-        android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/splash_screen_lg" />
+        android:src="@drawable/splash_screen_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/frontlogo"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="230dp">
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/frontlogo"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splash_screen_lg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/appName"
+            android:layout_marginTop="250dp"
+            />
+
 
         <TextView
             android:id="@+id/appName"
             android:layout_width="174dp"
             android:layout_height="66dp"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/medium"
             android:padding="0dp"
             android:text="@string/app_name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@+id/app"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/segoeui"
-            android:text="@string/app"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@id/appName"
-            app:layout_constraintTop_toBottomOf="@+id/appName" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frontlogo"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </RelativeLayout>

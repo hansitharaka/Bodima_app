@@ -37,6 +37,16 @@ public class AddReview extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.setTitle("Add a Review");
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddReview.this, RatingsAndReviews.class));
+            }
+        });
+
         database = FirebaseDatabase.getInstance().getReference().child("Ratings");
 
         review = findViewById(R.id.review);

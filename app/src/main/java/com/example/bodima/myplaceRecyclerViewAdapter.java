@@ -24,10 +24,20 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
     private Context mContext;
     private List<Place> placeArrayList;
     private OnItemClickListener mListener;
+    private String user;
 
     public myplaceRecyclerViewAdapter(Context context, List<Place> placeArrayList) {
         this.mContext = context;
         this.placeArrayList = placeArrayList;
+    }
+
+    //to retrieve logged in user type
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     @NonNull
@@ -119,13 +129,24 @@ public class myplaceRecyclerViewAdapter extends RecyclerView.Adapter<myplaceRecy
 
                 if (position != RecyclerView.NO_POSITION) {
 
-                    switch (item.getItemId()) {
-                        case 1:
-                            mListener.onEditClick(position);
-                            return true;
-                        case 2:
-                            mListener.onDeleteClick(position);
-                            return true;
+                    //only sellers get access to menu options
+                    if(user.equals("buyer") ) {
+                        switch (item.getItemId()) {
+                            case 1:
+                                mListener.onEditClick(position);
+                                return true;
+                            case 2:
+                                mListener.onDeleteClick(position);
+                                return true;
+                        }
+                    } else {
+                        switch ( (item.getItemId()) ) {
+                            case 1:
+                            case 2:
+                                item.setEnabled(false);
+                                
+                                return false;
+                        }
                     }
 
                 }

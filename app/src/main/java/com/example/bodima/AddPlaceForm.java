@@ -90,12 +90,24 @@ public class AddPlaceForm extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.setTitle("Add a Place");
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddPlaceForm.this, MyPlaces.class));
+            }
+        });
+
         //Database
         mReff = FirebaseDatabase.getInstance().getReference().child("Places");
         storageRef = FirebaseStorage.getInstance().getReference("Images");
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        userId = currentUser.getUid();
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+        }
         user = FirebaseDatabase.getInstance().getReference("User").child(userId);
 
         //initialize
@@ -332,7 +344,7 @@ public class AddPlaceForm extends AppCompatActivity {
                                                 Toast.makeText(AddPlaceForm.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                    } else if (key == null) {
+                                    } else {
                                         mReff.push().setValue(myPlaces).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

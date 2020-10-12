@@ -181,6 +181,7 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
                     if (utype.equals("seller")) {
 
+                        recyclerAdapter.setUser("seller"); //show hide longpress menu for the user
                         ClearAll();
                         GetSellerDataFromDatabase();
 
@@ -189,6 +190,7 @@ public class MyPlaces extends AppCompatActivity implements myplaceRecyclerViewAd
 
                     } else if (utype.equals("buyer")) {
 
+                        recyclerAdapter.setUser("buyer");   //show hide longpress menu for the user
                         ClearAll();
                         GetBuyerDataFromFirebase();
 
