@@ -61,7 +61,6 @@
         <activity android:name=".Expenses_Dashboard" />
         <activity android:name=".TypeSelector" />
         <activity android:name=".ExpensesHistory" />
-        <activity android:name=".AreaCalculation" />
     </application>
 
 </manifest>

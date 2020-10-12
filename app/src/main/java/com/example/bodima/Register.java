@@ -53,6 +53,7 @@ public class Register extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.setTitle("Sign Up");
+        toolbar.setNavigationIcon(R.drawable.arrowback);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -65,6 +66,13 @@ public class Register extends AppCompatActivity {
         Register=findViewById(R.id.signup);
 
 
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Register.this, WelcomPage.class));
+            }
+        });
 
 
         Login.setOnClickListener(new View.OnClickListener() {

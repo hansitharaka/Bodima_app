@@ -76,6 +76,16 @@ public class HouseForm extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.setTitle("Post House Ad");
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HouseForm.this, AllAdvertisements.class));
+            }
+        });
+
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 
         Title = findViewById(R.id.houseTitle);
@@ -95,7 +105,10 @@ public class HouseForm extends AppCompatActivity {
         //buttons
         addImg = findViewById(R.id.addImg);
         btnSave = findViewById(R.id.btnSave);
+
         progBar = findViewById(R.id.progressBar);
+
+
 
         //get key
         key = getIntent().getStringExtra("key");

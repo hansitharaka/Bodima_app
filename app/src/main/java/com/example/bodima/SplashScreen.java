@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -15,8 +17,8 @@ import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
     //Variables
-    Animation topAnim, bottomAnim;
-    ImageView imgLogo;
+    Animation fade_out, fade_in, bottomAnim;
+    ImageView imgLogo, splashbg;
     TextView appName, app;
 
     @Override
@@ -30,16 +32,18 @@ public class SplashScreen extends AppCompatActivity {
         //Hooks
         imgLogo = (ImageView) findViewById(R.id.frontlogo);
         appName = (TextView) findViewById(R.id.appName);
-        app = (TextView) findViewById(R.id.app);
+        splashbg = (ImageView) findViewById(R.id.splashscreen);
 
 
         /*  ANIMATIONS  */
-        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+        //Animation fade_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
 
-        imgLogo.setAnimation(topAnim);
+        imgLogo.setAnimation(fade_in);
         appName.setAnimation(bottomAnim);
-        app.setAnimation(bottomAnim);
+        splashbg.setAnimation(fade_in);
+
 
         /*  GO TO WELCOME SCREEN  */
         new Handler().postDelayed(new Runnable() {

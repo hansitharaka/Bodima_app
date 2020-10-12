@@ -69,6 +69,16 @@ public class LandForm extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.setTitle("Post Land Ad");
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LandForm.this, LandAllAds.class));
+            }
+        });
+
         storageRef = FirebaseStorage.getInstance().getReference("AdImages");
 
         Title = findViewById(R.id.title);

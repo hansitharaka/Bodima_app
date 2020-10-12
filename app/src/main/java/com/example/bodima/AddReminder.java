@@ -50,6 +50,17 @@ public class AddReminder extends AppCompatActivity implements AdapterView.OnItem
         this.setTitle("Add a Reminder");
 
 
+        toolbar.setNavigationIcon(R.drawable.arrowback);
+
+        //navigate to previous page
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddReminder.this, Reminders.class));
+            }
+        });
+
+
 /* * SPINNER CATEGORY * */
 
         final Spinner spinnerCategory = (Spinner) findViewById(R.id.pickCategory);
