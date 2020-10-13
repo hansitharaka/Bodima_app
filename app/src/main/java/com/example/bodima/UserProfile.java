@@ -108,13 +108,13 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
             boolean emailVerified = user.isEmailVerified();
         }
 
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         sendUsetDetailsToDataBase();
-
     }
 
     public void sendUsetDetailsToDataBase() {
@@ -128,13 +128,16 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
                 userprofile = new User();
 
+                userprofile.setId(CurrentUser);
+                name = Username.getText().toString();
+                phone = PhoneNumber.getText().toString();
+
+
                 userprofile.setName(name);
                 userprofile.setEmail(mail);
                 userprofile.setPhone(phone);
 
-                userprofile.setId(CurrentUser);
-                name = Username.getText().toString();
-                phone = PhoneNumber.getText().toString();
+
 
                 databaseReference.child(CurrentUser).setValue(userprofile);
 
