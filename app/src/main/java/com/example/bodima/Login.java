@@ -99,7 +99,6 @@ public class Login extends AppCompatActivity {
         Login();
     }
 
-
     private void Login() {
 
         Email = findViewById(R.id.usermail);
